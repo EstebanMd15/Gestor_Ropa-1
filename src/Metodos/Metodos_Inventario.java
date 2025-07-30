@@ -13,7 +13,6 @@ public class Metodos_Inventario implements ActionListener {
 
     BD_CONECCTION bd1 = new BD_CONECCTION();
     Connection con = bd1.conectar();
-    Inventario in = new Inventario();
 
     public void buscarCodigo() {
 
