@@ -1,6 +1,6 @@
 package GUI;
 
-import Metodos.Metodos;
+import Metodos.Metodos_Inventario;
 import gestor_ropa.BD_CONECCTION;
 import java.sql.*;
 import java.sql.PreparedStatement;
@@ -359,7 +359,7 @@ public class INGRESO extends javax.swing.JFrame {
     }//GEN-LAST:event_Campo_CodigoActionPerformed
 
     private void BTN_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_GuardarActionPerformed
-            int cantIngreso = Integer.parseInt(Campo_Cantidad.getText());
+            int cantIngreso = Integer.parseInt(Campo_Cantidad.getText().trim());
         try {
             PreparedStatement guardar = con.prepareStatement("INSERT INTO Ingresos (CODIGO, DESCRIPCION, REFERENCIA,TALLA, CANTIDAD, COSTO, FECHA_INGRESO, OBSERVACION) VALUES (?,?,?,?,?,?,?,?)");
             guardar.setString(1, Campo_Codigo.getText());

@@ -444,13 +444,12 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_Campo_CodigoVentaActionPerformed
 
     private void BTN_VenderVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_VenderVentaActionPerformed
-
+            
+        if (Campo_CantidadVenta.getText().trim().isEmpty() || in.Campo_Cantidad.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "POR FAVOR COMPLETAR TODOS LOS CAMPOS");
+            return;
+        }
         try {
-//            if (Campo_CantidadVenta.getText().trim().isEmpty()) {
-//                JOptionPane.showMessageDialog(null, "POR FAVOR COMPLETAR TODOS LOS CAMPOS");
-//                return;
-//            }
-
             int cantidadIn = Integer.parseInt(in.Campo_Cantidad.getText());
             int cantidadVen = Integer.parseInt(Campo_CantidadVenta.getText());
 
@@ -458,10 +457,10 @@ public class Ventas extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "LA CANTIDAD A VENDER ES MAYOR A LA DEL INVENTARIO");
                 return;
             }
-            PreparedStatement vender = con.prepareStatement("UPDATE Ingresos SET CANTIDAD = CANTIDAD - ? WHERE CODIGO = ? AND CANTIDAD >= ?");
-            vender.setString(1, Campo_CantidadVenta.getText());
+            PreparedStatement vender = con.prepareStatement("UPDATE Ingresos SET CANTIDAD = CANTIDAD - ? WHERE CODIGO = ? ");
+            vender.setInt(1, cantidadVen);
             vender.setString(2, Campo_CodigoVenta.getText());
-            vender.setString(3, Campo_CantidadVenta.getText());
+            //vender.setString(3, Campo_CantidadVenta.getText());
 
             int filasSelec = vender.executeUpdate();
 

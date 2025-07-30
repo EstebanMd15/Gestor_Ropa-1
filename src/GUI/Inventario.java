@@ -8,6 +8,7 @@ import java.sql.Connection;
 import javax.swing.JOptionPane;
 import GUI.INGRESO;
 import GUI.Ventas;
+import Metodos.Metodos_Inventario;
 
 public class Inventario extends javax.swing.JFrame {
 
@@ -15,6 +16,7 @@ public class Inventario extends javax.swing.JFrame {
     Connection con = bd.conectar();
     INGRESO in = new INGRESO();
     Ventas vn = new Ventas();
+//   Metodos_Inventario mt = new Metodos_Inventario();
 
     public Inventario() {
         initComponents();
@@ -393,28 +395,27 @@ public class Inventario extends javax.swing.JFrame {
     }//GEN-LAST:event_Campo_CantidadDispoInvenActionPerformed
 
     private void BTN_BuscarCodInvenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_BuscarCodInvenActionPerformed
-
-        try {
-//            int cantidadIngresada = Integer.parseInt(in.Campo_Cantidad.getText());
-//            int ventaSalida = Integer.parseInt(vn.Campo_CantidadVenta.getText());
-//            int disponible = ventaSalida - cantidadIngresada;
-
-            PreparedStatement buscar = con.prepareStatement("SELECT * FROM Ingresos WHERE CODIGO = ?");
-            buscar.setString(1, Campo_CodigoInventario.getText());
-            ResultSet rs = buscar.executeQuery();
-            if (rs.next()) {
-                Campo_CostoInventario.setText(rs.getString("COSTO"));
-                Campo_DescripcionInventario.setText(rs.getString("DESCRIPCION"));
-                Campo_FechaIngresoInven.setText(rs.getString("FECHA_INGRESO"));
-                Campo_ReferenciaInventario.setText(rs.getString("REFERENCIA"));
-                Campo_TallaInventario.setText(rs.getString("TALLA"));
-               // Campo_CantidadDispoInven.setText(String.valueOf(disponible));//PERMITE CAMBIAR TIPO DE DATOS A CADENA DE TEXTO
-            } else {
-                JOptionPane.showMessageDialog(null, "NO SE ENCONTRO NINGUN REGISTRO CON ESE CODIGO");
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "[ERROR]: " + e.getMessage());
-        }
+                //mt.buscarCodigo();
+                Metodos_Inventario mt = new Metodos_Inventario();
+                mt.buscarCodigo();
+//        try {
+//            PreparedStatement buscar = con.prepareStatement("SELECT * FROM Ingresos WHERE CODIGO = ?");
+//            buscar.setString(1, Campo_CodigoInventario.getText());
+//            ResultSet rs = buscar.executeQuery();
+//            if (rs.next()) {
+//                Campo_CostoInventario.setText(rs.getString("COSTO"));
+//                Campo_DescripcionInventario.setText(rs.getString("DESCRIPCION"));
+//                Campo_FechaIngresoInven.setText(rs.getString("FECHA_INGRESO"));
+//                Campo_ReferenciaInventario.setText(rs.getString("REFERENCIA"));
+//                Campo_TallaInventario.setText(rs.getString("TALLA"));
+//                
+//               // Campo_CantidadDispoInven.setText(String.valueOf(disponible));//PERMITE CAMBIAR TIPO DE DATOS A CADENA DE TEXTO
+//            } else {
+//                JOptionPane.showMessageDialog(null, "NO SE ENCONTRO NINGUN REGISTRO CON ESE CODIGO");
+//            }
+//        } catch (SQLException e) {
+//            JOptionPane.showMessageDialog(null, "[ERROR]: " + e.getMessage());
+//        }
 
     }//GEN-LAST:event_BTN_BuscarCodInvenActionPerformed
 
@@ -423,7 +424,8 @@ public class Inventario extends javax.swing.JFrame {
     }//GEN-LAST:event_Campo_FechaIngresoInvenActionPerformed
 
     private void BTN_MostrarInvenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_MostrarInvenActionPerformed
-        // TODO add your handling code here:
+            mostrar("Ingresos");
+        
     }//GEN-LAST:event_BTN_MostrarInvenActionPerformed
 
     private void BTN_LimpiarInvenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_LimpiarInvenActionPerformed
@@ -480,12 +482,12 @@ public class Inventario extends javax.swing.JFrame {
     private javax.swing.JButton BTN_SalirVenta;
     public javax.swing.JTextField Campo_CantidadDispoInven;
     public javax.swing.JTextField Campo_CodigoInventario;
-    private javax.swing.JTextField Campo_CostoInventario;
+    public javax.swing.JTextField Campo_CostoInventario;
     public javax.swing.JTextField Campo_DescripcionInventario;
     public javax.swing.JTextField Campo_FechaIngresoInven;
-    private javax.swing.JTextField Campo_PrecioInventario;
-    private javax.swing.JTextField Campo_ReferenciaInventario;
-    private javax.swing.JTextField Campo_TallaInventario;
+    public javax.swing.JTextField Campo_PrecioInventario;
+    public javax.swing.JTextField Campo_ReferenciaInventario;
+    public javax.swing.JTextField Campo_TallaInventario;
     private javax.swing.JTable TablaInventario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
