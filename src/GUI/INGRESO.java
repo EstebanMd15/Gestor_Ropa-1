@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import Metodos.Metodos_Ingresos;
 
 public class INGRESO extends javax.swing.JFrame {
 
@@ -17,40 +18,41 @@ public class INGRESO extends javax.swing.JFrame {
         initComponents();
     }
 
-   public void mostrar(String tabla){
-       String sql ="SELECT * FROM " + tabla;
-       
-       DefaultTableModel model = new DefaultTableModel();
-       model.addColumn("CODIGO");
-       model.addColumn("DESCRIPCION");
-       model.addColumn("REFERENCIA");
-       model.addColumn("TALLA");
-       model.addColumn("CANTIDAD");
-       model.addColumn("COSTO");
-       model.addColumn("FECHA_INGRESO");
-       model.addColumn("OBSERVACION");
-       Tabla_Ingreso.setModel(model);
-       
-       String [] datos = new String [8];
-       try {
-           Statement st;
-           st = con.createStatement();
-           ResultSet rs = st.executeQuery(sql);
-           while(rs.next()){
-               datos[0] = rs.getString(1);
-               datos[1] = rs.getString(2);
-               datos[2] = rs.getString(3);
-               datos[3] = rs.getString(4);
-               datos[4] = rs.getString(5);
-               datos[5] = rs.getString(6);
-               datos[6] = rs.getString(7);
-               datos[7] = rs.getString(8);
-               model.addRow(datos);
-           }
-       } catch (SQLException e) {
-           JOptionPane.showMessageDialog(null, "[ERROR]: " + e);
-       }
-   }
+    public void mostrar(String tabla) {
+        String sql = "SELECT * FROM " + tabla;
+
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("CODIGO");
+        model.addColumn("DESCRIPCION");
+        model.addColumn("REFERENCIA");
+        model.addColumn("TALLA");
+        model.addColumn("CANTIDAD");
+        model.addColumn("COSTO");
+        model.addColumn("FECHA_INGRESO");
+        model.addColumn("OBSERVACION");
+        Tabla_Ingreso.setModel(model);
+
+        String[] datos = new String[8];
+        try {
+            Statement st;
+            st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
+                datos[3] = rs.getString(4);
+                datos[4] = rs.getString(5);
+                datos[5] = rs.getString(6);
+                datos[6] = rs.getString(7);
+                datos[7] = rs.getString(8);
+                model.addRow(datos);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "[ERROR]: " + e);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -77,7 +79,7 @@ public class INGRESO extends javax.swing.JFrame {
         BTN_Guardar = new javax.swing.JButton();
         BTN_Salir = new javax.swing.JButton();
         BTN_Buscar = new javax.swing.JButton();
-        BTN_Cancelar = new javax.swing.JButton();
+        BTN_Limpiar = new javax.swing.JButton();
         BTN_Modificar = new javax.swing.JButton();
         BTN_Mostrar_Tabla = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -179,11 +181,11 @@ public class INGRESO extends javax.swing.JFrame {
             }
         });
 
-        BTN_Cancelar.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        BTN_Cancelar.setText("CANCELAR");
-        BTN_Cancelar.addActionListener(new java.awt.event.ActionListener() {
+        BTN_Limpiar.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        BTN_Limpiar.setText("LIMPIAR");
+        BTN_Limpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTN_CancelarActionPerformed(evt);
+                BTN_LimpiarActionPerformed(evt);
             }
         });
 
@@ -236,7 +238,7 @@ public class INGRESO extends javax.swing.JFrame {
                         .addGap(39, 39, 39)
                         .addComponent(BTN_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33)
-                        .addComponent(BTN_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BTN_Limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
                         .addComponent(BTN_Mostrar_Tabla, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -295,7 +297,7 @@ public class INGRESO extends javax.swing.JFrame {
                     .addComponent(BTN_Guardar)
                     .addComponent(BTN_Salir)
                     .addComponent(BTN_Buscar)
-                    .addComponent(BTN_Cancelar)
+                    .addComponent(BTN_Limpiar)
                     .addComponent(BTN_Modificar)
                     .addComponent(BTN_Mostrar_Tabla))
                 .addGap(22, 22, 22))
@@ -359,31 +361,34 @@ public class INGRESO extends javax.swing.JFrame {
     }//GEN-LAST:event_Campo_CodigoActionPerformed
 
     private void BTN_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_GuardarActionPerformed
-            int cantIngreso = Integer.parseInt(Campo_Cantidad.getText().trim());
-        try {
-            PreparedStatement guardar = con.prepareStatement("INSERT INTO Ingresos (CODIGO, DESCRIPCION, REFERENCIA,TALLA, CANTIDAD, COSTO, FECHA_INGRESO, OBSERVACION) VALUES (?,?,?,?,?,?,?,?)");
-            guardar.setString(1, Campo_Codigo.getText());
-            guardar.setString(2, Campo_Descripcion.getText());
-            guardar.setString(3, Campo_Referencia.getText());
-            guardar.setString(4, Campo_Talla.getText());
-            guardar.setInt(5,cantIngreso);
-            guardar.setString(6, Campo_Costo.getText());
-            java.sql.Date fechaActual = new java.sql.Date(System.currentTimeMillis());
-            guardar.setString(7, fechaActual.toString());
-            guardar.setString(8, Campo_Observacion.getText());
-            //LIMPIAR CAMPOS
-            Campo_Cantidad.setText("");
-            Campo_Codigo.setText("");
-            Campo_Costo.setText("");
-            Campo_Descripcion.setText("");
-            Campo_Observacion.setText("");
-            Campo_Referencia.setText("");
-            Campo_Talla.setText("");
-            guardar.executeUpdate();// EJECUTA SENTENCIAS SQL QUE MODIFIQUEN DATOS COMO INSERT, DELETE, UPDATE
-            JOptionPane.showMessageDialog(null, "REGISTRADO");
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "[ERROR]: " + e);
-        }
+        Metodos_Ingresos mt = new Metodos_Ingresos(this);
+        mt.guardar();
+
+//            int cantIngreso = Integer.parseInt(Campo_Cantidad.getText().trim());
+//        try {
+//            PreparedStatement guardar = con.prepareStatement("INSERT INTO Ingresos (CODIGO, DESCRIPCION, REFERENCIA,TALLA, CANTIDAD, COSTO, FECHA_INGRESO, OBSERVACION) VALUES (?,?,?,?,?,?,?,?)");
+//            guardar.setString(1, Campo_Codigo.getText());
+//            guardar.setString(2, Campo_Descripcion.getText());
+//            guardar.setString(3, Campo_Referencia.getText());
+//            guardar.setString(4, Campo_Talla.getText());
+//            guardar.setInt(5,cantIngreso);
+//            guardar.setString(6, Campo_Costo.getText());
+//            java.sql.Date fechaActual = new java.sql.Date(System.currentTimeMillis());
+//            guardar.setString(7, fechaActual.toString());
+//            guardar.setString(8, Campo_Observacion.getText());
+//            //LIMPIAR CAMPOS
+//            Campo_Cantidad.setText("");
+//            Campo_Codigo.setText("");
+//            Campo_Costo.setText("");
+//            Campo_Descripcion.setText("");
+//            Campo_Observacion.setText("");
+//            Campo_Referencia.setText("");
+//            Campo_Talla.setText("");
+//            guardar.executeUpdate();// EJECUTA SENTENCIAS SQL QUE MODIFIQUEN DATOS COMO INSERT, DELETE, UPDATE
+//            JOptionPane.showMessageDialog(null, "REGISTRADO");
+//        } catch (SQLException e) {
+//            JOptionPane.showMessageDialog(null, "[ERROR]: " + e);
+//        }
         mostrar("Ingresos");
     }//GEN-LAST:event_BTN_GuardarActionPerformed
 
@@ -394,68 +399,77 @@ public class INGRESO extends javax.swing.JFrame {
     }//GEN-LAST:event_BTN_SalirActionPerformed
 
     private void BTN_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_BuscarActionPerformed
-        try {
-            PreparedStatement buscar = con.prepareStatement("SELECT * FROM Ingresos WHERE CODIGO = ?");
-            buscar.setString(1, Campo_Codigo.getText());
-            ResultSet rs = buscar.executeQuery();
-            if (rs.next()) {
-                Campo_Cantidad.setText(rs.getString("CANTIDAD"));
-                Campo_Codigo.setText(rs.getString("CODIGO"));
-                Campo_Costo.setText(rs.getString("COSTO"));
-                Campo_Descripcion.setText(rs.getString("DESCRIPCION"));
-                Campo_Observacion.setText(rs.getString("OBSERVACION"));
-                Campo_Referencia.setText(rs.getString("REFERENCIA"));
-                Campo_Talla.setText(rs.getString("TALLA"));
+        Metodos_Ingresos mt = new Metodos_Ingresos(this);
+        mt.buscar();
 
-            } else {
-                JOptionPane.showMessageDialog(null, "NO SE ENCONTRO NINGUN REGISTRO CON ESE CODIGO");
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "[ERROR]: " + e);
-        }
+//        try {
+//            PreparedStatement buscar = con.prepareStatement("SELECT * FROM Ingresos WHERE CODIGO = ?");
+//            buscar.setString(1, Campo_Codigo.getText());
+//            ResultSet rs = buscar.executeQuery();
+//            if (rs.next()) {
+//                Campo_Cantidad.setText(rs.getString("CANTIDAD"));
+//                Campo_Codigo.setText(rs.getString("CODIGO"));
+//                Campo_Costo.setText(rs.getString("COSTO"));
+//                Campo_Descripcion.setText(rs.getString("DESCRIPCION"));
+//                Campo_Observacion.setText(rs.getString("OBSERVACION"));
+//                Campo_Referencia.setText(rs.getString("REFERENCIA"));
+//                Campo_Talla.setText(rs.getString("TALLA"));
+//
+//            } else {
+//                JOptionPane.showMessageDialog(null, "NO SE ENCONTRO NINGUN REGISTRO CON ESE CODIGO");
+//            }
+//        } catch (SQLException e) {
+//            JOptionPane.showMessageDialog(null, "[ERROR]: " + e);
+//        }
     }//GEN-LAST:event_BTN_BuscarActionPerformed
 
     private void BTN_ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_ModificarActionPerformed
-        try {
-            PreparedStatement modificar = con.prepareStatement("UPDATE Ingresos SET DESCRIPCION=?, REFERENCIA=?,TALLA=?, CANTIDAD=?, COSTO=?, OBSERVACION=? WHERE CODIGO =?");
-            modificar.setString(1, Campo_Descripcion.getText());
-            modificar.setString(2, Campo_Referencia.getText());
-            modificar.setString(3, Campo_Talla.getText());
-            modificar.setString(4, Campo_Cantidad.getText());
-            modificar.setString(5, Campo_Costo.getText());
-            modificar.setString(6, Campo_Observacion.getText());
-            modificar.setString(7, Campo_Codigo.getText());
-            int modificar2 = JOptionPane.showConfirmDialog(null, "DESEA MODIFICAR EL INGRESO ?");
-            if(modificar2 == 0){
-                int filas = modificar.executeUpdate();
-            if(filas != 0){
-                modificar.executeUpdate();
-            Campo_Cantidad.setText("");
-            Campo_Codigo.setText("");
-            Campo_Costo.setText("");
-            Campo_Descripcion.setText("");
-            Campo_Observacion.setText("");
-            Campo_Referencia.setText("");
-            Campo_Talla.setText("");
-            }
-                JOptionPane.showMessageDialog(null, "REGISTRO ACTUALIZADO CON EXITO!!");
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "[ERROR]: " + e);
-        }
+        Metodos_Ingresos mt = new Metodos_Ingresos(this);
+        mt.modificar();
+
+//        try {
+//            PreparedStatement modificar = con.prepareStatement("UPDATE Ingresos SET DESCRIPCION=?, REFERENCIA=?,TALLA=?, CANTIDAD=?, COSTO=?, OBSERVACION=? WHERE CODIGO =?");
+//            modificar.setString(1, Campo_Descripcion.getText());
+//            modificar.setString(2, Campo_Referencia.getText());
+//            modificar.setString(3, Campo_Talla.getText());
+//            modificar.setString(4, Campo_Cantidad.getText());
+//            modificar.setString(5, Campo_Costo.getText());
+//            modificar.setString(6, Campo_Observacion.getText());
+//            modificar.setString(7, Campo_Codigo.getText());
+//            int modificar2 = JOptionPane.showConfirmDialog(null, "DESEA MODIFICAR EL INGRESO ?");
+//            if(modificar2 == 0){
+//                int filas = modificar.executeUpdate();
+//            if(filas != 0){
+//                modificar.executeUpdate();
+//            Campo_Cantidad.setText("");
+//            Campo_Codigo.setText("");
+//            Campo_Costo.setText("");
+//            Campo_Descripcion.setText("");
+//            Campo_Observacion.setText("");
+//            Campo_Referencia.setText("");
+//            Campo_Talla.setText("");
+//            }
+//                JOptionPane.showMessageDialog(null, "REGISTRO ACTUALIZADO CON EXITO!!");
+//            }
+//        } catch (SQLException e) {
+//            JOptionPane.showMessageDialog(null, "[ERROR]: " + e);
+//        }
         mostrar("Ingresos");
     }//GEN-LAST:event_BTN_ModificarActionPerformed
 
-    private void BTN_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_CancelarActionPerformed
-      Campo_Cantidad.setText("");
-            Campo_Codigo.setText("");
-            Campo_Costo.setText("");
-            Campo_Descripcion.setText("");
-            Campo_Observacion.setText("");
-            Campo_Referencia.setText("");
-            Campo_Talla.setText("");
-        
-    }//GEN-LAST:event_BTN_CancelarActionPerformed
+    private void BTN_LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_LimpiarActionPerformed
+            Metodos_Ingresos mt = new Metodos_Ingresos(this);
+            mt.limpiar();
+
+//        Campo_Cantidad.setText("");
+//        Campo_Codigo.setText("");
+//        Campo_Costo.setText("");
+//        Campo_Descripcion.setText("");
+//        Campo_Observacion.setText("");
+//        Campo_Referencia.setText("");
+//        Campo_Talla.setText("");
+
+    }//GEN-LAST:event_BTN_LimpiarActionPerformed
 
     private void BTN_Mostrar_TablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_Mostrar_TablaActionPerformed
         mostrar("Ingresos");
@@ -498,8 +512,8 @@ public class INGRESO extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton BTN_Buscar;
-    public javax.swing.JButton BTN_Cancelar;
     public javax.swing.JButton BTN_Guardar;
+    public javax.swing.JButton BTN_Limpiar;
     public javax.swing.JButton BTN_Modificar;
     public javax.swing.JButton BTN_Mostrar_Tabla;
     public javax.swing.JButton BTN_Salir;

@@ -1,6 +1,7 @@
 package GUI;
 
 import GUI.INGRESO;
+import Metodos.Metodos_Ventas;
 import com.mysql.cj.xdevapi.Result;
 import gestor_ropa.BD_CONECCTION;
 import java.sql.*;
@@ -444,8 +445,8 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_Campo_CodigoVentaActionPerformed
 
     private void BTN_VenderVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_VenderVentaActionPerformed
-            
-        if (Campo_CantidadVenta.getText().trim().isEmpty() || in.Campo_Cantidad.getText().trim().isEmpty()) {
+
+        if (Campo_CantidadVenta.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "POR FAVOR COMPLETAR TODOS LOS CAMPOS");
             return;
         }
@@ -482,13 +483,8 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_Campo_TotalVentaActionPerformed
 
     private void BTN_CancelarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_CancelarVentaActionPerformed
-        try {
-            PreparedStatement cancelar = con.prepareStatement("TRUNCATE TABLE Ventas");
-            cancelar.executeUpdate();
-            JOptionPane.showMessageDialog(null, "REGISTROS CANCELADOS CORRECTAMENTE");
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "[ERROR]: " + e);
-        }
+        Metodos_Ventas mt = new Metodos_Ventas(this);
+        mt.cancelar();
         mostrar("Ventas");
     }//GEN-LAST:event_BTN_CancelarVentaActionPerformed
 
@@ -496,61 +492,23 @@ public class Ventas extends javax.swing.JFrame {
         Menu mn = new Menu();
         mn.setVisible(true);
         dispose();
-
     }//GEN-LAST:event_BTN_SalirVentaActionPerformed
 
     private void BTN_LimpiarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_LimpiarVentaActionPerformed
-        Campo_CostoVenta.setText("");
-        Campo_CodigoVenta.setText("");
-        Campo_DescripcionVenta.setText("");
-        Campo_ReferenciaVenta.setText("");
-        Campo_TallaVenta.setText("");
-        Campo_TotalVenta.setText("");
-
+        Metodos_Ventas mt = new Metodos_Ventas(this);
+        mt.limpiar();
     }//GEN-LAST:event_BTN_LimpiarVentaActionPerformed
 
     private void BTN_AgregarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AgregarVentaActionPerformed
-        try {
-            PreparedStatement agregar = con.prepareStatement("INSERT INTO Ventas (CODIGO, DESCRIPCION, TALLA, REFERENCIA, COSTO, CANTIDAD) VALUES (?,?,?,?,?,?)");
-            agregar.setString(1, Campo_CodigoVenta.getText());
-            agregar.setString(2, Campo_DescripcionVenta.getText());
-            agregar.setString(3, Campo_TallaVenta.getText());
-            agregar.setString(4, Campo_ReferenciaVenta.getText());
-            agregar.setString(5, Campo_CostoVenta.getText());
-            agregar.setString(6, Campo_CantidadVenta.getText());
-            //limpiar campos
-            Campo_CodigoVenta.setText("");
-            Campo_DescripcionVenta.setText("");
-            Campo_TallaVenta.setText("");
-            Campo_ReferenciaVenta.setText("");
-            Campo_CostoVenta.setText("");
-            Campo_CantidadVenta.setText("");
-            agregar.executeUpdate();//EJECUTAR SENTENCIA SQL QUE MODICIQUEN DATOS COMO INSERT. DELETE, UPDATE
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "[ERROR]: " + e.getMessage());
-        }
+        Metodos_Ventas mt = new Metodos_Ventas(this);
+        mt.agregarVenta();
         mostrar("Ventas");
         costoTotal();
     }//GEN-LAST:event_BTN_AgregarVentaActionPerformed
 
     private void BTN_BuscarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_BuscarVentaActionPerformed
-        try {
-            PreparedStatement buscar = con.prepareStatement("SELECT * FROM Ingresos WHERE CODIGO = ?");// CONSULTA DE BUSQUEDA EN MYSQL
-            buscar.setString(1, Campo_CodigoVenta.getText());//BUSCA EN LA BD EL DATO INGRESADO EN EL CAMPO QUE SE ESPECIFIQUE
-            ResultSet rs = buscar.executeQuery();// EJECUTA LA CONSULTA SQL Y ALMACENA LOS DATOS EN EL OBJETO
-            if (rs.next()) {//VERIFICA LA EXISTENCIA DE DATOS 
-                Campo_DescripcionVenta.setText(rs.getString("DESCRIPCION"));//MUESTRA EN EL CAMPO SELECCIONADO LA DESCRIPCION
-                Campo_ReferenciaVenta.setText(rs.getString("REFERENCIA"));
-                Campo_TallaVenta.setText(rs.getString("TALLA"));
-                Campo_CostoVenta.setText(rs.getString("COSTO"));
-
-            } else {
-                JOptionPane.showMessageDialog(null, "NO SE ENCONTRO NINGUN REGISTRO CON EL CODIGO INGRESADO");
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "[ERROR]: " + e);
-        }
-
+        Metodos_Ventas mt = new Metodos_Ventas(this);
+        mt.buscar();
     }//GEN-LAST:event_BTN_BuscarVentaActionPerformed
 
     private void Campo_CostoVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Campo_CostoVentaActionPerformed
@@ -597,18 +555,18 @@ public class Ventas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BTN_AgregarVenta;
-    private javax.swing.JButton BTN_BuscarVenta;
-    private javax.swing.JButton BTN_CancelarVenta;
-    private javax.swing.JButton BTN_LimpiarVenta;
+    public javax.swing.JButton BTN_AgregarVenta;
+    public javax.swing.JButton BTN_BuscarVenta;
+    public javax.swing.JButton BTN_CancelarVenta;
+    public javax.swing.JButton BTN_LimpiarVenta;
     private javax.swing.JButton BTN_SalirVenta;
-    private javax.swing.JButton BTN_VenderVenta;
+    public javax.swing.JButton BTN_VenderVenta;
     public javax.swing.JTextField Campo_CantidadVenta;
     public javax.swing.JTextField Campo_CodigoVenta;
-    private javax.swing.JTextField Campo_CostoVenta;
+    public javax.swing.JTextField Campo_CostoVenta;
     public javax.swing.JTextField Campo_DescripcionVenta;
-    private javax.swing.JTextField Campo_ReferenciaVenta;
-    private javax.swing.JTextField Campo_TallaVenta;
+    public javax.swing.JTextField Campo_ReferenciaVenta;
+    public javax.swing.JTextField Campo_TallaVenta;
     public javax.swing.JTextField Campo_TotalVenta;
     private javax.swing.JTable Tabla_Ventas;
     private javax.swing.JLabel jLabel1;

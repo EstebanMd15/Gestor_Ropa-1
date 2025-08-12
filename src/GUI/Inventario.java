@@ -395,9 +395,8 @@ public class Inventario extends javax.swing.JFrame {
     }//GEN-LAST:event_Campo_CantidadDispoInvenActionPerformed
 
     private void BTN_BuscarCodInvenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_BuscarCodInvenActionPerformed
-                //mt.buscarCodigo();
-                Metodos_Inventario mt = new Metodos_Inventario();
-                mt.buscarCodigo();
+        Metodos_Inventario metodo = new Metodos_Inventario(this);
+        metodo.buscarCodigo();
 //        try {
 //            PreparedStatement buscar = con.prepareStatement("SELECT * FROM Ingresos WHERE CODIGO = ?");
 //            buscar.setString(1, Campo_CodigoInventario.getText());
@@ -429,14 +428,16 @@ public class Inventario extends javax.swing.JFrame {
     }//GEN-LAST:event_BTN_MostrarInvenActionPerformed
 
     private void BTN_LimpiarInvenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_LimpiarInvenActionPerformed
-        Campo_CantidadDispoInven.setText("");
-        Campo_CodigoInventario.setText("");
-        Campo_CostoInventario.setText("");
-        Campo_DescripcionInventario.setText("");
-        Campo_FechaIngresoInven.setText("");
-        Campo_PrecioInventario.setText("");
-        Campo_ReferenciaInventario.setText("");
-        Campo_TallaInventario.setText("");
+            Metodos_Inventario mtd = new Metodos_Inventario(this);
+            mtd.limpiarCampos();
+//        Campo_CantidadDispoInven.setText("");
+//        Campo_CodigoInventario.setText("");
+//        Campo_CostoInventario.setText("");
+//        Campo_DescripcionInventario.setText("");
+//        Campo_FechaIngresoInven.setText("");
+//        Campo_PrecioInventario.setText("");
+//        Campo_ReferenciaInventario.setText("");
+//        Campo_TallaInventario.setText("");
 
     }//GEN-LAST:event_BTN_LimpiarInvenActionPerformed
 
@@ -476,9 +477,9 @@ public class Inventario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BTN_BuscarCodInven;
-    private javax.swing.JButton BTN_LimpiarInven;
-    private javax.swing.JButton BTN_MostrarInven;
+    public javax.swing.JButton BTN_BuscarCodInven;
+    public javax.swing.JButton BTN_LimpiarInven;
+    public javax.swing.JButton BTN_MostrarInven;
     private javax.swing.JButton BTN_SalirVenta;
     public javax.swing.JTextField Campo_CantidadDispoInven;
     public javax.swing.JTextField Campo_CodigoInventario;
