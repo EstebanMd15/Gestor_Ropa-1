@@ -445,37 +445,89 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_Campo_CodigoVentaActionPerformed
 
     private void BTN_VenderVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_VenderVentaActionPerformed
+        Metodos_Ventas mt = new Metodos_Ventas(this);
+//        try {
+//            int cantidadIn = Integer.parseInt(in.Campo_Cantidad.getText());
+//            int cantidadVen = Integer.parseInt(Campo_CantidadVenta.getText());
+//
+//            if (Campo_CantidadVenta.getText().trim().isEmpty()) {
+//                JOptionPane.showMessageDialog(null, "POR FAVOR COMPLETAR TODOS LOS CAMPOS");
+//                return;
+//            }
+//            if (cantidadIn <= cantidadVen) {
+//                JOptionPane.showMessageDialog(null, "LA CANTIDAD A VENDER ES MAYOR A LA DEL INVENTARIO");
+//                return;
+//            }
+//            String sqlSelectVentas = "SELECT CODIGO, CANTIDAD FROM Ventas";
+//            PreparedStatement vender = con.prepareStatement("UPDATE Ingresos SET CANTIDAD = CANTIDAD - ? WHERE CODIGO = ? ");
+//            Statement stmt = con.createStatement();
+//            ResultSet rs = stmt.executeQuery(sqlSelectVentas);
+//            while(rs.next()){
+//            vender.setInt(1, cantidadVen);
+//            vender.setString(2, Campo_CodigoVenta.getText());
+//            //vender.setString(3, Campo_CantidadVenta.getText());
+//
+//            int filasSelec = vender.executeUpdate();
+//
+//            if (filasSelec > 0) {
+//                JOptionPane.showMessageDialog(null, "VENTA EXITOSA");
+//            } else {
+//                JOptionPane.showInternalConfirmDialog(null, "NO SE REALIZO LA VENTA, VERIFICAR LOS DATOS");
+//            }
+//            }
+//        } catch (SQLException e) {
+//            JOptionPane.showMessageDialog(null, "[ERROR]: " + e.getMessage());
+//        }
+        // 1. Preparamos las consultas SQL
+        String sqlSelectVentas = "SELECT CODIGO, CANTIDAD FROM Ventas";
+        String sqlUpdateInventario = "UPDATE Ingresos SET CANTIDAD = CANTIDAD - ? WHERE CODIGO = ?";
 
-        if (Campo_CantidadVenta.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "POR FAVOR COMPLETAR TODOS LOS CAMPOS");
-            return;
-        }
         try {
-            int cantidadIn = Integer.parseInt(in.Campo_Cantidad.getText());
-            int cantidadVen = Integer.parseInt(Campo_CantidadVenta.getText());
+            // 2. Iniciamos la transacción para asegurar la integridad de los datos
+            con.setAutoCommit(false);
 
-            if (cantidadIn <= cantidadVen) {
-                JOptionPane.showMessageDialog(null, "LA CANTIDAD A VENDER ES MAYOR A LA DEL INVENTARIO");
-                return;
+            // 3. Obtenemos los productos de la tabla de venta actual
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(sqlSelectVentas);
+
+            // Preparamos la consulta para actualizar el inventario
+            PreparedStatement psUpdate = con.prepareStatement(sqlUpdateInventario);
+
+            // 4. Recorremos cada producto vendido y actualizamos el inventario
+            while (rs.next()) {
+                String codigo = rs.getString("CODIGO");
+                int cantidadVendida = rs.getInt("CANTIDAD");
+
+                psUpdate.setInt(1, cantidadVendida);
+                psUpdate.setString(2, codigo);
+                psUpdate.executeUpdate(); // Ejecutamos la resta de stock
             }
-            PreparedStatement vender = con.prepareStatement("UPDATE Ingresos SET CANTIDAD = CANTIDAD - ? WHERE CODIGO = ? ");
-            vender.setInt(1, cantidadVen);
-            vender.setString(2, Campo_CodigoVenta.getText());
-            //vender.setString(3, Campo_CantidadVenta.getText());
 
-            int filasSelec = vender.executeUpdate();
+            // 5. Si todo salió bien, confirmamos los cambios en la base de datos
+            con.commit();
+            JOptionPane.showMessageDialog(null, "¡Venta realizada con éxito! Inventario actualizado.");
 
-            if (filasSelec > 0) {
-                JOptionPane.showMessageDialog(null, "VENTA EXITOSA");
-            } else {
-                JOptionPane.showInternalConfirmDialog(null, "NO SE REALIZO LA VENTA, VERIFICAR LOS DATOS");
-            }
-
+            // Aquí también deberías actualizar la JTable para que se vea vacía
+        DefaultTableModel model = (DefaultTableModel) Tabla_Ventas.getModel();
+        model.setRowCount(0);
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "[ERROR]: " + e.getMessage());
+            // 7. Si algo falló, deshacemos todos los cambios
+            try {
+                con.rollback();//
+                JOptionPane.showMessageDialog(null, "Error en la transacción. La venta ha sido revertida.\n[ERROR]: " + e.getMessage());
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error crítico al intentar revertir la transacción.\n[ERROR]: " + ex.getMessage());
+            }
+        } finally {
+            // 8. Dejamos la conexión como estaba para otras operaciones
+            try {
+                con.setAutoCommit(true);
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "[ERROR] al restaurar la conexión: " + e.getMessage());
+            }
         }
-
-
+        mt.cancelar();
+        mt.limpiar();
     }//GEN-LAST:event_BTN_VenderVentaActionPerformed
 
     private void Campo_TotalVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Campo_TotalVentaActionPerformed
@@ -568,7 +620,7 @@ public class Ventas extends javax.swing.JFrame {
     public javax.swing.JTextField Campo_ReferenciaVenta;
     public javax.swing.JTextField Campo_TallaVenta;
     public javax.swing.JTextField Campo_TotalVenta;
-    private javax.swing.JTable Tabla_Ventas;
+    public javax.swing.JTable Tabla_Ventas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -582,7 +634,7 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JScrollPane jScrollPane1;
     private java.awt.PopupMenu popupMenu1;
     // End of variables declaration//GEN-END:variables
 }

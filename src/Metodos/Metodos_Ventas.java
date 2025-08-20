@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JTable;
 
 
 public class Metodos_Ventas implements ActionListener{
@@ -20,6 +22,7 @@ public class Metodos_Ventas implements ActionListener{
     private JButton btnLimpiar;
     private JButton btnCancelar;
     private JButton btnAgregar;
+    private JTable tabla_ventas;
 
     public Metodos_Ventas(Ventas vt) {
         this.vt = vt;
@@ -27,6 +30,8 @@ public class Metodos_Ventas implements ActionListener{
         this.btnBuscar = this.vt.BTN_BuscarVenta;
         this.btnCancelar = this.vt.BTN_CancelarVenta;
         this.btnLimpiar = this.vt.BTN_LimpiarVenta;
+       
+        
     }
     
     public void buscar(){
@@ -52,7 +57,7 @@ public class Metodos_Ventas implements ActionListener{
     public void agregarVenta(){
         try {
             PreparedStatement agregar = con.prepareStatement("INSERT INTO Ventas (CODIGO, DESCRIPCION, TALLA, REFERENCIA, COSTO, CANTIDAD) VALUES (?,?,?,?,?,?)");
-            agregar.setString(1, vt.Campo_CantidadVenta.getText());
+            agregar.setString(1, vt.Campo_CodigoVenta.getText());
             agregar.setString(2, vt.Campo_DescripcionVenta.getText());
             agregar.setString(3, vt.Campo_TallaVenta.getText());
             agregar.setString(4, vt.Campo_ReferenciaVenta.getText());
@@ -88,6 +93,24 @@ public class Metodos_Ventas implements ActionListener{
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "[ERROR]: " + e.getMessage());
         }
+    }
+    
+        public void calcularYMostrarTotal(){
+        DefaultTableModel model = (DefaultTableModel) vt.Tabla_Ventas.getModel();// SE OBTIENE EL MODELO DE DATOS DE LA TABLA
+        
+        double totalGeneral = 0.0;// se inicializa una variable para guardar la suma total
+        
+        for (int i = 0; i < model.getRowCount(); i++) {//se recorre todas las filas de la tabla
+            try {
+                String valorcelda = model.getValueAt(i, 6).toString();//se obtiene el valor de la columna "VALOR TOTAL", INDICE 6
+                double subtotal = Double.parseDouble(valorcelda);//se convierte de objeto a String y luego a double para poder sumarlo
+                
+                totalGeneral += subtotal;
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Error al parsear el valor en la fila " + i + ":"+ e.getMessage());
+            }
+        }
+        vt.Campo_TotalVenta.setText(String.format("%.2f", totalGeneral));
     }
 
     @Override
