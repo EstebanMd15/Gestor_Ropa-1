@@ -498,7 +498,10 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_BTN_VenderVentaActionPerformed
 
     private void Campo_TotalVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Campo_TotalVentaActionPerformed
-
+        Metodos_Ventas mt = new Metodos_Ventas(this);
+        mt.calcularYMostrarTotal();
+               
+        
     }//GEN-LAST:event_Campo_TotalVentaActionPerformed
 
     private void BTN_CancelarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_CancelarVentaActionPerformed
