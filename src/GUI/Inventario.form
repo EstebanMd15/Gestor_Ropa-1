@@ -495,7 +495,7 @@
                     <Column editable="true" title="DESCRIPCION" type="java.lang.Object"/>
                     <Column editable="true" title="TALLA" type="java.lang.Object"/>
                     <Column editable="true" title="REFERENCIA" type="java.lang.Object"/>
-                    <Column editable="true" title="CANTIDAD DISPONIBLE" type="java.lang.Object"/>
+                    <Column editable="true" title="CANTIDAD" type="java.lang.Object"/>
                     <Column editable="true" title="COSTO" type="java.lang.Object"/>
                     <Column editable="true" title="PRECIO" type="java.lang.Object"/>
                     <Column editable="true" title="FECHA DE INGRESO" type="java.lang.Object"/>

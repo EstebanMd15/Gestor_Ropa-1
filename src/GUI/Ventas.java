@@ -99,6 +99,7 @@ public class Ventas extends javax.swing.JFrame {
     private void initComponents() {
 
         popupMenu1 = new java.awt.PopupMenu();
+        jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -127,8 +128,12 @@ public class Ventas extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         Campo_CantidadVenta = new javax.swing.JTextField();
         Campo_CodigoVenta = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        Campo_CantDispo = new javax.swing.JTextField();
 
         popupMenu1.setLabel("popupMenu1");
+
+        jLabel5.setText("jLabel5");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -170,7 +175,7 @@ public class Ventas extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(new javax.swing.border.MatteBorder(null));
@@ -201,7 +206,7 @@ public class Ventas extends javax.swing.JFrame {
         Campo_TallaVenta.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel8.setText("CODIGO:");
+        jLabel8.setText("CANTIDAD DISPONIBLE:");
 
         BTN_BuscarVenta.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         BTN_BuscarVenta.setText("BUSCAR");
@@ -269,7 +274,7 @@ public class Ventas extends javax.swing.JFrame {
 
             },
             new String [] {
-                "CODIGO", "DESCRIPCION", "TALLA", "REFERENCIA", "COSTO UNITARIO", "CANTIDAD", "VALOR TOTAL"
+                "CODIGO", "DESCRIPCION", "TALLA", "REFERENCIA", "COSTO", "CANTIDAD", "VALOR TOTAL"
             }
         ));
         jScrollPane1.setViewportView(Tabla_Ventas);
@@ -299,6 +304,17 @@ public class Ventas extends javax.swing.JFrame {
             }
         });
 
+        jLabel13.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel13.setText("CODIGO:");
+
+        Campo_CantDispo.setEditable(false);
+        Campo_CantDispo.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        Campo_CantDispo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Campo_CantDispoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -318,7 +334,7 @@ public class Ventas extends javax.swing.JFrame {
                                         .addGap(12, 12, 12)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(jLabel12)
-                                            .addComponent(jLabel8))
+                                            .addComponent(jLabel13))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -358,6 +374,10 @@ public class Ventas extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(BTN_SalirVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Campo_CantDispo, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -367,25 +387,20 @@ public class Ventas extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel4)
+                    .addComponent(Campo_DescripcionVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Campo_CodigoVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel4)
-                            .addComponent(Campo_DescripcionVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Campo_TallaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel10)
-                                .addComponent(jLabel12)
-                                .addComponent(Campo_CantidadVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(Campo_CodigoVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(Campo_TallaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel10)
+                        .addComponent(jLabel12)
+                        .addComponent(Campo_CantidadVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
@@ -405,12 +420,14 @@ public class Ventas extends javax.swing.JFrame {
                     .addComponent(BTN_VenderVenta)
                     .addComponent(BTN_AgregarVenta))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Campo_TotalVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
-                    .addComponent(BTN_SalirVenta))
+                    .addComponent(BTN_SalirVenta)
+                    .addComponent(jLabel8)
+                    .addComponent(Campo_CantDispo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14))
         );
 
@@ -447,54 +464,6 @@ public class Ventas extends javax.swing.JFrame {
     private void BTN_VenderVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_VenderVentaActionPerformed
         Metodos_Ventas mt = new Metodos_Ventas(this);
         mt.venderVentas();
-//        // 1. Preparamos las consultas SQL
-//        String SelectVentas = "SELECT CODIGO, CANTIDAD FROM Ventas";
-//        String actualizarInventario = "UPDATE Ingresos SET CANTIDAD = CANTIDAD - ? WHERE CODIGO = ?";
-//
-//        try {
-//            // 2. Iniciamos la transacción para asegurar la integridad de los datos
-//            con.setAutoCommit(false);
-//
-//            // 3. Obtenemos los productos de la tabla de venta actual
-//            Statement stmt = con.createStatement();
-//            ResultSet rs = stmt.executeQuery(SelectVentas);
-//
-//            // Preparamos la consulta para actualizar el inventario
-//            PreparedStatement actualizar = con.prepareStatement(actualizarInventario);
-//
-//            // 4. Recorremos cada producto vendido y actualizamos el inventario
-//            while (rs.next()) {
-//                String codigo = rs.getString("CODIGO");
-//                int cantidadVendida = rs.getInt("CANTIDAD");
-//
-//                actualizar.setInt(1, cantidadVendida);
-//                actualizar.setString(2, codigo);
-//                actualizar.executeUpdate(); // Ejecutamos la resta de stock
-//            }
-//
-//            // 5. Si todo salió bien, confirmamos los cambios en la base de datos
-//            con.commit();
-//            JOptionPane.showMessageDialog(null, "VENTA REALIZADA CON EXITO!!, INVENTARIO ACTUALIZADO");
-//
-//            // Aquí también deberías actualizar la JTable para que se vea vacía
-//        DefaultTableModel model = (DefaultTableModel) Tabla_Ventas.getModel();
-//        model.setRowCount(0);
-//        } catch (SQLException e) {
-//            // 7. Si algo falló, deshacemos todos los cambios
-//            try {
-//                con.rollback();//
-//                JOptionPane.showMessageDialog(null, "Error en la transacción. La venta ha sido revertida.\n[ERROR]: " + e.getMessage());
-//            } catch (SQLException ex) {
-//                JOptionPane.showMessageDialog(null, "Error crítico al intentar revertir la transacción.\n[ERROR]: " + ex.getMessage());
-//            }
-//        } finally {
-//            // 8. Dejamos la conexión como estaba para otras operaciones
-//            try {
-//                con.setAutoCommit(true);
-//            } catch (SQLException e) {
-//                JOptionPane.showMessageDialog(null, "[ERROR] al restaurar la conexión: " + e.getMessage());
-//            }
-//        }
     }//GEN-LAST:event_BTN_VenderVentaActionPerformed
 
     private void Campo_TotalVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Campo_TotalVentaActionPerformed
@@ -508,6 +477,7 @@ public class Ventas extends javax.swing.JFrame {
         Metodos_Ventas mt = new Metodos_Ventas(this);
         mt.cancelar();
         mostrar("Ventas");
+        mt.limpiar();
     }//GEN-LAST:event_BTN_CancelarVentaActionPerformed
 
     private void BTN_SalirVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SalirVentaActionPerformed
@@ -526,11 +496,13 @@ public class Ventas extends javax.swing.JFrame {
         mt.agregarVenta();
         mostrar("Ventas");
         costoTotal();
+        mt.calcularYMostrarTotal();
     }//GEN-LAST:event_BTN_AgregarVentaActionPerformed
 
     private void BTN_BuscarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_BuscarVentaActionPerformed
         Metodos_Ventas mt = new Metodos_Ventas(this);
         mt.buscar();
+        mt.cantidadDispo();
     }//GEN-LAST:event_BTN_BuscarVentaActionPerformed
 
     private void Campo_CostoVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Campo_CostoVentaActionPerformed
@@ -540,6 +512,10 @@ public class Ventas extends javax.swing.JFrame {
     private void Campo_CantidadVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Campo_CantidadVentaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Campo_CantidadVentaActionPerformed
+
+    private void Campo_CantDispoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Campo_CantDispoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Campo_CantDispoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -583,6 +559,7 @@ public class Ventas extends javax.swing.JFrame {
     public javax.swing.JButton BTN_LimpiarVenta;
     private javax.swing.JButton BTN_SalirVenta;
     public javax.swing.JButton BTN_VenderVenta;
+    public javax.swing.JTextField Campo_CantDispo;
     public javax.swing.JTextField Campo_CantidadVenta;
     public javax.swing.JTextField Campo_CodigoVenta;
     public javax.swing.JTextField Campo_CostoVenta;
@@ -595,9 +572,11 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

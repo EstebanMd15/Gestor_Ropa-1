@@ -30,12 +30,13 @@ public class Inventario extends javax.swing.JFrame {
         model.addColumn("DESCRIPCION");
         model.addColumn("TALLA");
         model.addColumn("REFERENCIA");
+        model.addColumn("TALLA");
+        model.addColumn("CANTIDAD");
         model.addColumn("COSTO");
-        model.addColumn("PRECIO");
         model.addColumn("FECHA_INGRESO");
         TablaInventario.setModel(model);
 
-        String[] datos = new String[7];
+        String[] datos = new String[8];
         try {
             Statement st;
             st = con.createStatement();
@@ -49,6 +50,8 @@ public class Inventario extends javax.swing.JFrame {
                 datos[4] = rs.getString(5);
                 datos[5] = rs.getString(6);
                 datos[6] = rs.getString(7);
+                datos[7] = rs.getString(8);
+                model.addRow(datos);
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "[ERROR]: " + e.getMessage());
@@ -331,7 +334,7 @@ public class Inventario extends javax.swing.JFrame {
 
             },
             new String [] {
-                "CODIGO", "DESCRIPCION", "TALLA", "REFERENCIA", "CANTIDAD DISPONIBLE", "COSTO", "PRECIO", "FECHA DE INGRESO"
+                "CODIGO", "DESCRIPCION", "TALLA", "REFERENCIA", "CANTIDAD", "COSTO", "PRECIO", "FECHA DE INGRESO"
             }
         ));
         jScrollPane1.setViewportView(TablaInventario);
@@ -397,6 +400,7 @@ public class Inventario extends javax.swing.JFrame {
     private void BTN_BuscarCodInvenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_BuscarCodInvenActionPerformed
         Metodos_Inventario metodo = new Metodos_Inventario(this);
         metodo.buscarCodigo();
+        metodo.cantidadDisponible();
 //        try {
 //            PreparedStatement buscar = con.prepareStatement("SELECT * FROM Ingresos WHERE CODIGO = ?");
 //            buscar.setString(1, Campo_CodigoInventario.getText());

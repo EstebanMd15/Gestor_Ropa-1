@@ -48,6 +48,19 @@ public class Metodos_Inventario implements ActionListener {
         }
 
     }
+    
+    public void cantidadDisponible(){
+        try {
+            PreparedStatement cant = con.prepareStatement("SELECT * FROM Ingresos WHERE CODIGO = ?");
+            cant.setString(1, inventarioIu.Campo_CodigoInventario.getText());
+            ResultSet rs = cant.executeQuery();
+            if(rs.next()){
+                inventarioIu.Campo_CantidadDispoInven.setText(rs.getString("CANTIDAD"));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "[ERROR]: " + e.getMessage());
+        }
+    }
 
     public void limpiarCampos() {
 
