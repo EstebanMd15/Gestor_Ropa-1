@@ -97,15 +97,19 @@ public class Inventario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("PUNTO DE VENTA NORTE");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("TIENDA DE ROPA");
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("TEL:9999-9999");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -137,12 +141,17 @@ public class Inventario extends javax.swing.JFrame {
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jPanel2.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("CODIGO:");
 
+        Campo_CodigoInventario.setBackground(new java.awt.Color(204, 204, 204));
         Campo_CodigoInventario.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        Campo_CodigoInventario.setForeground(new java.awt.Color(0, 0, 0));
         Campo_CodigoInventario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Campo_CodigoInventarioActionPerformed(evt);
@@ -150,10 +159,13 @@ public class Inventario extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("DESCRIPCION:");
 
         Campo_DescripcionInventario.setEditable(false);
+        Campo_DescripcionInventario.setBackground(new java.awt.Color(204, 204, 204));
         Campo_DescripcionInventario.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        Campo_DescripcionInventario.setForeground(new java.awt.Color(0, 0, 0));
         Campo_DescripcionInventario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Campo_DescripcionInventarioActionPerformed(evt);
@@ -161,29 +173,40 @@ public class Inventario extends javax.swing.JFrame {
         });
 
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("TALLA:");
 
         Campo_TallaInventario.setEditable(false);
+        Campo_TallaInventario.setBackground(new java.awt.Color(204, 204, 204));
         Campo_TallaInventario.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        Campo_TallaInventario.setForeground(new java.awt.Color(0, 0, 0));
 
         Campo_ReferenciaInventario.setEditable(false);
+        Campo_ReferenciaInventario.setBackground(new java.awt.Color(204, 204, 204));
         Campo_ReferenciaInventario.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        Campo_ReferenciaInventario.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("REFERENCIA:");
 
         jLabel12.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("CANTIDAD DISPONIBLE:");
 
         Campo_CantidadDispoInven.setEditable(false);
+        Campo_CantidadDispoInven.setBackground(new java.awt.Color(204, 204, 204));
         Campo_CantidadDispoInven.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        Campo_CantidadDispoInven.setForeground(new java.awt.Color(0, 0, 0));
         Campo_CantidadDispoInven.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Campo_CantidadDispoInvenActionPerformed(evt);
             }
         });
 
+        BTN_BuscarCodInven.setBackground(new java.awt.Color(0, 0, 0));
         BTN_BuscarCodInven.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        BTN_BuscarCodInven.setForeground(new java.awt.Color(255, 255, 255));
         BTN_BuscarCodInven.setText("BUSCAR CODIGO");
         BTN_BuscarCodInven.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -192,29 +215,40 @@ public class Inventario extends javax.swing.JFrame {
         });
 
         jLabel11.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("COSTO:");
 
         Campo_CostoInventario.setEditable(false);
+        Campo_CostoInventario.setBackground(new java.awt.Color(204, 204, 204));
         Campo_CostoInventario.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        Campo_CostoInventario.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel13.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("PRECIO:");
 
         Campo_PrecioInventario.setEditable(false);
+        Campo_PrecioInventario.setBackground(new java.awt.Color(204, 204, 204));
         Campo_PrecioInventario.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        Campo_PrecioInventario.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel14.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setText("FECHA DE INGRESO:");
 
         Campo_FechaIngresoInven.setEditable(false);
+        Campo_FechaIngresoInven.setBackground(new java.awt.Color(204, 204, 204));
         Campo_FechaIngresoInven.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        Campo_FechaIngresoInven.setForeground(new java.awt.Color(0, 0, 0));
         Campo_FechaIngresoInven.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Campo_FechaIngresoInvenActionPerformed(evt);
             }
         });
 
+        BTN_MostrarInven.setBackground(new java.awt.Color(0, 0, 0));
         BTN_MostrarInven.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        BTN_MostrarInven.setForeground(new java.awt.Color(255, 255, 255));
         BTN_MostrarInven.setText("MOSTRAR INVENTARIO");
         BTN_MostrarInven.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,7 +256,9 @@ public class Inventario extends javax.swing.JFrame {
             }
         });
 
+        BTN_LimpiarInven.setBackground(new java.awt.Color(0, 0, 0));
         BTN_LimpiarInven.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        BTN_LimpiarInven.setForeground(new java.awt.Color(255, 255, 255));
         BTN_LimpiarInven.setText("LIMPIAR");
         BTN_LimpiarInven.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -249,7 +285,7 @@ public class Inventario extends javax.swing.JFrame {
                         .addComponent(Campo_CantidadDispoInven, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -258,11 +294,11 @@ public class Inventario extends javax.swing.JFrame {
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(Campo_DescripcionInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                                 .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Campo_TallaInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Campo_TallaInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel14)
@@ -319,9 +355,12 @@ public class Inventario extends javax.swing.JFrame {
                 .addGap(31, 31, 31))
         );
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
+        BTN_SalirVenta.setBackground(new java.awt.Color(0, 0, 0));
         BTN_SalirVenta.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        BTN_SalirVenta.setForeground(new java.awt.Color(255, 255, 255));
         BTN_SalirVenta.setText("SALIR");
         BTN_SalirVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

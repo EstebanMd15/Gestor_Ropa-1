@@ -29,6 +29,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -39,30 +40,48 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("BIENVENIDO AL GESTOR DE TU TIENDA");
+
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Parametrización\\Pictures\\LOGO GESTOR.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(363, 363, 363)
-                .addComponent(jLabel2)
-                .addContainerGap(433, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(250, 250, 250)
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(417, 417, 417)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(312, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(342, 342, 342)
+                .addGap(158, 158, 158)
                 .addComponent(jLabel2)
-                .addContainerGap(398, Short.MAX_VALUE))
+                .addGap(56, 56, 56)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(218, Short.MAX_VALUE))
         );
 
+        jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jMenu2.setBackground(new java.awt.Color(255, 255, 255));
+        jMenu2.setForeground(new java.awt.Color(0, 0, 0));
         jMenu2.setText("MODULOS");
         jMenu2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
+        jMenuItem1.setBackground(new java.awt.Color(255, 255, 255));
         jMenuItem1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jMenuItem1.setForeground(new java.awt.Color(0, 0, 0));
         jMenuItem1.setText("INGRESOS");
         jMenuItem1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -72,7 +91,9 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem1);
 
+        jMenuItem2.setBackground(new java.awt.Color(255, 255, 255));
         jMenuItem2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jMenuItem2.setForeground(new java.awt.Color(0, 0, 0));
         jMenuItem2.setText("VENTAS");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,7 +102,9 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem2);
 
+        jMenuItem3.setBackground(new java.awt.Color(255, 255, 255));
         jMenuItem3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jMenuItem3.setForeground(new java.awt.Color(0, 0, 0));
         jMenuItem3.setText("INVENTARIO");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,6 +190,7 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;

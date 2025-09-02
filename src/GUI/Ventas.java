@@ -100,6 +100,8 @@ public class Ventas extends javax.swing.JFrame {
 
         popupMenu1 = new java.awt.PopupMenu();
         jLabel5 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jEditorPane1 = new javax.swing.JEditorPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -135,17 +137,23 @@ public class Ventas extends javax.swing.JFrame {
 
         jLabel5.setText("jLabel5");
 
+        jScrollPane2.setViewportView(jEditorPane1);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("PUNTO DE VENTA NORTE");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("TIENDA DE ROPA");
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("TEL:9999-9999");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -178,9 +186,11 @@ public class Ventas extends javax.swing.JFrame {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(new javax.swing.border.MatteBorder(null));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("DESCRIPCION:");
 
         Campo_DescripcionVenta.setEditable(false);
@@ -199,16 +209,22 @@ public class Ventas extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setBackground(new java.awt.Color(0, 0, 0));
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("TOTAL:");
 
         Campo_TallaVenta.setEditable(false);
         Campo_TallaVenta.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
 
+        jLabel8.setBackground(new java.awt.Color(0, 0, 0));
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("CANTIDAD DISPONIBLE:");
 
+        BTN_BuscarVenta.setBackground(new java.awt.Color(0, 0, 0));
         BTN_BuscarVenta.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        BTN_BuscarVenta.setForeground(new java.awt.Color(255, 255, 255));
         BTN_BuscarVenta.setText("BUSCAR");
         BTN_BuscarVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -216,7 +232,9 @@ public class Ventas extends javax.swing.JFrame {
             }
         });
 
+        BTN_LimpiarVenta.setBackground(new java.awt.Color(0, 0, 0));
         BTN_LimpiarVenta.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        BTN_LimpiarVenta.setForeground(new java.awt.Color(255, 255, 255));
         BTN_LimpiarVenta.setText("LIMPIAR");
         BTN_LimpiarVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -224,7 +242,9 @@ public class Ventas extends javax.swing.JFrame {
             }
         });
 
+        BTN_VenderVenta.setBackground(new java.awt.Color(0, 0, 0));
         BTN_VenderVenta.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        BTN_VenderVenta.setForeground(new java.awt.Color(255, 255, 255));
         BTN_VenderVenta.setText("VENDER");
         BTN_VenderVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -232,7 +252,9 @@ public class Ventas extends javax.swing.JFrame {
             }
         });
 
+        BTN_SalirVenta.setBackground(new java.awt.Color(0, 0, 0));
         BTN_SalirVenta.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        BTN_SalirVenta.setForeground(new java.awt.Color(255, 255, 255));
         BTN_SalirVenta.setText("SALIR");
         BTN_SalirVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -241,9 +263,11 @@ public class Ventas extends javax.swing.JFrame {
         });
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("REFERENCIA:");
 
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("TALLA:");
 
         Campo_TotalVenta.setEditable(false);
@@ -255,12 +279,15 @@ public class Ventas extends javax.swing.JFrame {
         });
 
         jLabel11.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("COSTO:");
 
         Campo_ReferenciaVenta.setEditable(false);
         Campo_ReferenciaVenta.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
 
+        BTN_CancelarVenta.setBackground(new java.awt.Color(0, 0, 0));
         BTN_CancelarVenta.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        BTN_CancelarVenta.setForeground(new java.awt.Color(255, 255, 255));
         BTN_CancelarVenta.setText("CANCELAR");
         BTN_CancelarVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -279,7 +306,9 @@ public class Ventas extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(Tabla_Ventas);
 
+        BTN_AgregarVenta.setBackground(new java.awt.Color(0, 0, 0));
         BTN_AgregarVenta.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        BTN_AgregarVenta.setForeground(new java.awt.Color(255, 255, 255));
         BTN_AgregarVenta.setText("AGREGAR");
         BTN_AgregarVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -288,8 +317,10 @@ public class Ventas extends javax.swing.JFrame {
         });
 
         jLabel12.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("CANTIDAD:");
 
+        Campo_CantidadVenta.setBackground(new java.awt.Color(204, 204, 204));
         Campo_CantidadVenta.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         Campo_CantidadVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -297,6 +328,7 @@ public class Ventas extends javax.swing.JFrame {
             }
         });
 
+        Campo_CodigoVenta.setBackground(new java.awt.Color(204, 204, 204));
         Campo_CodigoVenta.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         Campo_CodigoVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -305,6 +337,7 @@ public class Ventas extends javax.swing.JFrame {
         });
 
         jLabel13.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("CODIGO:");
 
         Campo_CantDispo.setEditable(false);
@@ -568,6 +601,7 @@ public class Ventas extends javax.swing.JFrame {
     public javax.swing.JTextField Campo_TallaVenta;
     public javax.swing.JTextField Campo_TotalVenta;
     public javax.swing.JTable Tabla_Ventas;
+    private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -584,6 +618,7 @@ public class Ventas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     public javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private java.awt.PopupMenu popupMenu1;
     // End of variables declaration//GEN-END:variables
 }

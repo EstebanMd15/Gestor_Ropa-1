@@ -30,31 +30,34 @@ public class Inicio_Sesion extends javax.swing.JFrame {
         Campo_Contraseña_InicioSesion = new javax.swing.JPasswordField();
         BTN_Salir_InicioSesion = new javax.swing.JButton();
         BTN_Entrar_InicioSesion = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setForeground(new java.awt.Color(0, 153, 153));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("CONTRASEÑA");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("INICIO DE SESION");
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("CORREO ELECTRONICO");
 
+        Campo_Correo_InicioSesion.setBackground(new java.awt.Color(204, 204, 204));
         Campo_Correo_InicioSesion.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
-        Campo_Correo_InicioSesion.setForeground(new java.awt.Color(0, 0, 0));
+        Campo_Correo_InicioSesion.setForeground(new java.awt.Color(204, 204, 204));
 
+        Campo_Contraseña_InicioSesion.setBackground(new java.awt.Color(204, 204, 204));
         Campo_Contraseña_InicioSesion.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
-        Campo_Contraseña_InicioSesion.setForeground(new java.awt.Color(0, 0, 0));
+        Campo_Contraseña_InicioSesion.setForeground(new java.awt.Color(204, 204, 204));
 
-        BTN_Salir_InicioSesion.setBackground(new java.awt.Color(51, 51, 51));
+        BTN_Salir_InicioSesion.setBackground(new java.awt.Color(0, 0, 0));
         BTN_Salir_InicioSesion.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
         BTN_Salir_InicioSesion.setForeground(new java.awt.Color(255, 255, 255));
         BTN_Salir_InicioSesion.setText("SALIR");
@@ -64,7 +67,7 @@ public class Inicio_Sesion extends javax.swing.JFrame {
             }
         });
 
-        BTN_Entrar_InicioSesion.setBackground(new java.awt.Color(51, 51, 51));
+        BTN_Entrar_InicioSesion.setBackground(new java.awt.Color(0, 0, 0));
         BTN_Entrar_InicioSesion.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
         BTN_Entrar_InicioSesion.setForeground(new java.awt.Color(255, 255, 255));
         BTN_Entrar_InicioSesion.setText("ENTRAR");
@@ -74,6 +77,8 @@ public class Inicio_Sesion extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Parametrización\\Pictures\\logo ususarui.jpg")); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -81,42 +86,48 @@ public class Inicio_Sesion extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(315, 315, 315)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(275, 275, 275)
+                        .addGap(261, 261, 261)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(52, 52, 52)
                                 .addComponent(jLabel1))
                             .addComponent(Campo_Contraseña_InicioSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(Campo_Correo_InicioSesion)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(BTN_Entrar_InicioSesion)
                                 .addGap(102, 102, 102)
-                                .addComponent(BTN_Salir_InicioSesion)))))
-                .addContainerGap(327, Short.MAX_VALUE))
+                                .addComponent(BTN_Salir_InicioSesion))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(Campo_Correo_InicioSesion)
+                                    .addComponent(jLabel3))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(21, 21, 21)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(283, 283, 283)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(341, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jLabel2)
-                .addGap(102, 102, 102)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Campo_Correo_InicioSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86)
+                .addGap(35, 35, 35)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Campo_Contraseña_InicioSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(135, 135, 135)
+                .addGap(48, 48, 48)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTN_Salir_InicioSesion)
                     .addComponent(BTN_Entrar_InicioSesion))
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -211,6 +222,7 @@ public class Inicio_Sesion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
