@@ -51,11 +51,11 @@ public class Inicio_Sesion extends javax.swing.JFrame {
 
         Campo_Correo_InicioSesion.setBackground(new java.awt.Color(204, 204, 204));
         Campo_Correo_InicioSesion.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
-        Campo_Correo_InicioSesion.setForeground(new java.awt.Color(204, 204, 204));
+        Campo_Correo_InicioSesion.setForeground(new java.awt.Color(0, 0, 0));
 
         Campo_Contraseña_InicioSesion.setBackground(new java.awt.Color(204, 204, 204));
         Campo_Contraseña_InicioSesion.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
-        Campo_Contraseña_InicioSesion.setForeground(new java.awt.Color(204, 204, 204));
+        Campo_Contraseña_InicioSesion.setForeground(new java.awt.Color(0, 0, 0));
 
         BTN_Salir_InicioSesion.setBackground(new java.awt.Color(0, 0, 0));
         BTN_Salir_InicioSesion.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N

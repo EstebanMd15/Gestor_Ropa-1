@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import GUI.Ventas;
 import GUI.INGRESO;
+import GUI.Inventario;
 import com.mysql.cj.protocol.Resultset;
 import gestor_ropa.BD_CONECCTION;
 import java.awt.event.ActionEvent;
@@ -20,8 +21,9 @@ public class Metodos_Ventas implements ActionListener {
 
     BD_CONECCTION bd = new BD_CONECCTION();
     Connection con = bd.conectar();
-    private INGRESO ig;
-    private Ventas vt;
+    INGRESO ig = new INGRESO();
+    Ventas vt =  new Ventas();
+    Inventario in = new Inventario();
     private JButton btnBuscar;
     private JButton btnLimpiar;
     private JButton btnCancelar;
@@ -51,7 +53,7 @@ public class Metodos_Ventas implements ActionListener {
                 vt.Campo_DescripcionVenta.setText(rs.getString("DESCRIPCION"));
                 vt.Campo_ReferenciaVenta.setText(rs.getString("REFERENCIA"));
                 vt.Campo_TallaVenta.setText(rs.getString("TALLA"));
-                vt.Campo_CostoVenta.setText(rs.getString("COSTO"));
+                vt.Campo_COSTOventa.setText(rs.getString("COSTO"));
 
                 this.CantDispo = rs.getInt("CANTIDAD");
             } else {
@@ -97,7 +99,7 @@ public class Metodos_Ventas implements ActionListener {
                 JOptionPane.showMessageDialog(null, "LA CANTIDAD A VENDER DEBE SER MAYOR A 0");
                 vt.Campo_CantidadVenta.requestFocus();
                 return;
-            }
+            } 
 
             //SE COMPARA EL STOCK DISPONIBLE
             PreparedStatement buscar = con.prepareStatement("SELECT* FROM Ingresos WHERE CODIGO = ?");
@@ -105,6 +107,7 @@ public class Metodos_Ventas implements ActionListener {
             ResultSet rs = buscar.executeQuery();
             if (rs.next()) {
                 this.CantDispo = rs.getInt("CANTIDAD");
+                
             }
             if (cantidadVender > this.CantDispo) {
                 JOptionPane.showMessageDialog(null, "NO CUENTA CON LA CANTIDAD SUFICIENTE\nCANTIDAD DISPONIBLE: " + this.CantDispo);
@@ -118,7 +121,7 @@ public class Metodos_Ventas implements ActionListener {
             agregar.setString(2, vt.Campo_DescripcionVenta.getText());
             agregar.setString(3, vt.Campo_TallaVenta.getText());
             agregar.setString(4, vt.Campo_ReferenciaVenta.getText());
-            agregar.setString(5, vt.Campo_CostoVenta.getText());
+            agregar.setString(5, vt.Campo_COSTOventa.getText());
             agregar.setString(6, vt.Campo_CantidadVenta.getText());
 
             vt.Campo_CodigoVenta.setText("");
@@ -126,7 +129,7 @@ public class Metodos_Ventas implements ActionListener {
             vt.Campo_TallaVenta.setText("");
             vt.Campo_ReferenciaVenta.setText("");
             vt.Campo_CantidadVenta.setText("");
-            vt.Campo_CostoVenta.setText("");
+            vt.Campo_COSTOventa.setText("");
             agregar.executeUpdate();
 
             //Se reinicia la cantidad disponible para la proxima busqueda
@@ -140,13 +143,27 @@ public class Metodos_Ventas implements ActionListener {
     }
 
     public void limpiar() {
-        vt.Campo_CostoVenta.setText("");
+        vt.Campo_COSTOventa.setText("");
         vt.Campo_CodigoVenta.setText("");
         vt.Campo_DescripcionVenta.setText("");
         vt.Campo_ReferenciaVenta.setText("");
         vt.Campo_TallaVenta.setText("");
         vt.Campo_TotalVenta.setText("");
         vt.Campo_CantidadVenta.setText("");
+        vt.Campo_SUBTotalVenta.setText("");
+        vt.Campo_CantDispo.setText("");
+        vt.Campo_PrecioVenta1.setText("");
+               
+    }
+    
+    public void limpiar2(){
+        vt.Campo_CodigoVenta.setText("");
+        vt.Campo_CantidadVenta.setText("");
+        vt.Campo_PrecioVenta1.setText("");
+        vt.Campo_COSTOventa.setText("");
+        vt.Campo_DescripcionVenta.setText("");
+        vt.Campo_TallaVenta.setText("");
+        vt.Campo_ReferenciaVenta.setText("");
         vt.Campo_CantDispo.setText("");
     }
 
@@ -175,7 +192,7 @@ public class Metodos_Ventas implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Error al parsear el valor en la fila " + i + ":" + e.getMessage());
             }
         }
-        vt.Campo_TotalVenta.setText(String.format("%.2f", totalGeneral));
+        vt.Campo_SUBTotalVenta.setText(String.format("%.2f", totalGeneral));
     }
 
     public void venderVentas() {
@@ -230,6 +247,44 @@ public class Metodos_Ventas implements ActionListener {
         cancelar();
         limpiar();
     }
+    
+    public void calculoPorcentaje(){
+        try {
+            double costoBase = 0;
+            
+            PreparedStatement porc = con.prepareStatement("SELECT *  FROM Ingresos WHERE CODIGO = ?");
+            porc.setString(1, ig.Campo_Codigo.getText());
+            ResultSet rs = porc.executeQuery();
+            
+            if(rs.next()){
+                String costoBD = rs.getString("COSTO");
+                if(costoBD != null && !costoBD.isEmpty()){
+                    costoBase = Double.parseDouble(costoBD);
+                    ig.Campo_Costo.setText(costoBD);
+                }
+            }else{
+                String costoInve = vt.Campo_COSTOventa.getText();
+                if(costoInve != null && !costoInve.isEmpty()){
+                    costoBase = Double.parseDouble(costoInve);
+                }
+            }
+            
+            double precioFinal;
+            
+            if(costoBase > 5000){
+                precioFinal = costoBase * 1.30;
+            }else{
+                precioFinal = costoBase;
+            }
+            vt.Campo_PrecioVenta1.setText(String.valueOf(precioFinal));
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "[ERROR]:\n" + e.getMessage());
+        } catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "[ERROR EN EL FORMATO]: VERIFIQUE QUE LOS CAMPOS TENGAN VALORES VALIDOS\n" + e.getMessage());
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, "[ERROR]: \n" + e.getMessage());
+        }
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -248,6 +303,6 @@ public class Metodos_Ventas implements ActionListener {
         if (e.getSource() == btnVender) {
             venderVentas();
         }
+    
     }
-
 }

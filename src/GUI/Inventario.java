@@ -28,7 +28,6 @@ public class Inventario extends javax.swing.JFrame {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("CODIGO");
         model.addColumn("DESCRIPCION");
-        model.addColumn("TALLA");
         model.addColumn("REFERENCIA");
         model.addColumn("TALLA");
         model.addColumn("CANTIDAD");
@@ -36,7 +35,7 @@ public class Inventario extends javax.swing.JFrame {
         model.addColumn("FECHA_INGRESO");
         TablaInventario.setModel(model);
 
-        String[] datos = new String[8];
+        String[] datos = new String[7];
         try {
             Statement st;
             st = con.createStatement();
@@ -50,7 +49,6 @@ public class Inventario extends javax.swing.JFrame {
                 datos[4] = rs.getString(5);
                 datos[5] = rs.getString(6);
                 datos[6] = rs.getString(7);
-                datos[7] = rs.getString(8);
                 model.addRow(datos);
             }
         } catch (SQLException e) {
@@ -373,7 +371,7 @@ public class Inventario extends javax.swing.JFrame {
 
             },
             new String [] {
-                "CODIGO", "DESCRIPCION", "TALLA", "REFERENCIA", "CANTIDAD", "COSTO", "PRECIO", "FECHA DE INGRESO"
+                "CODIGO", "DESCRIPCION", "TALLA", "REFERENCIA", "CANTIDAD", "COSTO", "FECHA_INGRESO"
             }
         ));
         jScrollPane1.setViewportView(TablaInventario);
@@ -440,24 +438,7 @@ public class Inventario extends javax.swing.JFrame {
         Metodos_Inventario metodo = new Metodos_Inventario(this);
         metodo.buscarCodigo();
         metodo.cantidadDisponible();
-//        try {
-//            PreparedStatement buscar = con.prepareStatement("SELECT * FROM Ingresos WHERE CODIGO = ?");
-//            buscar.setString(1, Campo_CodigoInventario.getText());
-//            ResultSet rs = buscar.executeQuery();
-//            if (rs.next()) {
-//                Campo_CostoInventario.setText(rs.getString("COSTO"));
-//                Campo_DescripcionInventario.setText(rs.getString("DESCRIPCION"));
-//                Campo_FechaIngresoInven.setText(rs.getString("FECHA_INGRESO"));
-//                Campo_ReferenciaInventario.setText(rs.getString("REFERENCIA"));
-//                Campo_TallaInventario.setText(rs.getString("TALLA"));
-//                
-//               // Campo_CantidadDispoInven.setText(String.valueOf(disponible));//PERMITE CAMBIAR TIPO DE DATOS A CADENA DE TEXTO
-//            } else {
-//                JOptionPane.showMessageDialog(null, "NO SE ENCONTRO NINGUN REGISTRO CON ESE CODIGO");
-//            }
-//        } catch (SQLException e) {
-//            JOptionPane.showMessageDialog(null, "[ERROR]: " + e.getMessage());
-//        }
+        metodo.calculo();
 
     }//GEN-LAST:event_BTN_BuscarCodInvenActionPerformed
 
@@ -466,21 +447,13 @@ public class Inventario extends javax.swing.JFrame {
     }//GEN-LAST:event_Campo_FechaIngresoInvenActionPerformed
 
     private void BTN_MostrarInvenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_MostrarInvenActionPerformed
-            mostrar("Ingresos");
-        
+        mostrar("Ingresos");
+
     }//GEN-LAST:event_BTN_MostrarInvenActionPerformed
 
     private void BTN_LimpiarInvenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_LimpiarInvenActionPerformed
-            Metodos_Inventario mtd = new Metodos_Inventario(this);
-            mtd.limpiarCampos();
-//        Campo_CantidadDispoInven.setText("");
-//        Campo_CodigoInventario.setText("");
-//        Campo_CostoInventario.setText("");
-//        Campo_DescripcionInventario.setText("");
-//        Campo_FechaIngresoInven.setText("");
-//        Campo_PrecioInventario.setText("");
-//        Campo_ReferenciaInventario.setText("");
-//        Campo_TallaInventario.setText("");
+        Metodos_Inventario mtd = new Metodos_Inventario(this);
+        mtd.limpiarCampos();
 
     }//GEN-LAST:event_BTN_LimpiarInvenActionPerformed
 
