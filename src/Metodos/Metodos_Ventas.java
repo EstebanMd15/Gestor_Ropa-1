@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import GUI.Ventas;
 import GUI.INGRESO;
 import GUI.Inventario;
+import GUI.Lista_Precios;
 import com.mysql.cj.protocol.Resultset;
 import gestor_ropa.BD_CONECCTION;
 import java.awt.event.ActionEvent;
@@ -15,9 +16,13 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTable;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import java.util.List;
 
-public class Metodos_Ventas implements ActionListener {
+public class Metodos_Ventas extends Lista_Precios implements ActionListener {
 
     BD_CONECCTION bd = new BD_CONECCTION();
     Connection con = bd.conectar();
@@ -43,6 +48,34 @@ public class Metodos_Ventas implements ActionListener {
         this.btnVender = this.vt.BTN_VenderVenta;
 
     }
+    
+//    public void actualizaListas(){
+//        //Obtenemos el modelo del comboBox para manipularlo
+//        DefaultComboBoxModel<String> modelo = (DefaultComboBoxModel<String>) vt.ComboBox_ListasP.getModel();
+//        //Se limpia los items para no duplicar datos
+//        modelo.removeAllElements();
+//        //Se crea una lista para guardar los nombres de las listas de la BD
+//        List<String> listaPrecios = new ArrayList<>();
+//        //SE EJECUTA LA CONSULTA A LA BD
+//        String sql = "SELECT NOMBRE FROM Lista_Precios ORDER BY NOMBRE ASC";
+//        
+//        try {
+//            Statement stm = con.createStatement();
+//            ResultSet rs = stm.executeQuery(sql);
+//            
+//            while(rs.next()){
+//                listaPrecios.add("NOMBRE");
+//            }
+//        } catch (SQLException e) {
+//            JOptionPane.showMessageDialog(null, "ERROR AL CARGAR LAS LISTAS DE LA BASE DE DATOS" + e.getMessage(), "ERROR DE BASE DE DATOS", JOptionPane.ERROR_MESSAGE);
+//            e.printStackTrace();
+//        }
+//        for(String nombreLista : listaPrecios){
+//            modelo.addElement(nombreLista);
+//        }
+//        
+//       
+//    }
 
     public void buscar() {
         try {
