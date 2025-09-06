@@ -315,7 +315,7 @@ public class Lista_Precios extends javax.swing.JFrame {
         Metodos_ListaPrecios mt = new Metodos_ListaPrecios(this);
         mt.agregar();
        mt.mostrarTabla("Lista_Precios");
-        
+        mt.actualizaListas();
     
     }//GEN-LAST:event_Btn_AgregarLPActionPerformed
 
@@ -339,7 +339,7 @@ public class Lista_Precios extends javax.swing.JFrame {
 
     private void Btn_MostrarLPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_MostrarLPActionPerformed
             Metodos_ListaPrecios mt = new Metodos_ListaPrecios(this);
-            mt.mostrarTabla("Tabla_Precios");
+            mt.mostrarTabla("Lista_Precios");
     }//GEN-LAST:event_Btn_MostrarLPActionPerformed
 
     /**

@@ -48,6 +48,8 @@ public class Metodos_ListaPrecios extends Ventas implements ActionListener {
     }
 
         public void actualizaListas(){
+        if(vt.ComboBox_ListasP == null) return;
+            
         //Obtenemos el modelo del comboBox para manipularlo
         DefaultComboBoxModel<String> modelo = (DefaultComboBoxModel<String>) vt.ComboBox_ListasP.getModel();
         //Se limpia los items para no duplicar datos
@@ -57,12 +59,12 @@ public class Metodos_ListaPrecios extends Ventas implements ActionListener {
         //SE EJECUTA LA CONSULTA A LA BD
         String sql = "SELECT NOMBRE FROM Lista_Precios ORDER BY NOMBRE ASC";
         
-        try {
+        try( 
             Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery(sql);
+            ResultSet rs = stm.executeQuery(sql)){
             
             while(rs.next()){
-                listaPrecios.add("NOMBRE");
+                listaPrecios.add(rs.getString("NOMBRE"));
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "ERROR AL CARGAR LAS LISTAS DE LA BASE DE DATOS" + e.getMessage(), "ERROR DE BASE DE DATOS", JOptionPane.ERROR_MESSAGE);
@@ -119,10 +121,10 @@ public class Metodos_ListaPrecios extends Ventas implements ActionListener {
             }
             int codigo = Integer.parseInt(lp.Campo_CodigoLP.getText());
             double porcentaje = Double.parseDouble(lp.Campo_PorcentajeLP.getText());
-            if (codigo == Integer.parseInt(lp.Campo_CodigoLP.getText())) {
-                JOptionPane.showMessageDialog(null, "EL CODIGO YA SE ENCUENTRA REGISTRADO");
-                return;
-            }
+//            if (codigo == Integer.parseInt(lp.Campo_CodigoLP.getText())) {
+//                JOptionPane.showMessageDialog(null, "EL CODIGO YA SE ENCUENTRA REGISTRADO");
+//                return;
+//            }
             PreparedStatement agregar = con.prepareStatement("INSERT INTO Lista_Precios (CODIGO, NOMBRE, RENTABILIDAD) VALUES (?,?,?)");
             agregar.setInt(1, codigo);
             agregar.setString(2, lp.Campo_NombreLP.getText());
