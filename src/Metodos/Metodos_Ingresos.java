@@ -28,6 +28,15 @@ public class Metodos_Ingresos implements ActionListener {
         this.btnLimpiar = this.ig.BTN_Limpiar;
     }
     
+    public void eliminarRegistros(){
+        try {
+            PreparedStatement eliminarReg = cn.prepareStatement("TRUNCATE TABLE Ingresos");
+            eliminarReg.executeUpdate();
+            JOptionPane.showMessageDialog(null, "INGRESOS ELIMINADOS EXITOSAMENTE");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"[ERROR]: " +  e.getMessage());
+        }
+    }
 
     public void guardar(){
         int cantIngreso = Integer.parseInt(ig.Campo_Cantidad.getText());

@@ -85,6 +85,7 @@ public class INGRESO extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla_Ingreso = new javax.swing.JTable();
         BTN_Salir = new javax.swing.JButton();
+        BTN_EliminarRegistros = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -361,6 +362,16 @@ public class INGRESO extends javax.swing.JFrame {
             }
         });
 
+        BTN_EliminarRegistros.setBackground(new java.awt.Color(0, 0, 0));
+        BTN_EliminarRegistros.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        BTN_EliminarRegistros.setForeground(new java.awt.Color(255, 255, 255));
+        BTN_EliminarRegistros.setText("ELIMINA REGISTROS");
+        BTN_EliminarRegistros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BTN_EliminarRegistrosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -368,16 +379,20 @@ public class INGRESO extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(BTN_Salir, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BTN_EliminarRegistros)
+                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 939, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BTN_Salir)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BTN_Salir)
+                    .addComponent(BTN_EliminarRegistros, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 9, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -413,32 +428,6 @@ public class INGRESO extends javax.swing.JFrame {
     private void BTN_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_GuardarActionPerformed
         Metodos_Ingresos mt = new Metodos_Ingresos(this);
         mt.guardar();
-
-//            int cantIngreso = Integer.parseInt(Campo_Cantidad.getText().trim());
-//        try {
-//            PreparedStatement guardar = con.prepareStatement("INSERT INTO Ingresos (CODIGO, DESCRIPCION, REFERENCIA,TALLA, CANTIDAD, COSTO, FECHA_INGRESO, OBSERVACION) VALUES (?,?,?,?,?,?,?,?)");
-//            guardar.setString(1, Campo_Codigo.getText());
-//            guardar.setString(2, Campo_Descripcion.getText());
-//            guardar.setString(3, Campo_Referencia.getText());
-//            guardar.setString(4, Campo_Talla.getText());
-//            guardar.setInt(5,cantIngreso);
-//            guardar.setString(6, Campo_Costo.getText());
-//            java.sql.Date fechaActual = new java.sql.Date(System.currentTimeMillis());
-//            guardar.setString(7, fechaActual.toString());
-//            guardar.setString(8, Campo_Observacion.getText());
-//            //LIMPIAR CAMPOS
-//            Campo_Cantidad.setText("");
-//            Campo_Codigo.setText("");
-//            Campo_Costo.setText("");
-//            Campo_Descripcion.setText("");
-//            Campo_Observacion.setText("");
-//            Campo_Referencia.setText("");
-//            Campo_Talla.setText("");
-//            guardar.executeUpdate();// EJECUTA SENTENCIAS SQL QUE MODIFIQUEN DATOS COMO INSERT, DELETE, UPDATE
-//            JOptionPane.showMessageDialog(null, "REGISTRADO");
-//        } catch (SQLException e) {
-//            JOptionPane.showMessageDialog(null, "[ERROR]: " + e);
-//        }
         mostrar("Ingresos");
     }//GEN-LAST:event_BTN_GuardarActionPerformed
 
@@ -451,59 +440,11 @@ public class INGRESO extends javax.swing.JFrame {
     private void BTN_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_BuscarActionPerformed
         Metodos_Ingresos mt = new Metodos_Ingresos(this);
         mt.buscar();
-
-//        try {
-//            PreparedStatement buscar = con.prepareStatement("SELECT * FROM Ingresos WHERE CODIGO = ?");
-//            buscar.setString(1, Campo_Codigo.getText());
-//            ResultSet rs = buscar.executeQuery();
-//            if (rs.next()) {
-//                Campo_Cantidad.setText(rs.getString("CANTIDAD"));
-//                Campo_Codigo.setText(rs.getString("CODIGO"));
-//                Campo_Costo.setText(rs.getString("COSTO"));
-//                Campo_Descripcion.setText(rs.getString("DESCRIPCION"));
-//                Campo_Observacion.setText(rs.getString("OBSERVACION"));
-//                Campo_Referencia.setText(rs.getString("REFERENCIA"));
-//                Campo_Talla.setText(rs.getString("TALLA"));
-//
-//            } else {
-//                JOptionPane.showMessageDialog(null, "NO SE ENCONTRO NINGUN REGISTRO CON ESE CODIGO");
-//            }
-//        } catch (SQLException e) {
-//            JOptionPane.showMessageDialog(null, "[ERROR]: " + e);
-//        }
     }//GEN-LAST:event_BTN_BuscarActionPerformed
 
     private void BTN_ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_ModificarActionPerformed
         Metodos_Ingresos mt = new Metodos_Ingresos(this);
         mt.modificar();
-
-//        try {
-//            PreparedStatement modificar = con.prepareStatement("UPDATE Ingresos SET DESCRIPCION=?, REFERENCIA=?,TALLA=?, CANTIDAD=?, COSTO=?, OBSERVACION=? WHERE CODIGO =?");
-//            modificar.setString(1, Campo_Descripcion.getText());
-//            modificar.setString(2, Campo_Referencia.getText());
-//            modificar.setString(3, Campo_Talla.getText());
-//            modificar.setString(4, Campo_Cantidad.getText());
-//            modificar.setString(5, Campo_Costo.getText());
-//            modificar.setString(6, Campo_Observacion.getText());
-//            modificar.setString(7, Campo_Codigo.getText());
-//            int modificar2 = JOptionPane.showConfirmDialog(null, "DESEA MODIFICAR EL INGRESO ?");
-//            if(modificar2 == 0){
-//                int filas = modificar.executeUpdate();
-//            if(filas != 0){
-//                modificar.executeUpdate();
-//            Campo_Cantidad.setText("");
-//            Campo_Codigo.setText("");
-//            Campo_Costo.setText("");
-//            Campo_Descripcion.setText("");
-//            Campo_Observacion.setText("");
-//            Campo_Referencia.setText("");
-//            Campo_Talla.setText("");
-//            }
-//                JOptionPane.showMessageDialog(null, "REGISTRO ACTUALIZADO CON EXITO!!");
-//            }
-//        } catch (SQLException e) {
-//            JOptionPane.showMessageDialog(null, "[ERROR]: " + e);
-//        }
         mostrar("Ingresos");
     }//GEN-LAST:event_BTN_ModificarActionPerformed
 
@@ -511,19 +452,16 @@ public class INGRESO extends javax.swing.JFrame {
             Metodos_Ingresos mt = new Metodos_Ingresos(this);
             mt.limpiar();
 
-//        Campo_Cantidad.setText("");
-//        Campo_Codigo.setText("");
-//        Campo_Costo.setText("");
-//        Campo_Descripcion.setText("");
-//        Campo_Observacion.setText("");
-//        Campo_Referencia.setText("");
-//        Campo_Talla.setText("");
-
     }//GEN-LAST:event_BTN_LimpiarActionPerformed
 
     private void BTN_Mostrar_TablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_Mostrar_TablaActionPerformed
         mostrar("Ingresos");
     }//GEN-LAST:event_BTN_Mostrar_TablaActionPerformed
+
+    private void BTN_EliminarRegistrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_EliminarRegistrosActionPerformed
+        Metodos_Ingresos mt = new Metodos_Ingresos(this);
+        mt.eliminarRegistros();
+    }//GEN-LAST:event_BTN_EliminarRegistrosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -562,6 +500,7 @@ public class INGRESO extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton BTN_Buscar;
+    private javax.swing.JButton BTN_EliminarRegistros;
     public javax.swing.JButton BTN_Guardar;
     public javax.swing.JButton BTN_Limpiar;
     public javax.swing.JButton BTN_Modificar;

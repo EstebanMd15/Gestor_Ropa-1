@@ -1,5 +1,5 @@
-
 package GUI;
+
 import java.sql.*;
 import gestor_ropa.BD_CONECCTION;
 import java.sql.Connection;
@@ -8,16 +8,14 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 public class Inicio_Sesion extends javax.swing.JFrame {
+
     BD_CONECCTION bd1 = new BD_CONECCTION();
     Connection con = bd1.conectar();
 
-    
-    
     public Inicio_Sesion() {
         initComponents();
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -151,31 +149,42 @@ public class Inicio_Sesion extends javax.swing.JFrame {
     }//GEN-LAST:event_BTN_Salir_InicioSesionActionPerformed
 
     private void BTN_Entrar_InicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_Entrar_InicioSesionActionPerformed
-            String correo2 = Campo_Correo_InicioSesion.getText().trim();
-            if(!correo2.contains("@")|| !correo2.contains(".com")){
-                JOptionPane.showMessageDialog(null, "CORREO ELECTRONICO INVALIDO, POR FAVOR VERIFICAR");
+        try {
+            String contraseñaIngresada = new String(Campo_Contraseña_InicioSesion.getPassword());
+            String correoIngresado = Campo_Correo_InicioSesion.getText().trim();
+            
+            if(contraseñaIngresada.isEmpty() || correoIngresado.isEmpty()){
+                JOptionPane.showMessageDialog(null, "POR FAVOR, INGRESE CORREO Y CONTRASEÑA");
                 Campo_Correo_InicioSesion.requestFocus();
-                Campo_Correo_InicioSesion.selectAll();
                 return;
             }
-        try {
-            //String correo = Campo_Correo_InicioSesion.getText();
-            String pass = Campo_Contraseña_InicioSesion.getText();
-            PreparedStatement in = con.prepareStatement("SELECT * FROM Registro WHERE CORREO_ELECTRONICO = '"+correo2+"' AND CONTRASEÑA = '"+pass+"'");
-            ResultSet rs = in.executeQuery();
+            if(!correoIngresado.contains("@")|| !correoIngresado.contains(".com")){
+                JOptionPane.showMessageDialog(null, "CORREO INVALIDO");
+                Campo_Correo_InicioSesion.requestFocus();
+                return;
+            }
+            PreparedStatement entrar = con.prepareStatement("SELECT CONTRASEÑA FROM Registro WHERE CORREO_ELECTRONICO = ?");
+            entrar.setString(1, correoIngresado);
+            ResultSet rs = entrar.executeQuery();
+            
             if(rs.next()){
+                String contraseñaValida = rs.getString("CONTRASEÑA");
+            
+            if(contraseñaValida.equals(contraseñaIngresada)){
+                JOptionPane.showMessageDialog(null, "BIENVENIDO");
                 Menu mn = new Menu();
                 mn.setVisible(true);
-                dispose();
-                
+                this.dispose();
             }else{
-                JOptionPane.showMessageDialog(null, "CORREO NO REGISTRADO");
-                Campo_Correo_InicioSesion.setText("");
-                Campo_Contraseña_InicioSesion.setText("");
+                JOptionPane.showMessageDialog(null, "CONTRASEÑA INCORRECTA");
+                Campo_Contraseña_InicioSesion.requestFocus();
             }
-            
+            }else{
+                JOptionPane.showMessageDialog(null, "CORREO ELECTRONICO NO REGISTRADO");
+                Campo_Correo_InicioSesion.requestFocus();
+            }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "ERROR: " + e);
+            JOptionPane.showMessageDialog(null,"[ERROR DE CONEXION]: " + e.getMessage());
         }
     }//GEN-LAST:event_BTN_Entrar_InicioSesionActionPerformed
 
