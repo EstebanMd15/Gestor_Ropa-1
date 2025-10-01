@@ -30,9 +30,10 @@ public class INGRESO extends javax.swing.JFrame {
         model.addColumn("COSTO");
         model.addColumn("FECHA_INGRESO");
         model.addColumn("OBSERVACION");
-        Tabla_Ingreso.setModel(model);
+        model.addColumn("PRECIO");
+        Tabla_Ingresos.setModel(model);
 
-        String[] datos = new String[8];
+        String[] datos = new String[9];
         try {
             Statement st;
             st = con.createStatement();
@@ -46,6 +47,7 @@ public class INGRESO extends javax.swing.JFrame {
                 datos[5] = rs.getString(6);
                 datos[6] = rs.getString(7);
                 datos[7] = rs.getString(8);
+                datos[8] = rs.getString(9);
                 model.addRow(datos);
             }
         } catch (SQLException e) {
@@ -81,9 +83,11 @@ public class INGRESO extends javax.swing.JFrame {
         BTN_Limpiar = new javax.swing.JButton();
         BTN_Modificar = new javax.swing.JButton();
         BTN_Mostrar_Tabla = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        Campo_PrecioVenta = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Tabla_Ingreso = new javax.swing.JTable();
+        Tabla_Ingresos = new javax.swing.JTable();
         BTN_Salir = new javax.swing.JButton();
         BTN_EliminarRegistros = new javax.swing.JButton();
 
@@ -183,7 +187,7 @@ public class INGRESO extends javax.swing.JFrame {
 
         Campo_Observacion.setBackground(new java.awt.Color(204, 204, 204));
 
-        BTN_Guardar.setBackground(new java.awt.Color(0, 0, 0));
+        BTN_Guardar.setBackground(new java.awt.Color(0, 0, 204));
         BTN_Guardar.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         BTN_Guardar.setForeground(new java.awt.Color(255, 255, 255));
         BTN_Guardar.setText("GUARDAR");
@@ -193,7 +197,7 @@ public class INGRESO extends javax.swing.JFrame {
             }
         });
 
-        BTN_Buscar.setBackground(new java.awt.Color(0, 0, 0));
+        BTN_Buscar.setBackground(new java.awt.Color(0, 0, 204));
         BTN_Buscar.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         BTN_Buscar.setForeground(new java.awt.Color(255, 255, 255));
         BTN_Buscar.setText("BUSCAR");
@@ -203,7 +207,7 @@ public class INGRESO extends javax.swing.JFrame {
             }
         });
 
-        BTN_Limpiar.setBackground(new java.awt.Color(0, 0, 0));
+        BTN_Limpiar.setBackground(new java.awt.Color(0, 0, 204));
         BTN_Limpiar.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         BTN_Limpiar.setForeground(new java.awt.Color(255, 255, 255));
         BTN_Limpiar.setText("LIMPIAR");
@@ -213,7 +217,7 @@ public class INGRESO extends javax.swing.JFrame {
             }
         });
 
-        BTN_Modificar.setBackground(new java.awt.Color(0, 0, 0));
+        BTN_Modificar.setBackground(new java.awt.Color(0, 0, 204));
         BTN_Modificar.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         BTN_Modificar.setForeground(new java.awt.Color(255, 255, 255));
         BTN_Modificar.setText("MODIFICAR");
@@ -223,7 +227,7 @@ public class INGRESO extends javax.swing.JFrame {
             }
         });
 
-        BTN_Mostrar_Tabla.setBackground(new java.awt.Color(0, 0, 0));
+        BTN_Mostrar_Tabla.setBackground(new java.awt.Color(0, 0, 204));
         BTN_Mostrar_Tabla.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         BTN_Mostrar_Tabla.setForeground(new java.awt.Color(255, 255, 255));
         BTN_Mostrar_Tabla.setText("MOSTRAR");
@@ -232,6 +236,12 @@ public class INGRESO extends javax.swing.JFrame {
                 BTN_Mostrar_TablaActionPerformed(evt);
             }
         });
+
+        jLabel10.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel10.setText("PRECIO DE VENTA:");
+
+        Campo_PrecioVenta.setBackground(new java.awt.Color(204, 204, 204));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -262,37 +272,37 @@ public class INGRESO extends javax.swing.JFrame {
                         .addGap(56, 56, 56))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(BTN_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
                         .addComponent(BTN_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                                .addComponent(Campo_Descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Campo_Referencia, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(65, 65, 65)
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(BTN_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Campo_Observacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(BTN_Limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(77, 77, 77)
-                                .addComponent(BTN_Mostrar_Tabla, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(36, 36, 36)))))
+                        .addComponent(jLabel9)
+                        .addGap(53, 53, 53)
+                        .addComponent(Campo_Descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel12)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Campo_Referencia, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel11)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addComponent(BTN_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(34, 34, 34))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addComponent(jLabel10)
+                                    .addGap(18, 18, 18)))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(Campo_Observacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(Campo_PrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(BTN_Limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(77, 77, 77)
+                                    .addComponent(BTN_Mostrar_Tabla, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(36, 36, 36))))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -320,12 +330,14 @@ public class INGRESO extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(Campo_Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11)
-                    .addComponent(Campo_Observacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Campo_Observacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(Campo_Costo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Campo_Costo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Campo_PrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTN_Guardar)
@@ -341,18 +353,18 @@ public class INGRESO extends javax.swing.JFrame {
 
         jScrollPane1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
 
-        Tabla_Ingreso.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        Tabla_Ingreso.setModel(new javax.swing.table.DefaultTableModel(
+        Tabla_Ingresos.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        Tabla_Ingresos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "CODIGO", "DESCRIPCION", "REFERENCIA", "TALLA", "CANTIDAD", "COSTO", "FECHA INGRESO", "OBSERVACION"
+                "CODIGO", "DESCRIPCION", "REFERENCIA", "TALLA", "CANTIDAD", "COSTO", "FECHA INGRESO", "OBSERVACION", "PRECIO"
             }
         ));
-        jScrollPane1.setViewportView(Tabla_Ingreso);
+        jScrollPane1.setViewportView(Tabla_Ingresos);
 
-        BTN_Salir.setBackground(new java.awt.Color(0, 0, 0));
+        BTN_Salir.setBackground(new java.awt.Color(204, 0, 0));
         BTN_Salir.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         BTN_Salir.setForeground(new java.awt.Color(255, 255, 255));
         BTN_Salir.setText("SALIR");
@@ -362,7 +374,7 @@ public class INGRESO extends javax.swing.JFrame {
             }
         });
 
-        BTN_EliminarRegistros.setBackground(new java.awt.Color(0, 0, 0));
+        BTN_EliminarRegistros.setBackground(new java.awt.Color(204, 0, 0));
         BTN_EliminarRegistros.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         BTN_EliminarRegistros.setForeground(new java.awt.Color(255, 255, 255));
         BTN_EliminarRegistros.setText("ELIMINA REGISTROS");
@@ -511,10 +523,12 @@ public class INGRESO extends javax.swing.JFrame {
     public javax.swing.JTextField Campo_Costo;
     public javax.swing.JTextField Campo_Descripcion;
     public javax.swing.JTextField Campo_Observacion;
+    public javax.swing.JTextField Campo_PrecioVenta;
     public javax.swing.JTextField Campo_Referencia;
     public javax.swing.JTextField Campo_Talla;
-    private javax.swing.JTable Tabla_Ingreso;
+    public javax.swing.JTable Tabla_Ingresos;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;

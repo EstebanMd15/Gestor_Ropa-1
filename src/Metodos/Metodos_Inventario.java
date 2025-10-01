@@ -43,6 +43,7 @@ public class Metodos_Inventario implements ActionListener {
                 inventarioIu.Campo_FechaIngresoInven.setText(rs.getString("FECHA_INGRESO"));
                 inventarioIu.Campo_ReferenciaInventario.setText(rs.getString("REFERENCIA"));
                 inventarioIu.Campo_TallaInventario.setText(rs.getString("TALLA"));
+                inventarioIu.Campo_PrecioInventario.setText(rs.getString("PRECIO"));
 
                 // Campo_CantidadDispoInven.setText(String.valueOf(disponible));//PERMITE CAMBIAR TIPO DE DATOS A CADENA DE TEXTO
             } else {
@@ -79,44 +80,44 @@ public class Metodos_Inventario implements ActionListener {
         inventarioIu.Campo_TallaInventario.setText("");
     }
 
-    public void calculo() {
-
-        try {
-            double costoBase = 0;
-
-            PreparedStatement cal = con.prepareStatement("SELECT * FROM Ingresos WHERE CODIGO = ?");
-            cal.setString(1, ig.Campo_Codigo.getText());
-            ResultSet rs = cal.executeQuery();
-            if (rs.next()) {
-                String costoBD = rs.getString("COSTO");
-                if (costoBD != null && !costoBD.isEmpty()) {
-                    costoBase = Double.parseDouble(costoBD);
-                    ig.Campo_Costo.setText(costoBD);
-                }
-            } else {
-                String costoInv = inventarioIu.Campo_CostoInventario.getText();
-                if (costoInv != null && !costoInv.isEmpty()) {
-                    costoBase = Double.parseDouble(costoInv);
-                }
-            }
-            double preciofinal;
-
-            if (costoBase > 5000) {
-                preciofinal = costoBase * 1.30;
-            } else {
-                preciofinal = costoBase;
-            }
-            inventarioIu.Campo_PrecioInventario.setText(String.valueOf(preciofinal));
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "[ERROR]: " + e.getMessage());
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "[ERROR EN EL FORMATO]: VERIFIQUE QUE LOS CAMPOS TENGAN VALORES VALIDOS" + e.getMessage());
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(null, "[ERROR]: " + e.getMessage());
-        }
-
-    }
+//    public void calculo() {
+//
+//        try {
+//            double costoBase = 0;
+//
+//            PreparedStatement cal = con.prepareStatement("SELECT * FROM Ingresos WHERE CODIGO = ?");
+//            cal.setString(1, ig.Campo_Codigo.getText());
+//            ResultSet rs = cal.executeQuery();
+//            if (rs.next()) {
+//                String costoBD = rs.getString("COSTO");
+//                if (costoBD != null && !costoBD.isEmpty()) {
+//                    costoBase = Double.parseDouble(costoBD);
+//                    ig.Campo_Costo.setText(costoBD);
+//                }
+//            } else {
+//                String costoInv = inventarioIu.Campo_CostoInventario.getText();
+//                if (costoInv != null && !costoInv.isEmpty()) {
+//                    costoBase = Double.parseDouble(costoInv);
+//                }
+//            }
+//            double preciofinal;
+//
+//            if (costoBase > 5000) {
+//                preciofinal = costoBase * 1.30;
+//            } else {
+//                preciofinal = costoBase;
+//            }
+//            inventarioIu.Campo_PrecioInventario.setText(String.valueOf(preciofinal));
+//
+//        } catch (SQLException e) {
+//            JOptionPane.showMessageDialog(null, "[ERROR]: " + e.getMessage());
+//        } catch (NumberFormatException e) {
+//            JOptionPane.showMessageDialog(null, "[ERROR EN EL FORMATO]: VERIFIQUE QUE LOS CAMPOS TENGAN VALORES VALIDOS" + e.getMessage());
+//        } catch (Exception e){
+//            JOptionPane.showMessageDialog(null, "[ERROR]: " + e.getMessage());
+//        }
+//
+//    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

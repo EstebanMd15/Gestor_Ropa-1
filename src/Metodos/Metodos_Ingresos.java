@@ -5,16 +5,19 @@ import java.sql.*;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import GUI.INGRESO;
+import GUI.Ventas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class Metodos_Ingresos implements ActionListener {
 
     BD_CONECCTION bd = new BD_CONECCTION();
     Connection cn = bd.conectar();
     private INGRESO ig;
+    private Ventas vt;
     private JButton btnGuardar;
     private JButton btnBuscar;
     private JButton btnModificar;
@@ -22,6 +25,7 @@ public class Metodos_Ingresos implements ActionListener {
 
     public Metodos_Ingresos(INGRESO ig) {
         this.ig = ig;
+        this.vt = vt;
         this.btnGuardar = this.ig.BTN_Guardar;
         this.btnBuscar = this.ig.BTN_Buscar;
         this.btnModificar = this.ig.BTN_Modificar;
@@ -42,7 +46,7 @@ public class Metodos_Ingresos implements ActionListener {
         int cantIngreso = Integer.parseInt(ig.Campo_Cantidad.getText());
         java.sql.Date fechaActual = new java.sql.Date(System.currentTimeMillis());
         try {
-            PreparedStatement guardar = cn.prepareStatement("INSERT INTO Ingresos (CODIGO, DESCRIPCION, REFERENCIA, TALLA, CANTIDAD, COSTO, FECHA_INGRESO, OBSERVACION) VALUES (?,?,?,?,?,?,?,?)");
+            PreparedStatement guardar = cn.prepareStatement("INSERT INTO Ingresos (CODIGO, DESCRIPCION, REFERENCIA, TALLA, CANTIDAD, COSTO, FECHA_INGRESO, OBSERVACION, PRECIO) VALUES (?,?,?,?,?,?,?,?,?)");
             guardar.setString(1, ig.Campo_Codigo.getText());
             guardar.setString(2, ig.Campo_Descripcion.getText());
             guardar.setString(3, ig.Campo_Referencia.getText());
@@ -51,6 +55,7 @@ public class Metodos_Ingresos implements ActionListener {
             guardar.setString(6, ig.Campo_Costo.getText());
             guardar.setString(7, fechaActual.toString());
             guardar.setString(8, ig.Campo_Observacion.getText());
+            guardar.setString(9, ig.Campo_PrecioVenta.getText());
             
             ig.Campo_Cantidad.setText("");
             ig.Campo_Codigo.setText("");
@@ -127,6 +132,23 @@ public class Metodos_Ingresos implements ActionListener {
         ig.Campo_Observacion.setText("");
         ig.Campo_Referencia.setText("");
         ig.Campo_Talla.setText("");
+    }
+    
+    public void calcularPrecioVenta(){
+        DefaultTableModel model = (DefaultTableModel) ig.Tabla_Ingresos.getModel();
+        double totalVenta = 0.0;
+        
+        for(int i = 0; i < model.getRowCount(); i++){
+            try {
+                String valorcelda = model.getValueAt(i, 9).toString();
+                double total = Double.parseDouble(valorcelda);
+                
+                totalVenta += total;
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null,"ERROR AL PARSEAR LA FILA " + i + ":" + e.getMessage());
+            }
+        }
+        vt.Campo_TotalVenta.setText(String.format("%.2f",totalVenta));
     }
     
     

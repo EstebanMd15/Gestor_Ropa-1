@@ -55,7 +55,7 @@ public class Inicio_Sesion extends javax.swing.JFrame {
         Campo_Contraseña_InicioSesion.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
         Campo_Contraseña_InicioSesion.setForeground(new java.awt.Color(0, 0, 0));
 
-        BTN_Salir_InicioSesion.setBackground(new java.awt.Color(0, 0, 0));
+        BTN_Salir_InicioSesion.setBackground(new java.awt.Color(204, 0, 0));
         BTN_Salir_InicioSesion.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
         BTN_Salir_InicioSesion.setForeground(new java.awt.Color(255, 255, 255));
         BTN_Salir_InicioSesion.setText("SALIR");
@@ -65,7 +65,7 @@ public class Inicio_Sesion extends javax.swing.JFrame {
             }
         });
 
-        BTN_Entrar_InicioSesion.setBackground(new java.awt.Color(0, 0, 0));
+        BTN_Entrar_InicioSesion.setBackground(new java.awt.Color(0, 102, 0));
         BTN_Entrar_InicioSesion.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
         BTN_Entrar_InicioSesion.setForeground(new java.awt.Color(255, 255, 255));
         BTN_Entrar_InicioSesion.setText("ENTRAR");

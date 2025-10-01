@@ -173,7 +173,7 @@ public class Inventario extends javax.swing.JFrame {
             }
         });
 
-        BTN_BuscarCodInven.setBackground(new java.awt.Color(0, 0, 0));
+        BTN_BuscarCodInven.setBackground(new java.awt.Color(0, 0, 204));
         BTN_BuscarCodInven.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         BTN_BuscarCodInven.setForeground(new java.awt.Color(255, 255, 255));
         BTN_BuscarCodInven.setText("BUSCAR CODIGO");
@@ -215,7 +215,7 @@ public class Inventario extends javax.swing.JFrame {
             }
         });
 
-        BTN_MostrarInven.setBackground(new java.awt.Color(0, 0, 0));
+        BTN_MostrarInven.setBackground(new java.awt.Color(0, 0, 204));
         BTN_MostrarInven.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         BTN_MostrarInven.setForeground(new java.awt.Color(255, 255, 255));
         BTN_MostrarInven.setText("MOSTRAR INVENTARIO");
@@ -225,7 +225,7 @@ public class Inventario extends javax.swing.JFrame {
             }
         });
 
-        BTN_LimpiarInven.setBackground(new java.awt.Color(0, 0, 0));
+        BTN_LimpiarInven.setBackground(new java.awt.Color(0, 0, 204));
         BTN_LimpiarInven.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         BTN_LimpiarInven.setForeground(new java.awt.Color(255, 255, 255));
         BTN_LimpiarInven.setText("LIMPIAR");
@@ -367,7 +367,7 @@ public class Inventario extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
-        BTN_SalirVenta.setBackground(new java.awt.Color(0, 0, 0));
+        BTN_SalirVenta.setBackground(new java.awt.Color(204, 0, 0));
         BTN_SalirVenta.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         BTN_SalirVenta.setForeground(new java.awt.Color(255, 255, 255));
         BTN_SalirVenta.setText("SALIR");
@@ -446,7 +446,7 @@ public class Inventario extends javax.swing.JFrame {
         Metodos_Inventario metodo = new Metodos_Inventario(this);
         metodo.buscarCodigo();
         metodo.cantidadDisponible();
-        metodo.calculo();
+//      metodo.calculo();
 
     }//GEN-LAST:event_BTN_BuscarCodInvenActionPerformed
 

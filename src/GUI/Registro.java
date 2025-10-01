@@ -90,7 +90,7 @@ public class Registro extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("FECHA DE EXPEDICION:");
 
-        Combo_Tipo_Identidad.setBackground(new java.awt.Color(0, 0, 0));
+        Combo_Tipo_Identidad.setBackground(new java.awt.Color(0, 102, 0));
         Combo_Tipo_Identidad.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         Combo_Tipo_Identidad.setForeground(new java.awt.Color(255, 255, 255));
         Combo_Tipo_Identidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "C.C", "T.I", "C.E" }));
@@ -125,7 +125,7 @@ public class Registro extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("NOMBRES:");
 
-        Combo_Tipo_Rh.setBackground(new java.awt.Color(0, 0, 0));
+        Combo_Tipo_Rh.setBackground(new java.awt.Color(0, 102, 0));
         Combo_Tipo_Rh.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         Combo_Tipo_Rh.setForeground(new java.awt.Color(255, 255, 255));
         Combo_Tipo_Rh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" }));
@@ -156,7 +156,7 @@ public class Registro extends javax.swing.JFrame {
         Campo_Telefono.setBackground(new java.awt.Color(204, 204, 204));
         Campo_Telefono.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
-        BTN_Salir_Registro.setBackground(new java.awt.Color(0, 0, 0));
+        BTN_Salir_Registro.setBackground(new java.awt.Color(204, 0, 0));
         BTN_Salir_Registro.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
         BTN_Salir_Registro.setForeground(new java.awt.Color(255, 255, 255));
         BTN_Salir_Registro.setText("SALIR");
@@ -166,7 +166,7 @@ public class Registro extends javax.swing.JFrame {
             }
         });
 
-        BTN_Confirmar_Registro.setBackground(new java.awt.Color(0, 0, 0));
+        BTN_Confirmar_Registro.setBackground(new java.awt.Color(0, 102, 0));
         BTN_Confirmar_Registro.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
         BTN_Confirmar_Registro.setForeground(new java.awt.Color(255, 255, 255));
         BTN_Confirmar_Registro.setText("CONFIRMAR");

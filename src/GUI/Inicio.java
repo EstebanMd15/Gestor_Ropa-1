@@ -29,7 +29,7 @@ public class Inicio extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("GESTOR DE INVENTARIO");
 
-        BTN_Iniciar_Sesion.setBackground(new java.awt.Color(0, 0, 0));
+        BTN_Iniciar_Sesion.setBackground(new java.awt.Color(0, 102, 0));
         BTN_Iniciar_Sesion.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         BTN_Iniciar_Sesion.setForeground(new java.awt.Color(255, 255, 255));
         BTN_Iniciar_Sesion.setText("INICIAR SESION");
@@ -39,7 +39,7 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
-        BTN_Registrarse.setBackground(new java.awt.Color(0, 0, 0));
+        BTN_Registrarse.setBackground(new java.awt.Color(0, 102, 0));
         BTN_Registrarse.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         BTN_Registrarse.setForeground(new java.awt.Color(255, 255, 255));
         BTN_Registrarse.setText("REGISTRARSE");

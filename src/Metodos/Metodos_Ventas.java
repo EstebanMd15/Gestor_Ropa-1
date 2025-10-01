@@ -6,8 +6,7 @@ import java.sql.PreparedStatement;
 import GUI.Ventas;
 import GUI.INGRESO;
 import GUI.Inventario;
-import GUI.Lista_Precios;
-import com.mysql.cj.protocol.Resultset;
+//import com.mysql.cj.protocol.Resultset;
 import gestor_ropa.BD_CONECCTION;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,12 +16,10 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JTable;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import java.util.List;
 
-public class Metodos_Ventas extends Lista_Precios implements ActionListener {
+public class Metodos_Ventas implements ActionListener {
 
     BD_CONECCTION bd = new BD_CONECCTION();
     Connection con = bd.conectar();
@@ -39,7 +36,7 @@ public class Metodos_Ventas extends Lista_Precios implements ActionListener {
     private int CantDispo;
 
     public Metodos_Ventas(Ventas vt) {
-        // this.cant = this.ig.Campo_Cantidad;
+        this.cant = this.ig.Campo_Cantidad;
         this.vt = vt;
         this.btnAgregar = this.vt.BTN_AgregarVenta;
         this.btnBuscar = this.vt.BTN_BuscarVenta;
@@ -49,33 +46,6 @@ public class Metodos_Ventas extends Lista_Precios implements ActionListener {
 
     }
     
-//    public void actualizaListas(){
-//        //Obtenemos el modelo del comboBox para manipularlo
-//        DefaultComboBoxModel<String> modelo = (DefaultComboBoxModel<String>) vt.ComboBox_ListasP.getModel();
-//        //Se limpia los items para no duplicar datos
-//        modelo.removeAllElements();
-//        //Se crea una lista para guardar los nombres de las listas de la BD
-//        List<String> listaPrecios = new ArrayList<>();
-//        //SE EJECUTA LA CONSULTA A LA BD
-//        String sql = "SELECT NOMBRE FROM Lista_Precios ORDER BY NOMBRE ASC";
-//        
-//        try {
-//            Statement stm = con.createStatement();
-//            ResultSet rs = stm.executeQuery(sql);
-//            
-//            while(rs.next()){
-//                listaPrecios.add("NOMBRE");
-//            }
-//        } catch (SQLException e) {
-//            JOptionPane.showMessageDialog(null, "ERROR AL CARGAR LAS LISTAS DE LA BASE DE DATOS" + e.getMessage(), "ERROR DE BASE DE DATOS", JOptionPane.ERROR_MESSAGE);
-//            e.printStackTrace();
-//        }
-//        for(String nombreLista : listaPrecios){
-//            modelo.addElement(nombreLista);
-//        }
-//        
-//       
-//    }
 
     public void buscar() {
         try {
@@ -87,6 +57,7 @@ public class Metodos_Ventas extends Lista_Precios implements ActionListener {
                 vt.Campo_ReferenciaVenta.setText(rs.getString("REFERENCIA"));
                 vt.Campo_TallaVenta.setText(rs.getString("TALLA"));
                 vt.Campo_COSTOventa.setText(rs.getString("COSTO"));
+                vt.Campo_PrecioVenta1.setText(rs.getString("PRECIO"));
 
                 this.CantDispo = rs.getInt("CANTIDAD");
             } else {
@@ -149,12 +120,12 @@ public class Metodos_Ventas extends Lista_Precios implements ActionListener {
                 return;// se detiene la ejecucion del método
             }
 
-            PreparedStatement agregar = con.prepareStatement("INSERT INTO Ventas (CODIGO, DESCRIPCION, TALLA, REFERENCIA, COSTO, CANTIDAD) VALUES (?,?,?,?,?,?)");
+            PreparedStatement agregar = con.prepareStatement("INSERT INTO Ventas (CODIGO, DESCRIPCION, TALLA, REFERENCIA, PRECIO, CANTIDAD) VALUES (?,?,?,?,?,?)");
             agregar.setString(1, vt.Campo_CodigoVenta.getText());
             agregar.setString(2, vt.Campo_DescripcionVenta.getText());
             agregar.setString(3, vt.Campo_TallaVenta.getText());
             agregar.setString(4, vt.Campo_ReferenciaVenta.getText());
-            agregar.setString(5, vt.Campo_COSTOventa.getText());
+            agregar.setString(5, vt.Campo_PrecioVenta1.getText());
             agregar.setString(6, vt.Campo_CantidadVenta.getText());
 
             vt.Campo_CodigoVenta.setText("");
@@ -183,7 +154,7 @@ public class Metodos_Ventas extends Lista_Precios implements ActionListener {
         vt.Campo_TallaVenta.setText("");
         vt.Campo_TotalVenta.setText("");
         vt.Campo_CantidadVenta.setText("");
-        vt.Campo_SUBTotalVenta.setText("");
+        vt.Campo_TotalVenta.setText("");
         vt.Campo_CantDispo.setText("");
         vt.Campo_PrecioVenta1.setText("");
                
@@ -225,7 +196,7 @@ public class Metodos_Ventas extends Lista_Precios implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Error al parsear el valor en la fila " + i + ":" + e.getMessage());
             }
         }
-        vt.Campo_SUBTotalVenta.setText(String.format("%.2f", totalGeneral));
+        vt.Campo_TotalVenta.setText(String.format("%.2f", totalGeneral));
     }
 
     public void venderVentas() {
