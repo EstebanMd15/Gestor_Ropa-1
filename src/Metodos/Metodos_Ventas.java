@@ -49,7 +49,7 @@ public class Metodos_Ventas implements ActionListener {
 
     public void buscar() {
         try {
-            PreparedStatement buscar = con.prepareStatement("SELECT * FROM Ingresos WHERE CODIGO = ?");
+            PreparedStatement buscar = con.prepareStatement("SELECT * FROM INGRESOS WHERE CODIGO_I = ?");
             buscar.setString(1, vt.Campo_CodigoVenta.getText());
             ResultSet rs = buscar.executeQuery();
             if (rs.next()) {
@@ -76,7 +76,7 @@ public class Metodos_Ventas implements ActionListener {
     
     public void cantidadDispo(){
         try {
-            PreparedStatement cant = con.prepareStatement("SELECT * FROM Ingresos WHERE CODIGO = ?");
+            PreparedStatement cant = con.prepareStatement("SELECT * FROM INGRESOS WHERE CODIGO_I = ?");
             cant.setString(1, vt.Campo_CodigoVenta.getText());
             ResultSet rs = cant.executeQuery();
             if(rs.next()){
@@ -106,7 +106,7 @@ public class Metodos_Ventas implements ActionListener {
             } 
 
             //SE COMPARA EL STOCK DISPONIBLE
-            PreparedStatement buscar = con.prepareStatement("SELECT* FROM Ingresos WHERE CODIGO = ?");
+            PreparedStatement buscar = con.prepareStatement("SELECT* FROM INGRESOS WHERE CODIGO_I = ?");
             buscar.setString(1, codigo);
             ResultSet rs = buscar.executeQuery();
             if (rs.next()) {
@@ -120,7 +120,7 @@ public class Metodos_Ventas implements ActionListener {
                 return;// se detiene la ejecucion del método
             }
 
-            PreparedStatement agregar = con.prepareStatement("INSERT INTO Ventas (CODIGO, DESCRIPCION, TALLA, REFERENCIA, PRECIO, CANTIDAD) VALUES (?,?,?,?,?,?)");
+            PreparedStatement agregar = con.prepareStatement("INSERT INTO VENTAS (CODIGO_V, DESCRIPCION, TALLA, REFERENCIA, PRECIO, CANTIDAD) VALUES (?,?,?,?,?,?)");
             agregar.setString(1, vt.Campo_CodigoVenta.getText());
             agregar.setString(2, vt.Campo_DescripcionVenta.getText());
             agregar.setString(3, vt.Campo_TallaVenta.getText());
@@ -173,7 +173,7 @@ public class Metodos_Ventas implements ActionListener {
 
     public void cancelar() {
         try {
-            PreparedStatement cancelar = con.prepareStatement("TRUNCATE TABLE Ventas");
+            PreparedStatement cancelar = con.prepareStatement("TRUNCATE TABLE VENTAS");
             cancelar.executeUpdate();
             JOptionPane.showMessageDialog(null, "REGISTROS ELIMINADOS CORRECTAMENTE");
         } catch (SQLException e) {
@@ -201,8 +201,8 @@ public class Metodos_Ventas implements ActionListener {
 
     public void venderVentas() {
         //Se prepara la consulta SQL
-        String selecVentas = "SELECT CODIGO, CANTIDAD FROM Ventas";
-        String actualizarInventario = "UPDATE Ingresos SET CANTIDAD = CANTIDAD - ? WHERE CODIGO = ?";
+        String selecVentas = "SELECT CODIGO_V, CANTIDAD FROM VENTAS";
+        String actualizarInventario = "UPDATE INGRESOS SET CANTIDAD = CANTIDAD - ? WHERE CODIGO_I = ?";
 
         try {
             // Se inicia una transaccion para asegurar la integridad de los datos
@@ -214,7 +214,7 @@ public class Metodos_Ventas implements ActionListener {
             PreparedStatement actualizar = con.prepareStatement(actualizarInventario);
             //Se recorre cada producto vendido y se actualiza el inventario
             while (rs.next()) {
-                String codigo = rs.getString("CODIGO");
+                String codigo = rs.getString("CODIGO_V");
                 int cantidadVendida = rs.getInt("CANTIDAD");
                 actualizar.setInt(1, cantidadVendida);
                 actualizar.setString(2, codigo);
@@ -256,7 +256,7 @@ public class Metodos_Ventas implements ActionListener {
         try {
             double costoBase = 0;
             
-            PreparedStatement porc = con.prepareStatement("SELECT *  FROM Ingresos WHERE CODIGO = ?");
+            PreparedStatement porc = con.prepareStatement("SELECT *  FROM INGRESOS WHERE CODIGO_I = ?");
             porc.setString(1, ig.Campo_Codigo.getText());
             ResultSet rs = porc.executeQuery();
             

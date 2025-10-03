@@ -34,7 +34,7 @@ public class Metodos_Inventario implements ActionListener {
     public void buscarCodigo() {
 
         try {
-            PreparedStatement buscar = con.prepareStatement("SELECT * FROM Ingresos WHERE CODIGO = ?");
+            PreparedStatement buscar = con.prepareStatement("SELECT * FROM INGRESOS WHERE CODIGO_I = ?");
             buscar.setString(1, inventarioIu.Campo_CodigoInventario.getText());
             ResultSet rs = buscar.executeQuery();
             if (rs.next()) {
@@ -57,7 +57,7 @@ public class Metodos_Inventario implements ActionListener {
 
     public void cantidadDisponible() {
         try {
-            PreparedStatement cant = con.prepareStatement("SELECT * FROM Ingresos WHERE CODIGO = ?");
+            PreparedStatement cant = con.prepareStatement("SELECT * FROM INGRESOS WHERE CODIGO_I = ?");
             cant.setString(1, inventarioIu.Campo_CodigoInventario.getText());
             ResultSet rs = cant.executeQuery();
             if (rs.next()) {

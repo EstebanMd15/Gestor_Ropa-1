@@ -34,7 +34,7 @@ public class Metodos_Ingresos implements ActionListener {
     
     public void eliminarRegistros(){
         try {
-            PreparedStatement eliminarReg = cn.prepareStatement("TRUNCATE TABLE Ingresos");
+            PreparedStatement eliminarReg = cn.prepareStatement("TRUNCATE TABLE INGRESOS");
             eliminarReg.executeUpdate();
             JOptionPane.showMessageDialog(null, "INGRESOS ELIMINADOS EXITOSAMENTE");
         } catch (SQLException e) {
@@ -46,7 +46,7 @@ public class Metodos_Ingresos implements ActionListener {
         int cantIngreso = Integer.parseInt(ig.Campo_Cantidad.getText());
         java.sql.Date fechaActual = new java.sql.Date(System.currentTimeMillis());
         try {
-            PreparedStatement guardar = cn.prepareStatement("INSERT INTO Ingresos (CODIGO, DESCRIPCION, REFERENCIA, TALLA, CANTIDAD, COSTO, FECHA_INGRESO, OBSERVACION, PRECIO) VALUES (?,?,?,?,?,?,?,?,?)");
+            PreparedStatement guardar = cn.prepareStatement("INSERT INTO INGRESOS (CODIGO_I, DESCRIPCION, REFERENCIA, TALLA, CANTIDAD, COSTO, FECHA_INGRESO, OBSERVACION, PRECIO) VALUES (?,?,?,?,?,?,?,?,?)");
             guardar.setString(1, ig.Campo_Codigo.getText());
             guardar.setString(2, ig.Campo_Descripcion.getText());
             guardar.setString(3, ig.Campo_Referencia.getText());
@@ -64,6 +64,7 @@ public class Metodos_Ingresos implements ActionListener {
             ig.Campo_Observacion.setText("");
             ig.Campo_Referencia.setText("");
             ig.Campo_Talla.setText("");
+            ig.Campo_PrecioVenta.setText("");
             guardar.executeUpdate();// ejecuta sentencias sql que modifiquen datos como INSERT, DELETE, UPDATE
             JOptionPane.showMessageDialog(null, "REGISTRADO");
             
@@ -74,12 +75,12 @@ public class Metodos_Ingresos implements ActionListener {
     
     public void buscar(){
         try {
-            PreparedStatement guardar = cn.prepareStatement("SELECT * FROM Ingresos WHERE CODIGO = ?");
+            PreparedStatement guardar = cn.prepareStatement("SELECT * FROM INGRESOS WHERE CODIGO_I = ?");
             guardar.setString(1, ig.Campo_Codigo.getText());
             ResultSet rs = guardar.executeQuery();
             if(rs.next()){
                 ig.Campo_Cantidad.setText(rs.getString("CANTIDAD"));
-                ig.Campo_Codigo.setText(rs.getString("CODIGO"));
+                ig.Campo_Codigo.setText(rs.getString("CODIGO_I"));
                 ig.Campo_Costo.setText(rs.getString("COSTO"));
                 ig.Campo_Descripcion.setText(rs.getString("DESCRIPCION"));
                 ig.Campo_Observacion.setText(rs.getString("OBSERVACION"));
@@ -95,7 +96,7 @@ public class Metodos_Ingresos implements ActionListener {
     
     public void modificar(){
         try {
-            PreparedStatement modificar = cn.prepareStatement("UPDATE Ingresos SET DESCRIPCION =?, REFERENCIA =?, TALLA =?, CANTIDAD =?, COSTO =?, OBSERVACION =? WHERE CODIGO = ?");
+            PreparedStatement modificar = cn.prepareStatement("UPDATE INGRESOS SET DESCRIPCION =?, REFERENCIA =?, TALLA =?, CANTIDAD =?, COSTO =?, OBSERVACION =? WHERE CODIGO_I = ?");
             modificar.setString(1, ig.Campo_Descripcion.getText());
             modificar.setString(2, ig.Campo_Referencia.getText());
             modificar.setString(3, ig.Campo_Talla.getText());

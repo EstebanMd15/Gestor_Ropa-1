@@ -2,6 +2,7 @@ package gestor_ropa;
 
 import java.sql.*;
 import java.sql.Connection;
+import javax.swing.JOptionPane;
 
 public class BD_CONECCTION {
 
@@ -16,7 +17,7 @@ public class BD_CONECCTION {
             System.out.println("Conexión exitosa");
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "ERROR DE CONEXION: " + e.getMessage());
         }
         return con1;
     }
