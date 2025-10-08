@@ -10,6 +10,7 @@ import GUI.Inventario;
 import gestor_ropa.BD_CONECCTION;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -87,9 +88,26 @@ public class Metodos_Ventas implements ActionListener {
             JOptionPane.showMessageDialog(null, "[ERROR]: "+ e.getMessage());
         }
     }
+    
+    private int generarConsecutivo(){
+        try {
+            PreparedStatement consecutivo = con.prepareStatement("INSERT INTO FACTURAS(CONSECUTIVO, FECHA_CREACION) VALUES (CONCAT('FAC-', DATE_FORMAT(NOW(), '%Y%m%d-'), LPAD(IFNULL(MAX(SUBSTRING(consecutivo, 13)), 0) + 1, 4, '0')), NOW())", Statement.RETURN_GENERATED_KEYS);
+            consecutivo.executeUpdate();
+            
+            ResultSet rs = consecutivo.getGeneratedKeys();
+            if(rs.next()){
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "[ERROR]: " + e);
+        }
+        return -1;
+    }
 
     public void agregarVenta() {
-
+        String total = vt.Campo_TotalVenta.getText();
+        BigDecimal totalVenta = new BigDecimal(total);
+                     
         try {
 
             String codigo = vt.Campo_CodigoVenta.getText();
@@ -119,14 +137,26 @@ public class Metodos_Ventas implements ActionListener {
 
                 return;// se detiene la ejecucion del método
             }
+           
+            int facturaId = generarConsecutivo();
 
-            PreparedStatement agregar = con.prepareStatement("INSERT INTO VENTAS (CODIGO_V, DESCRIPCION, TALLA, REFERENCIA, PRECIO, CANTIDAD) VALUES (?,?,?,?,?,?)");
+            PreparedStatement facpro = con.prepareStatement("INSERT INTO FACTURA_PRODUCTOS (ID, REFERENCIA, TALLA, CANTIDAD, PRECIO_UNITARIO, FACTURA_ID, TOTAL) VALUES (?,?,?,?,?,?,?)");
+            facpro.setString(1, vt.Campo_CodigoVenta.getText());
+            facpro.setString(2, vt.Campo_ReferenciaVenta.getText());
+            facpro.setString(3, vt.Campo_TallaVenta.getText());
+            facpro.setString(4, vt.Campo_CantidadVenta.getText());
+            facpro.setString(5, vt.Campo_PrecioVenta1.getText());
+            facpro.setInt(6, facturaId);
+            facpro.setBigDecimal(7, totalVenta);
+            facpro.executeUpdate();
+            
+            PreparedStatement agregar = con.prepareStatement("INSERT INTO VENTAS (CODIGO_V, DESCRIPCION, TALLA, CANTIDAD, REFERENCIA, PRECIO) VALUES (?,?,?,?,?,?)");
             agregar.setString(1, vt.Campo_CodigoVenta.getText());
             agregar.setString(2, vt.Campo_DescripcionVenta.getText());
             agregar.setString(3, vt.Campo_TallaVenta.getText());
-            agregar.setString(4, vt.Campo_ReferenciaVenta.getText());
-            agregar.setString(5, vt.Campo_PrecioVenta1.getText());
-            agregar.setString(6, vt.Campo_CantidadVenta.getText());
+            agregar.setString(4, vt.Campo_CantidadVenta.getText());
+            agregar.setString(5, vt.Campo_ReferenciaVenta.getText());
+            agregar.setString(6, vt.Campo_PrecioVenta1.getText());
 
             vt.Campo_CodigoVenta.setText("");
             vt.Campo_DescripcionVenta.setText("");
@@ -135,6 +165,7 @@ public class Metodos_Ventas implements ActionListener {
             vt.Campo_CantidadVenta.setText("");
             vt.Campo_COSTOventa.setText("");
             agregar.executeUpdate();
+            
 
             //Se reinicia la cantidad disponible para la proxima busqueda
             this.CantDispo = 0;
