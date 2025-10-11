@@ -382,7 +382,7 @@ public class Inventario extends javax.swing.JFrame {
 
             },
             new String [] {
-                "CODIGO", "DESCRIPCION", "TALLA", "REFERENCIA", "CANTIDAD", "COSTO", "FECHA_INGRESO"
+                "CODIGO", "DESCRIPCION", "REFERENCIA", "TALLA", "CANTIDAD", "COSTO", "FECHA_INGRESO"
             }
         ));
         jScrollPane1.setViewportView(TablaInventario);
