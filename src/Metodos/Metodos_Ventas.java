@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import GUI.Ventas;
 import GUI.INGRESO;
 import GUI.Inventario;
+import com.mysql.cj.jdbc.PreparedStatementWrapper;
 //import com.mysql.cj.protocol.Resultset;
 import gestor_ropa.BD_CONECCTION;
 import java.awt.event.ActionEvent;
@@ -25,19 +26,17 @@ public class Metodos_Ventas implements ActionListener {
     BD_CONECCTION bd = new BD_CONECCTION();
     Connection con = bd.conectar();
     INGRESO ig = new INGRESO();
-    Ventas vt =  new Ventas();
+    Ventas vt = new Ventas();
     Inventario in = new Inventario();
     private JButton btnBuscar;
     private JButton btnLimpiar;
     private JButton btnCancelar;
     private JButton btnAgregar;
     private JButton btnVender;
-    private JTextField cant;
     private JTable tabla_ventas;
     private int CantDispo;
 
     public Metodos_Ventas(Ventas vt) {
-        this.cant = this.ig.Campo_Cantidad;
         this.vt = vt;
         this.btnAgregar = this.vt.BTN_AgregarVenta;
         this.btnBuscar = this.vt.BTN_BuscarVenta;
@@ -46,7 +45,6 @@ public class Metodos_Ventas implements ActionListener {
         this.btnVender = this.vt.BTN_VenderVenta;
 
     }
-    
 
     public void buscar() {
         try {
@@ -66,48 +64,97 @@ public class Metodos_Ventas implements ActionListener {
                 this.CantDispo = 0;
                 limpiar();
             }
-            
-            
-            
+
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "[ERROR]: " + e.getMessage());
 
         }
     }
-    
-    public void cantidadDispo(){
+
+    public void cantidadDispo() {
         try {
             PreparedStatement cant = con.prepareStatement("SELECT * FROM INGRESOS WHERE CODIGO_I = ?");
             cant.setString(1, vt.Campo_CodigoVenta.getText());
             ResultSet rs = cant.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 vt.Campo_CantDispo.setText(rs.getString("CANTIDAD"));
             }
-            
+
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "[ERROR]: "+ e.getMessage());
+            JOptionPane.showMessageDialog(null, "[ERROR]: " + e.getMessage());
         }
-    }
-    
-    private int generarConsecutivo(){
-        try {
-            PreparedStatement consecutivo = con.prepareStatement("INSERT INTO FACTURAS(CONSECUTIVO, FECHA_CREACION) VALUES (CONCAT('FAC-', DATE_FORMAT(NOW(), '%Y%m%d-'), LPAD(IFNULL(MAX(SUBSTRING(consecutivo, 13)), 0) + 1, 4, '0')), NOW())", Statement.RETURN_GENERATED_KEYS);
-            consecutivo.executeUpdate();
-            
-            ResultSet rs = consecutivo.getGeneratedKeys();
-            if(rs.next()){
-                return rs.getInt(1);
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "[ERROR]: " + e);
-        }
-        return -1;
     }
 
+    private int generarConsecutivo() {
+        DefaultTableModel model = (DefaultTableModel) vt.Tabla_Ventas.getModel();
+        double total = 0.0;
+        
+        for (int i = 0; i < model.getRowCount(); i++) {
+            try {
+                String valorC = model.getValueAt(i, 6).toString();
+                double subtotal = Double.parseDouble(valorC);
+                
+                total += subtotal;
+            } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "ERROR AL PARSEAR LA FILA " + i + ": " + e.getMessage());
+            }
+        }
+        
+     try {
+        // Primero obtener el próximo consecutivo
+        String obtenerConsecutivoSQL = "SELECT COALESCE(MAX(CAST(SUBSTRING(CONSECUTIVO, 5) AS UNSIGNED)), 0) + 1 FROM FACTURAS WHERE CONSECUTIVO LIKE 'FAC.%'";
+        
+        int nextConsecutive = 1;
+        try (PreparedStatement stmt = con.prepareStatement(obtenerConsecutivoSQL);
+             ResultSet rs = stmt.executeQuery()) {
+            if (rs.next()) {
+                nextConsecutive = rs.getInt(1);
+            }
+        }
+        
+        // Formatear el consecutivo: "FAC.0001"
+        String consecutivoFormateado = "FAC." + String.format("%04d", nextConsecutive);
+        
+        // Insertar la nueva factura
+        String insertSQL = "INSERT INTO FACTURAS (CONSECUTIVO, TOTAL, FECHA_CREACION) VALUES (?,?, NOW())";
+        PreparedStatement consecutive = con.prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS);
+        
+        consecutive.setString(1, consecutivoFormateado);
+        consecutive.setDouble(2, total);
+        consecutive.executeUpdate();
+        
+        // Obtener el ID generado
+        ResultSet rs = consecutive.getGeneratedKeys();
+        if (rs.next()) {
+            return rs.getInt(1);
+        }
+        
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "[ERROR]: " + e);
+    }
+    return -1;
+}
     public void agregarVenta() {
-        String total = vt.Campo_TotalVenta.getText();
-        BigDecimal totalVenta = new BigDecimal(total);
-                     
+
+        String cantV = vt.Campo_CantidadVenta.getText().trim();
+        int cantidadVender = Integer.parseInt(cantV);
+
+//        try {
+//            int facturaId = generarConsecutivo();
+//
+//            PreparedStatement factura = con.prepareStatement("INSERT INTO FACTURA_PRODUCTOS (FACTURA_ID, NOMBRE_PRODUCTO, REFERENCIA, TALLA, CANTIDAD, PRECIO_UNITARIO, TOTAL) VALUES (?,?,?,?,?,?,?");
+//            factura.setInt(1, facturaId);
+//            factura.setString(2, vt.Campo_DescripcionVenta.getText());
+//            factura.setString(3, vt.Campo_ReferenciaVenta.getText());
+//            factura.setString(4, vt.Campo_TallaVenta.getText());
+//            factura.setString(5, vt.Campo_CantidadVenta.getText());
+//            factura.setString(6, vt.Campo_PrecioVenta1.getText());
+//            factura.setString(7, vt.Campo_TotalVenta.getText());
+//
+//        } catch (SQLException e) {
+//            JOptionPane.showMessageDialog(null,"[ERROR]: " + e.getMessage());
+//        }
+
         try {
 
             String codigo = vt.Campo_CodigoVenta.getText();
@@ -115,13 +162,17 @@ public class Metodos_Ventas implements ActionListener {
                 JOptionPane.showMessageDialog(null, "EL CAMPO DEL CODIGO NO PUEDE ESTAR VACIO");
                 return;
             }
-            int cantidadVender = Integer.parseInt(vt.Campo_CantidadVenta.getText());
+
+            if (cantV.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "EL CAMPO CANTIDAD NO PUEDE ESTAR VACIO");
+                return;
+            }
 
             if (cantidadVender <= 0) {
                 JOptionPane.showMessageDialog(null, "LA CANTIDAD A VENDER DEBE SER MAYOR A 0");
                 vt.Campo_CantidadVenta.requestFocus();
                 return;
-            } 
+            }
 
             //SE COMPARA EL STOCK DISPONIBLE
             PreparedStatement buscar = con.prepareStatement("SELECT* FROM INGRESOS WHERE CODIGO_I = ?");
@@ -129,7 +180,7 @@ public class Metodos_Ventas implements ActionListener {
             ResultSet rs = buscar.executeQuery();
             if (rs.next()) {
                 this.CantDispo = rs.getInt("CANTIDAD");
-                
+
             }
             if (cantidadVender > this.CantDispo) {
                 JOptionPane.showMessageDialog(null, "NO CUENTA CON LA CANTIDAD SUFICIENTE\nCANTIDAD DISPONIBLE: " + this.CantDispo);
@@ -137,26 +188,14 @@ public class Metodos_Ventas implements ActionListener {
 
                 return;// se detiene la ejecucion del método
             }
-           
-            int facturaId = generarConsecutivo();
 
-            PreparedStatement facpro = con.prepareStatement("INSERT INTO FACTURA_PRODUCTOS (ID, REFERENCIA, TALLA, CANTIDAD, PRECIO_UNITARIO, FACTURA_ID, TOTAL) VALUES (?,?,?,?,?,?,?)");
-            facpro.setString(1, vt.Campo_CodigoVenta.getText());
-            facpro.setString(2, vt.Campo_ReferenciaVenta.getText());
-            facpro.setString(3, vt.Campo_TallaVenta.getText());
-            facpro.setString(4, vt.Campo_CantidadVenta.getText());
-            facpro.setString(5, vt.Campo_PrecioVenta1.getText());
-            facpro.setInt(6, facturaId);
-            facpro.setBigDecimal(7, totalVenta);
-            facpro.executeUpdate();
-            
-            PreparedStatement agregar = con.prepareStatement("INSERT INTO VENTAS (CODIGO_V, DESCRIPCION, TALLA, CANTIDAD, REFERENCIA, PRECIO) VALUES (?,?,?,?,?,?)");
+            PreparedStatement agregar = con.prepareStatement("INSERT INTO VENTAS (CODIGO_V, DESCRIPCION, TALLA, REFERENCIA, PRECIO, CANTIDAD) VALUES (?,?,?,?,?,?)");
             agregar.setString(1, vt.Campo_CodigoVenta.getText());
             agregar.setString(2, vt.Campo_DescripcionVenta.getText());
             agregar.setString(3, vt.Campo_TallaVenta.getText());
-            agregar.setString(4, vt.Campo_CantidadVenta.getText());
-            agregar.setString(5, vt.Campo_ReferenciaVenta.getText());
-            agregar.setString(6, vt.Campo_PrecioVenta1.getText());
+            agregar.setString(4, vt.Campo_ReferenciaVenta.getText());
+            agregar.setString(5, vt.Campo_PrecioVenta1.getText());
+            agregar.setString(6, vt.Campo_CantidadVenta.getText());
 
             vt.Campo_CodigoVenta.setText("");
             vt.Campo_DescripcionVenta.setText("");
@@ -165,7 +204,6 @@ public class Metodos_Ventas implements ActionListener {
             vt.Campo_CantidadVenta.setText("");
             vt.Campo_COSTOventa.setText("");
             agregar.executeUpdate();
-            
 
             //Se reinicia la cantidad disponible para la proxima busqueda
             this.CantDispo = 0;
@@ -188,10 +226,10 @@ public class Metodos_Ventas implements ActionListener {
         vt.Campo_TotalVenta.setText("");
         vt.Campo_CantDispo.setText("");
         vt.Campo_PrecioVenta1.setText("");
-               
+
     }
-    
-    public void limpiar2(){
+
+    public void limpiar2() {
         vt.Campo_CodigoVenta.setText("");
         vt.Campo_CantidadVenta.setText("");
         vt.Campo_PrecioVenta1.setText("");
@@ -228,6 +266,20 @@ public class Metodos_Ventas implements ActionListener {
             }
         }
         vt.Campo_TotalVenta.setText(String.format("%.2f", totalGeneral));
+    }
+    
+    public void obtenerProductos(){
+        DefaultTableModel model = (DefaultTableModel) vt.Tabla_Ventas.getModel();
+        for (int i = 0; i < model.getRowCount(); i++) {
+            try {
+                String id = model.getValueAt(i, 0).toString();
+                PreparedStatement obt = con.prepareStatement("INSERT INTO FACTURA_PRODUCTOS(FACTURA_ID) VALUES (?)");
+                obt.setString(1, id);
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null,"[ERROR]: " + e);
+            }
+            
+        }
     }
 
     public void venderVentas() {
@@ -282,41 +334,41 @@ public class Metodos_Ventas implements ActionListener {
         cancelar();
         limpiar();
     }
-    
-    public void calculoPorcentaje(){
+
+    public void calculoPorcentaje() {
         try {
             double costoBase = 0;
-            
+
             PreparedStatement porc = con.prepareStatement("SELECT *  FROM INGRESOS WHERE CODIGO_I = ?");
             porc.setString(1, ig.Campo_Codigo.getText());
             ResultSet rs = porc.executeQuery();
-            
-            if(rs.next()){
+
+            if (rs.next()) {
                 String costoBD = rs.getString("COSTO");
-                if(costoBD != null && !costoBD.isEmpty()){
+                if (costoBD != null && !costoBD.isEmpty()) {
                     costoBase = Double.parseDouble(costoBD);
                     ig.Campo_Costo.setText(costoBD);
                 }
-            }else{
+            } else {
                 String costoInve = vt.Campo_COSTOventa.getText();
-                if(costoInve != null && !costoInve.isEmpty()){
+                if (costoInve != null && !costoInve.isEmpty()) {
                     costoBase = Double.parseDouble(costoInve);
                 }
             }
-            
+
             double precioFinal;
-            
-            if(costoBase > 5000){
+
+            if (costoBase > 5000) {
                 precioFinal = costoBase * 1.30;
-            }else{
+            } else {
                 precioFinal = costoBase;
             }
             vt.Campo_PrecioVenta1.setText(String.valueOf(precioFinal));
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "[ERROR]:\n" + e.getMessage());
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "[ERROR EN EL FORMATO]: VERIFIQUE QUE LOS CAMPOS TENGAN VALORES VALIDOS\n" + e.getMessage());
-        } catch (Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "[ERROR]: \n" + e.getMessage());
         }
     }
@@ -338,6 +390,6 @@ public class Metodos_Ventas implements ActionListener {
         if (e.getSource() == btnVender) {
             venderVentas();
         }
-    
+
     }
 }

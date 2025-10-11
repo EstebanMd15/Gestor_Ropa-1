@@ -362,7 +362,7 @@ public class INGRESO extends javax.swing.JFrame {
 
             },
             new String [] {
-                "CODIGO", "DESCRIPCION", "REFERENCIA", "TALLA", "CANTIDAD", "COSTO", "FECHA INGRESO", "OBSERVACION", "PRECIO"
+                "CODIGO", "DESCRIPCION", "REFERENCIA", "TALLA", "CANTIDAD", "COSTO", "FECHA_INGRESO", "OBSERVACION", "PRECIO"
             }
         ));
         jScrollPane1.setViewportView(Tabla_Ingresos);
@@ -475,7 +475,11 @@ public class INGRESO extends javax.swing.JFrame {
 
     private void BTN_EliminarRegistrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_EliminarRegistrosActionPerformed
         Metodos_Ingresos mt = new Metodos_Ingresos(this);
-        mt.eliminarRegistros();
+        String[] TabasOrden = {
+          "VENTAS", "INGRESOS"  
+        };
+        mostrar("Ingresos");
+        mt.eliminarRegistros(TabasOrden);
     }//GEN-LAST:event_BTN_EliminarRegistrosActionPerformed
 
     /**

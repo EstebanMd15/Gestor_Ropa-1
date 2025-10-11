@@ -624,7 +624,7 @@
                     <Column editable="true" title="TALLA" type="java.lang.Object"/>
                     <Column editable="true" title="CANTIDAD" type="java.lang.Object"/>
                     <Column editable="true" title="COSTO" type="java.lang.Object"/>
-                    <Column editable="true" title="FECHA INGRESO" type="java.lang.Object"/>
+                    <Column editable="true" title="FECHA_INGRESO" type="java.lang.Object"/>
                     <Column editable="true" title="OBSERVACION" type="java.lang.Object"/>
                     <Column editable="true" title="PRECIO" type="java.lang.Object"/>
                   </Table>

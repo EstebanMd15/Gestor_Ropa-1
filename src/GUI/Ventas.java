@@ -11,6 +11,7 @@ import java.sql.Connection;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import Metodos.Metodos_Ingresos;
+import Metodos.Metodos_Facturas;
 
 public class Ventas extends javax.swing.JFrame {
 
@@ -45,8 +46,8 @@ public class Ventas extends javax.swing.JFrame {
                 datos[1] = rs.getString(2);//DESCRIPCION
                 datos[2] = rs.getString(3);//TALLA
                 datos[3] = rs.getString(4);//REFERENCIA
-                datos[4] = rs.getString(5);//REFERENCIA
-                datos[5] = rs.getString(6);//REFERENCIA
+                datos[4] = rs.getString(5);//PRECIO
+                datos[5] = rs.getString(6);//VALOR_TOTAL
 
                 try {
                     double costo = Double.parseDouble(datos[4]);
@@ -549,8 +550,7 @@ public class Ventas extends javax.swing.JFrame {
 
     private void BTN_AgregarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AgregarVentaActionPerformed
         Metodos_Ventas mt = new Metodos_Ventas(this);
-        //Metodos_Ingresos mi = new Metodos_Ingresos(this);
-       // mi.calcularPrecioVenta();
+        mt.obtenerProductos();
         mt.agregarVenta();
         mostrar("Ventas");
         costoTotal();
