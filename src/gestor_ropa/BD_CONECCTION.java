@@ -8,7 +8,7 @@ public class BD_CONECCTION {
 
     static String url = "jdbc:mysql://localhost:3306/Gestor_Ropa";
     static String user = "root";
-    static String pass = "costos";
+    static String pass = "root";
 
     public static Connection conectar() {
         Connection con1 = null;

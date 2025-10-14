@@ -11,13 +11,14 @@ import java.sql.Connection;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import Metodos.Metodos_Ingresos;
-import Metodos.Metodos_Facturas;
+import Metodos.Metodos_FacturaProductos;
 
 public class Ventas extends javax.swing.JFrame {
 
     BD_CONECCTION bd = new BD_CONECCTION();
     Connection con = bd.conectar();
     INGRESO in = new INGRESO();
+    
 
     public Ventas() {
         initComponents();
@@ -550,7 +551,8 @@ public class Ventas extends javax.swing.JFrame {
 
     private void BTN_AgregarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AgregarVentaActionPerformed
         Metodos_Ventas mt = new Metodos_Ventas(this);
-        mt.obtenerProductos();
+        Metodos_FacturaProductos mtf = new Metodos_FacturaProductos(this);
+        mtf.obtenerProducto();
         mt.agregarVenta();
         mostrar("Ventas");
         costoTotal();
