@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Metodos.Metodos_Ventas;
+import java.math.BigDecimal;
 
 public class Metodos_FacturaProductos implements ActionListener {
 
@@ -104,76 +105,34 @@ public class Metodos_FacturaProductos implements ActionListener {
     public void obtenerProducto() {
         DefaultTableModel model = (DefaultTableModel) vta.Tabla_Ventas.getModel();
         int consecutivo = generarConsecutivo();
-
-        String cantV = vta.Campo_CantidadVenta.getText().trim();
-        int cantidadVender = Integer.parseInt(cantV);
-        for (int i = 0; i < model.getRowCount(); i++) {
+        for (int i = 0; i < model.getRowCount(); i++) {     
             try {
-
-                String cod = model.getValueAt(i, 0).toString();
-                int cod2 = Integer.parseInt(cod);
 
                 String des = model.getValueAt(i, 1).toString();
 
                 String talla = model.getValueAt(i, 2).toString();
-                int talla2 = Integer.parseInt(talla);
 
                 String ref = model.getValueAt(i, 3).toString();
 
-                String precio = model.getValueAt(i, 4).toString();
-                int precio2 = Integer.parseInt(precio);
+                double precio = Double.parseDouble(model.getValueAt(i, 4).toString());
+                BigDecimal precio2 = new BigDecimal(precio);
 
                 String cant = model.getValueAt(i, 5).toString();
                 int cant2 = Integer.parseInt(cant);
 
-                String valorT = model.getValueAt(i, 6).toString();
-                int valorT2 = Integer.parseInt(valorT);
+                double valorT = Double.parseDouble(model.getValueAt(i, 6).toString());
+                BigDecimal valorT2 = new BigDecimal(valorT);
 
-                String codigo = vta.Campo_CodigoVenta.getText();
-                if (codigo.trim().isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "EL CAMPO DEL CODIGO NO PUEDE ESTAR VACIO");
-                    return;
-                }
 
-                if (cantV.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "EL CAMPO CANTIDAD NO PUEDE ESTAR VACIO");
-                    return;
-                }
-
-                if (cantidadVender <= 0) {
-                    JOptionPane.showMessageDialog(null, "LA CANTIDAD A VENDER DEBE SER MAYOR A 0");
-                    vta.Campo_CantidadVenta.requestFocus();
-                    return;
-                }
-
-                //SE COMPARA EL STOCK DISPONIBLE
-                PreparedStatement buscar = con.prepareStatement("SELECT* FROM INGRESOS WHERE CODIGO_I = ?");
-                buscar.setString(1, codigo);
-                ResultSet rs = buscar.executeQuery();
-                if (rs.next()) {
-                    this.cantDispo = rs.getInt("CANTIDAD");
-
-                }
-                if (cantidadVender > this.cantDispo) {
-                    JOptionPane.showMessageDialog(null, "NO CUENTA CON LA CANTIDAD SUFICIENTE\nCANTIDAD DISPONIBLE: " + this.cantDispo);
-                    vta.Campo_CantidadVenta.requestFocus();
-
-                    return;// se detiene la ejecucion del método
-                }
-
-                PreparedStatement obt = con.prepareStatement("INSERT INTO FACTURA_PRODUCTOS(ID, FACTURA_ID, NOMBRE_PRODUCTO, REFERENCIA, TALLA, CANTIDAD, PRECIO_UNITARIO, TOTAL)"
-                        + "VALUES (?,?,?,?,?,?,?,?");
-                obt.setInt(1, cod2);
-                obt.setInt(2, consecutivo);
-                obt.setString(3, des);
+                PreparedStatement obt = con.prepareStatement("INSERT INTO FACTURA_PRODUCTOS(ID_FACTURA, NOMBRE_PRODUCTO, TALLA, REFERENCIA, PRECIO_UNITARIO, CANTIDAD, TOTAL) VALUES (?,?,?,?,?,?)");
+                obt.setInt(1, consecutivo);
+                obt.setString(2, des);
+                obt.setString(3, talla);
                 obt.setString(4, ref);
-                obt.setInt(5, talla2);
+                obt.setBigDecimal(5, precio2);
                 obt.setInt(6, cant2);
-                obt.setInt(7, precio2);
-                obt.setInt(8, valorT2);
+                obt.setBigDecimal(7, valorT2);
                 obt.executeUpdate();
-
-                mvt.limpiar();
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null, "ERROR EN EL FORMATO DE NUMEROS: " + ex.getMessage());
             } catch (SQLException e) {
@@ -183,11 +142,35 @@ public class Metodos_FacturaProductos implements ActionListener {
         }
 
     }
+    
+    public void facturas(){
+        int consecutivo2 = generarConsecutivo();
+              
+        try {
+            PreparedStatement fac = con.prepareStatement("INSERT INTO FACURAS(CONSECUTIVO) VALUES (?)");
+            fac.setInt(1, consecutivo2 );
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "[ERROR]: " + e.getMessage());
+        }
+    }
+    
+    public void cancelar(){
+        try {
+            PreparedStatement cn = con.prepareStatement("TRUNCATE TABLE FACTURA_PRODUCTOS");
+            cn.executeUpdate();
+           
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null,"[ERROR]: " + e.getMessage());
+        }
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnAgregar) {
             obtenerProducto();
+        }
+        if(e.getSource() == btnAgregar){
+            facturas();
         }
     }
 
