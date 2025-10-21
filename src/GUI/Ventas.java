@@ -528,11 +528,16 @@ public class Ventas extends javax.swing.JFrame {
 
     private void BTN_VenderVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_VenderVentaActionPerformed
         Metodos_Ventas mt = new Metodos_Ventas(this);
+        Metodos_FacturaProductos mtf = new Metodos_FacturaProductos(this);
+        mtf.facturas();
+        //mtf.obtenerTotal();
         mt.venderVentas();
     }//GEN-LAST:event_BTN_VenderVentaActionPerformed
 
     private void BTN_CancelarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_CancelarVentaActionPerformed
         Metodos_Ventas mt = new Metodos_Ventas(this);
+        Metodos_FacturaProductos mft = new Metodos_FacturaProductos(this);
+        mft.cancelar();
         mt.cancelar();
         mostrar("Ventas");
         mt.limpiar();

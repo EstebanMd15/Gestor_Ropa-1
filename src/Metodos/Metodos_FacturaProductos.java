@@ -76,8 +76,8 @@ public class Metodos_FacturaProductos implements ActionListener {
         }
         return -1;
     }
-    
-        public void buscar() {
+
+    public void buscar() {
         try {
             PreparedStatement buscar = con.prepareStatement("SELECT * FROM INGRESOS WHERE CODIGO_I = ?");
             buscar.setString(1, vta.Campo_CodigoVenta.getText());
@@ -93,7 +93,7 @@ public class Metodos_FacturaProductos implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(null, "NO SE ENCONTRO NINGUN REGISTRO CON ESE CODIGO");
                 this.cantDispo = 0;
-                
+
             }
 
         } catch (SQLException e) {
@@ -101,66 +101,86 @@ public class Metodos_FacturaProductos implements ActionListener {
 
         }
     }
+
+//    public void obtenerTotal() {
+//        try {
+//            DefaultTableModel model = (DefaultTableModel) vta.Tabla_Ventas.getModel();// SE OBTIENE EL MODELO DE DATOS DE LA TABLA
+//
+//            double totalGeneral = 0.0;// se inicializa una variable para guardar la suma total
+//
+//            for (int i = 0; i < model.getRowCount(); i++) {//se recorre todas las filas de la tabla
+//                try {
+//                    String valorcelda = model.getValueAt(i, 6).toString();//se obtiene el valor de la columna "VALOR TOTAL", INDICE 6
+//                    double subtotal = Double.parseDouble(valorcelda);//se convierte de objeto a String y luego a double para poder sumarlo
+//
+//                    totalGeneral += subtotal;
+//                } catch (NumberFormatException e) {
+//                    JOptionPane.showMessageDialog(null, "Error al parsear el valor en la fila " + i + ":" + e.getMessage());
+//                }
+//            }
+//
+//            PreparedStatement cs = con.prepareStatement("UPDATE FACTURA_PRODUCOS SET TOTAL = ? WHERE ID = ?");
+//            cs.setDouble(1, totalGeneral);
+//        } catch (SQLException e) {
+//            JOptionPane.showMessageDialog(null, "[ERROR]: " + e.getMessage());
+//        }
+//    }
 
     public void obtenerProducto() {
-        DefaultTableModel model = (DefaultTableModel) vta.Tabla_Ventas.getModel();
         int consecutivo = generarConsecutivo();
-        for (int i = 0; i < model.getRowCount(); i++) {     
-            try {
+        String total = vta.Campo_TotalVenta.getText();
 
-                String des = model.getValueAt(i, 1).toString();
+        try {
 
-                String talla = model.getValueAt(i, 2).toString();
+            DefaultTableModel model = (DefaultTableModel) vta.Tabla_Ventas.getModel();// SE OBTIENE EL MODELO DE DATOS DE LA TABLA
 
-                String ref = model.getValueAt(i, 3).toString();
+            double totalGeneral = 0.0;// se inicializa una variable para guardar la suma total
 
-                double precio = Double.parseDouble(model.getValueAt(i, 4).toString());
-                BigDecimal precio2 = new BigDecimal(precio);
+            for (int i = 0; i < model.getRowCount(); i++) {//se recorre todas las filas de la tabla
+                try {
+                    String valorcelda = model.getValueAt(i, 6).toString();//se obtiene el valor de la columna "VALOR TOTAL", INDICE 6
+                    double subtotal = Double.parseDouble(valorcelda);//se convierte de objeto a String y luego a double para poder sumarlo
 
-                String cant = model.getValueAt(i, 5).toString();
-                int cant2 = Integer.parseInt(cant);
-
-                double valorT = Double.parseDouble(model.getValueAt(i, 6).toString());
-                BigDecimal valorT2 = new BigDecimal(valorT);
-
-
-                PreparedStatement obt = con.prepareStatement("INSERT INTO FACTURA_PRODUCTOS(ID_FACTURA, NOMBRE_PRODUCTO, TALLA, REFERENCIA, PRECIO_UNITARIO, CANTIDAD, TOTAL) VALUES (?,?,?,?,?,?)");
-                obt.setInt(1, consecutivo);
-                obt.setString(2, des);
-                obt.setString(3, talla);
-                obt.setString(4, ref);
-                obt.setBigDecimal(5, precio2);
-                obt.setInt(6, cant2);
-                obt.setBigDecimal(7, valorT2);
-                obt.executeUpdate();
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, "ERROR EN EL FORMATO DE NUMEROS: " + ex.getMessage());
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, "ERROR SQL: " + e.getMessage());
+                    totalGeneral += subtotal;
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Error al parsear el valor en la fila " + i + ":" + e.getMessage());
+                }
             }
+            PreparedStatement obt = con.prepareStatement("INSERT INTO FACTURA_PRODUCTOS(FACTURA_ID, NOMBRE_PRODUCTO, TALLA, REFERENCIA, PRECIO_UNITARIO, CANTIDAD, TOTAL) VALUES (?,?,?,?,?,?,?)");
+            obt.setInt(1, consecutivo);
+            obt.setString(2, vta.Campo_DescripcionVenta.getText());
+            obt.setString(3, vta.Campo_TallaVenta.getText());
+            obt.setString(4, vta.Campo_ReferenciaVenta.getText());
+            obt.setString(5, vta.Campo_PrecioVenta1.getText());
+            obt.setString(6, vta.Campo_CantidadVenta.getText());
+            obt.setDouble(7, totalGeneral);
 
+            obt.executeUpdate();
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR EN EL FORMATO DE NUMEROS: " + ex.getMessage());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "ERROR SQL: " + e.getMessage());
         }
-
     }
-    
-    public void facturas(){
+
+    public void facturas() {
         int consecutivo2 = generarConsecutivo();
-              
+
         try {
             PreparedStatement fac = con.prepareStatement("INSERT INTO FACURAS(CONSECUTIVO) VALUES (?)");
-            fac.setInt(1, consecutivo2 );
+            fac.setInt(1, consecutivo2);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "[ERROR]: " + e.getMessage());
         }
     }
-    
-    public void cancelar(){
+
+    public void cancelar() {
         try {
             PreparedStatement cn = con.prepareStatement("TRUNCATE TABLE FACTURA_PRODUCTOS");
             cn.executeUpdate();
-           
+
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null,"[ERROR]: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "[ERROR]: " + e.getMessage());
         }
     }
 
@@ -169,7 +189,7 @@ public class Metodos_FacturaProductos implements ActionListener {
         if (e.getSource() == btnAgregar) {
             obtenerProducto();
         }
-        if(e.getSource() == btnAgregar){
+        if (e.getSource() == btnAgregar) {
             facturas();
         }
     }

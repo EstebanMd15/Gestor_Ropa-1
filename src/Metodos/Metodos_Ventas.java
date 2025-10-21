@@ -87,55 +87,7 @@ public class Metodos_Ventas implements ActionListener {
         }
     }
 
-    private int generarConsecutivo() {
-        DefaultTableModel model = (DefaultTableModel) vt.Tabla_Ventas.getModel();
-        double total = 0.0;
-
-        for (int i = 0; i < model.getRowCount(); i++) {
-            try {
-                String valorC = model.getValueAt(i, 6).toString();
-                double subtotal = Double.parseDouble(valorC);
-
-                total += subtotal;
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "ERROR AL PARSEAR LA FILA " + i + ": " + e.getMessage());
-            }
-        }
-
-        try {
-            // Primero obtener el próximo consecutivo
-            String obtenerConsecutivoSQL = "SELECT COALESCE(MAX(CAST(SUBSTRING(CONSECUTIVO, 5) AS UNSIGNED)), 0) + 1 FROM FACTURAS WHERE CONSECUTIVO LIKE 'FAC.%'";
-
-            int nextConsecutive = 1;
-            try (PreparedStatement stmt = con.prepareStatement(obtenerConsecutivoSQL); ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    nextConsecutive = rs.getInt(1);
-                }
-            }
-
-            // Formatear el consecutivo: "FAC.0001"
-            String consecutivoFormateado = "FAC." + String.format("%04d", nextConsecutive);
-
-            // Insertar la nueva factura
-            String insertSQL = "INSERT INTO FACTURAS (CONSECUTIVO, TOTAL, FECHA_CREACION) VALUES (?,?, NOW())";
-            PreparedStatement consecutive = con.prepareStatement(insertSQL, Statement.RETURN_GENERATED_KEYS);
-
-            consecutive.setString(1, consecutivoFormateado);
-            consecutive.setDouble(2, total);
-            consecutive.executeUpdate();
-
-            // Obtener el ID generado
-            ResultSet rs = consecutive.getGeneratedKeys();
-            if (rs.next()) {
-                return rs.getInt(1);
-            }
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "[ERROR]: " + e);
-        }
-        return -1;
-    }
-
+ 
     public void agregarVenta() {
 
         String cantV = vt.Campo_CantidadVenta.getText().trim();
@@ -254,56 +206,6 @@ public class Metodos_Ventas implements ActionListener {
         vt.Campo_TotalVenta.setText(String.format("%.2f", totalGeneral));
     }
 
-//    public void obtenerProductos() {
-//        DefaultTableModel model = (DefaultTableModel) vt.Tabla_Ventas.getModel();
-//        //con.setAutoCommit(false);
-//        
-//        for (int i = 0; i < model.getRowCount(); i++) {
-//            try {
-//
-//                String cod = model.getValueAt(i, 0).toString();
-//                int cod2 = Integer.parseInt(cod);
-//
-//                String nom = model.getValueAt(i, 1).toString();
-//
-//                String tall = model.getValueAt(i, 2).toString();
-//
-//                String ref = model.getValueAt(i, 3).toString();
-//                
-//                String prec = model.getValueAt(i, 4).toString();
-//                
-//                String cant = model.getValueAt(i, 5).toString();
-//                int cant2 = Integer.parseInt(cant);
-//                
-//                String total = model.getValueAt(i, 6).toString();
-//                
-//                int consecutivo = generarConsecutivo();
-//
-//                PreparedStatement obt = con.prepareStatement("INSERT INTO FACTURA_PRODUCTOS(ID, FACTURA_ID, NOMBRE_PRODUCTO, REFERENCIA, TALLA, CANTIDAD, PRECIO_UNITARIO, TOTAL)"
-//                        + " VALUES (?,?,?,?,?,?,?,?)");
-//                obt.setInt(1, cod2);
-//                obt.setInt(2, consecutivo);
-//                obt.setString(3, nom);
-//                obt.setString(4, ref);
-//                obt.setString(5, tall);
-//                obt.setInt(6, cant2);
-//                obt.setString(7, prec);
-//                obt.setString(8, total);
-//                obt.executeUpdate();
-//                obt.close();
-//                
-//            }catch(NumberFormatException ex){
-//                JOptionPane.showMessageDialog(null,"ERROR EN FORMATO EN LA FILA: "+ i + ": " + ex.getMessage());
-//                continue;
-//
-//            } catch (SQLException e) {
-//                JOptionPane.showMessageDialog(null, "[ERROR SQL, FILA: ]: "+ i + ": " + e.getMessage());
-//                continue;
-//            }
-//        }
-//        //con.commit();
-//        System.out.println("PRODUCTO INGRESADOS CORRECTAMENTE");
-//    }
 
     public void venderVentas() {
         //Se prepara la consulta SQL
@@ -413,9 +315,7 @@ public class Metodos_Ventas implements ActionListener {
         if (e.getSource() == btnVender) {
             venderVentas();
         }
-//        if(e.getSource() == btnAgregar2){
-//            obtenerProductos();
-//        }
+
 
     }
 }
