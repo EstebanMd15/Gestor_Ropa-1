@@ -1,25 +1,16 @@
 package Metodos;
 
-import java.sql.*;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import GUI.Ventas;
 import GUI.INGRESO;
 import GUI.Inventario;
-import com.mysql.cj.jdbc.PreparedStatementWrapper;
-//import com.mysql.cj.protocol.Resultset;
+import GUI.Ventas;
 import gestor_ropa.BD_CONECCTION;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.math.BigDecimal;
+import java.sql.*;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.JTable;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import javax.swing.JTextField;
-import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 public class Metodos_Ventas implements ActionListener {
 

@@ -2,7 +2,7 @@ package GUI;
 
 import GUI.INGRESO;
 import Metodos.Metodos_Ventas;
-import com.mysql.cj.xdevapi.Result;
+//import com.mysql.cj.xdevapi.Result;
 import gestor_ropa.BD_CONECCTION;
 import java.sql.*;
 import java.sql.PreparedStatement;
