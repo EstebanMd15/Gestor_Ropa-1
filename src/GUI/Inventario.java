@@ -13,7 +13,7 @@ import Metodos.Metodos_Inventario;
 public class Inventario extends javax.swing.JFrame {
 
     BD_CONECCTION bd = new BD_CONECCTION();
-    Connection con = bd.conectar();
+    Connection con = bd.getconectar();
     INGRESO in = new INGRESO();
     Ventas vn = new Ventas();
 //   Metodos_Inventario mt = new Metodos_Inventario();

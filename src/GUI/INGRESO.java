@@ -12,7 +12,7 @@ import Metodos.Metodos_Ingresos;
 public class INGRESO extends javax.swing.JFrame {
 
     BD_CONECCTION bd = new BD_CONECCTION();
-    Connection con = bd.conectar();
+    Connection con = bd.getconectar();
 
     public INGRESO() {
         initComponents();

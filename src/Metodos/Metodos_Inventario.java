@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 public class Metodos_Inventario implements ActionListener {
 
     BD_CONECCTION bd1 = new BD_CONECCTION();
-    Connection con = bd1.conectar();
+    Connection con = bd1.getconectar();
 
     private Inventario inventarioIu;
     private JButton btnBuscar;

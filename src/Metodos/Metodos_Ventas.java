@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import GUI.Ventas;
 import GUI.INGRESO;
 import GUI.Inventario;
-import com.mysql.cj.jdbc.PreparedStatementWrapper;
 //import com.mysql.cj.protocol.Resultset;
 import gestor_ropa.BD_CONECCTION;
 import java.awt.event.ActionEvent;
@@ -24,7 +23,7 @@ import java.util.List;
 public class Metodos_Ventas implements ActionListener {
 
     BD_CONECCTION bd = new BD_CONECCTION();
-    Connection con = bd.conectar();
+    Connection con = bd.getconectar();
     INGRESO ig = new INGRESO();
     Ventas vt = new Ventas();
     Inventario in = new Inventario();

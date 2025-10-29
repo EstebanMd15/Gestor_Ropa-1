@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
 public class Metodos_Ingresos implements ActionListener {
 
     BD_CONECCTION bd = new BD_CONECCTION();
-    Connection cn = bd.conectar();
+    Connection cn = bd.getconectar();
     private INGRESO ig;
     private Ventas vt;
     private JButton btnGuardar;

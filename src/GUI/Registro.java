@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 
 public class Registro extends javax.swing.JFrame {
     BD_CONECCTION bd = new BD_CONECCTION();
-    Connection con = bd.conectar();
+    Connection con = bd.getconectar();
             
     
     public Registro() {
@@ -56,14 +56,12 @@ public class Registro extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("No :");
 
         Campo_Identidad.setBackground(new java.awt.Color(204, 204, 204));
         Campo_Identidad.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("CORREO ELECTRONICO:");
 
         Campo_Nombre.setBackground(new java.awt.Color(204, 204, 204));
@@ -75,7 +73,6 @@ public class Registro extends javax.swing.JFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("APELLIDOS:");
 
         Campo_Apellido.setBackground(new java.awt.Color(204, 204, 204));
@@ -87,7 +84,6 @@ public class Registro extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("FECHA DE EXPEDICION:");
 
         Combo_Tipo_Identidad.setBackground(new java.awt.Color(0, 102, 0));
@@ -96,14 +92,12 @@ public class Registro extends javax.swing.JFrame {
         Combo_Tipo_Identidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "C.C", "T.I", "C.E" }));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("DIRECCION DE RESIDENCIA:");
 
         Campo_Direccion.setBackground(new java.awt.Color(204, 204, 204));
         Campo_Direccion.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("TIPO DE IDENTIDAD:");
 
         Campo_Fecha_Expedicion.setBackground(new java.awt.Color(204, 204, 204));
@@ -115,14 +109,12 @@ public class Registro extends javax.swing.JFrame {
         });
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("BARRIO:");
 
         Campo_Barrio.setBackground(new java.awt.Color(204, 204, 204));
         Campo_Barrio.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("NOMBRES:");
 
         Combo_Tipo_Rh.setBackground(new java.awt.Color(0, 102, 0));
@@ -136,18 +128,15 @@ public class Registro extends javax.swing.JFrame {
         });
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("RH:");
 
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("CONTRASEÑA:");
 
         Campo_Correo.setBackground(new java.awt.Color(204, 204, 204));
         Campo_Correo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
         jLabel11.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("TELEFONO:");
 
         Campo_Contraseña.setBackground(new java.awt.Color(204, 204, 204));
@@ -276,7 +265,7 @@ public class Registro extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTN_Confirmar_Registro)
                     .addComponent(BTN_Salir_Registro))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

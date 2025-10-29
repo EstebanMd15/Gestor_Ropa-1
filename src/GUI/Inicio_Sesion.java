@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 public class Inicio_Sesion extends javax.swing.JFrame {
 
     BD_CONECCTION bd1 = new BD_CONECCTION();
-    Connection con = bd1.conectar();
+    Connection con = bd1.getconectar();
 
     public Inicio_Sesion() {
         initComponents();

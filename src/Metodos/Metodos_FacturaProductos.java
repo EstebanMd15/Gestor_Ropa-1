@@ -16,7 +16,7 @@ import java.math.BigDecimal;
 public class Metodos_FacturaProductos implements ActionListener {
 
     BD_CONECCTION bd = new BD_CONECCTION();
-    Connection con = bd.conectar();
+    Connection con = bd.getconectar();
     Metodos_Ventas mvt;
     Ventas vta;
     private JButton btnAgregar;
