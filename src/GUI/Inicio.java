@@ -18,7 +18,6 @@ public class Inicio extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         BTN_Iniciar_Sesion = new javax.swing.JButton();
-        BTN_Registrarse = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -39,41 +38,28 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
-        BTN_Registrarse.setBackground(new java.awt.Color(0, 102, 0));
-        BTN_Registrarse.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        BTN_Registrarse.setForeground(new java.awt.Color(255, 255, 255));
-        BTN_Registrarse.setText("REGISTRARSE");
-        BTN_Registrarse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTN_RegistrarseActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(247, 247, 247)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(BTN_Iniciar_Sesion, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                    .addComponent(BTN_Registrarse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(248, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(168, 168, 168))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(152, 152, 152)
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(202, 202, 202)
+                        .addComponent(BTN_Iniciar_Sesion, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(71, 71, 71)
+                .addGap(76, 76, 76)
                 .addComponent(jLabel2)
-                .addGap(89, 89, 89)
+                .addGap(125, 125, 125)
                 .addComponent(BTN_Iniciar_Sesion)
-                .addGap(107, 107, 107)
-                .addComponent(BTN_Registrarse)
-                .addContainerGap(193, Short.MAX_VALUE))
+                .addContainerGap(257, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -106,12 +92,6 @@ public class Inicio extends javax.swing.JFrame {
             in.setVisible(true);
             dispose();
     }//GEN-LAST:event_BTN_Iniciar_SesionActionPerformed
-
-    private void BTN_RegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_RegistrarseActionPerformed
-        Registro rg = new Registro();
-        rg.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_BTN_RegistrarseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,7 +130,6 @@ public class Inicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTN_Iniciar_Sesion;
-    private javax.swing.JButton BTN_Registrarse;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

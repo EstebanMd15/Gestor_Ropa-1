@@ -1,11 +1,14 @@
-package Metodos;
+package Metodos_Admin;
 
+import Metodos.*;
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import GUI.Ventas;
 import GUI.INGRESO;
 import GUI.Inventario;
+import GUI_ADMIN.INGRESO_ADMIN;
+import GUI_ADMIN.Ventas_ADMIN;
 //import com.mysql.cj.protocol.Resultset;
 import gestor_ropa.BD_CONECCTION;
 import java.awt.event.ActionEvent;
@@ -17,11 +20,11 @@ import javax.swing.JTable;
 import java.sql.ResultSet;
 
 
-public class Metodos_Ventas implements ActionListener {
+public class Metodos_Ventas_admin implements ActionListener {
 
     Connection con = BD_CONECCTION.getInstance().getconectar();
-    INGRESO ig = new INGRESO();
-    Ventas vt = new Ventas();
+    INGRESO_ADMIN ig = new INGRESO_ADMIN();
+    Ventas_ADMIN vt = new Ventas_ADMIN();
     Inventario in = new Inventario();
     private JButton btnBuscar;
     private JButton btnLimpiar;
@@ -32,7 +35,7 @@ public class Metodos_Ventas implements ActionListener {
     private JTable tabla_ventas;
     private int CantDispo;
 
-    public Metodos_Ventas(Ventas vt) {
+    public Metodos_Ventas_admin(Ventas_ADMIN vt) {
         this.vt = vt;
         this.btnAgregar2 = this.vt.BTN_AgregarVenta;
         this.btnAgregar = this.vt.BTN_AgregarVenta;
@@ -184,7 +187,7 @@ public class Metodos_Ventas implements ActionListener {
     }
 
     public void calcularYMostrarTotal() {
-        DefaultTableModel model = (DefaultTableModel) vt.Tabla_Ventas.getModel();// SE OBTIENE EL MODELO DE DATOS DE LA TABLA
+        DefaultTableModel model = (DefaultTableModel) vt.Tabla_Ventas_Admin.getModel();// SE OBTIENE EL MODELO DE DATOS DE LA TABLA
 
         double totalGeneral = 0.0;// se inicializa una variable para guardar la suma total
 
@@ -233,7 +236,7 @@ public class Metodos_Ventas implements ActionListener {
             con.commit();
             JOptionPane.showMessageDialog(null, "VENTA REALIZADA CON EXITO!!\n INVENTARIO ACTUALIZADO");
             //Se actualiza la tabla para que se vea vacía
-            DefaultTableModel model = (DefaultTableModel) vt.Tabla_Ventas.getModel();
+            DefaultTableModel model = (DefaultTableModel) vt.Tabla_Ventas_Admin.getModel();
             model.setRowCount(0);
         } catch (SQLException e) {
             //si algo sale mal, se deshace todos los cambios 
@@ -260,14 +263,14 @@ public class Metodos_Ventas implements ActionListener {
             double costoBase = 0;
 
             PreparedStatement porc = BD_CONECCTION.getInstance().getconectar().prepareStatement("SELECT *  FROM INGRESOS WHERE CODIGO_I = ?");
-            porc.setString(1, ig.Campo_Codigo.getText());
+            porc.setString(1, ig.Campo_Codigo_admin.getText());
             ResultSet rs = porc.executeQuery();
 
             if (rs.next()) {
                 String costoBD = rs.getString("COSTO");
                 if (costoBD != null && !costoBD.isEmpty()) {
                     costoBase = Double.parseDouble(costoBD);
-                    ig.Campo_Costo.setText(costoBD);
+                    ig.Campo_Costo_admin.setText(costoBD);
                 }
             } else {
                 String costoInve = vt.Campo_COSTOventa.getText();

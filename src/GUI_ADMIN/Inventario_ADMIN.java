@@ -1,5 +1,6 @@
-package GUI;
+package GUI_ADMIN;
 
+import GUI.*;
 import gestor_ropa.BD_CONECCTION;
 import java.sql.*;
 import java.sql.PreparedStatement;
@@ -8,16 +9,16 @@ import java.sql.Connection;
 import javax.swing.JOptionPane;
 import GUI.INGRESO;
 import GUI.Ventas;
-import Metodos.Metodos_Inventario;
+import Metodos_Admin.Metodos_Inventario_admin;
 
-public class Inventario extends javax.swing.JFrame {
+public class Inventario_ADMIN extends javax.swing.JFrame {
 
     Connection con = BD_CONECCTION.getInstance().getconectar();
     INGRESO in = new INGRESO();
     Ventas vn = new Ventas();
 //   Metodos_Inventario mt = new Metodos_Inventario();
 
-    public Inventario() {
+    public Inventario_ADMIN() {
         initComponents();
     }
 
@@ -69,26 +70,26 @@ public class Inventario extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        Campo_CodigoInventario = new javax.swing.JTextField();
+        Campo_CodigoInventario_admin = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        Campo_DescripcionInventario = new javax.swing.JTextField();
+        Campo_DescripcionInventario_admin = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        Campo_TallaInventario = new javax.swing.JTextField();
-        Campo_ReferenciaInventario = new javax.swing.JTextField();
+        Campo_TallaInventario_admin = new javax.swing.JTextField();
+        Campo_ReferenciaInventario_admin = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        Campo_CantidadDispoInven = new javax.swing.JTextField();
-        BTN_BuscarCodInven = new javax.swing.JButton();
+        Campo_CantidadDispoInven_admin = new javax.swing.JTextField();
+        BTN_BuscarCodInven_admin = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        Campo_CostoInventario = new javax.swing.JTextField();
+        Campo_CostoInventario_admin = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        Campo_PrecioInventario = new javax.swing.JTextField();
+        Campo_PrecioInventario_admin = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        Campo_FechaIngresoInven = new javax.swing.JTextField();
-        BTN_MostrarInven = new javax.swing.JButton();
-        BTN_LimpiarInven = new javax.swing.JButton();
+        Campo_FechaIngresoInven_admin = new javax.swing.JTextField();
+        BTN_MostrarInven_admin = new javax.swing.JButton();
+        BTN_LimpiarInven_admin = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        BTN_SalirVenta = new javax.swing.JButton();
+        BTN_SalirVenta_admin = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaInventario = new javax.swing.JTable();
 
@@ -98,139 +99,119 @@ public class Inventario extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("PUNTO DE VENTA NORTE");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("TIENDA DE ROPA");
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("TEL:9999-9999");
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        jPanel2.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("CODIGO:");
 
-        Campo_CodigoInventario.setBackground(new java.awt.Color(204, 204, 204));
-        Campo_CodigoInventario.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        Campo_CodigoInventario.setForeground(new java.awt.Color(0, 0, 0));
-        Campo_CodigoInventario.addActionListener(new java.awt.event.ActionListener() {
+        Campo_CodigoInventario_admin.setBackground(new java.awt.Color(204, 204, 204));
+        Campo_CodigoInventario_admin.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        Campo_CodigoInventario_admin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Campo_CodigoInventarioActionPerformed(evt);
+                Campo_CodigoInventario_adminActionPerformed(evt);
             }
         });
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("DESCRIPCION:");
 
-        Campo_DescripcionInventario.setEditable(false);
-        Campo_DescripcionInventario.setBackground(new java.awt.Color(204, 204, 204));
-        Campo_DescripcionInventario.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        Campo_DescripcionInventario.setForeground(new java.awt.Color(0, 0, 0));
-        Campo_DescripcionInventario.addActionListener(new java.awt.event.ActionListener() {
+        Campo_DescripcionInventario_admin.setEditable(false);
+        Campo_DescripcionInventario_admin.setBackground(new java.awt.Color(204, 204, 204));
+        Campo_DescripcionInventario_admin.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        Campo_DescripcionInventario_admin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Campo_DescripcionInventarioActionPerformed(evt);
+                Campo_DescripcionInventario_adminActionPerformed(evt);
             }
         });
 
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("TALLA:");
 
-        Campo_TallaInventario.setEditable(false);
-        Campo_TallaInventario.setBackground(new java.awt.Color(204, 204, 204));
-        Campo_TallaInventario.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        Campo_TallaInventario.setForeground(new java.awt.Color(0, 0, 0));
+        Campo_TallaInventario_admin.setEditable(false);
+        Campo_TallaInventario_admin.setBackground(new java.awt.Color(204, 204, 204));
+        Campo_TallaInventario_admin.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
 
-        Campo_ReferenciaInventario.setEditable(false);
-        Campo_ReferenciaInventario.setBackground(new java.awt.Color(204, 204, 204));
-        Campo_ReferenciaInventario.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        Campo_ReferenciaInventario.setForeground(new java.awt.Color(0, 0, 0));
+        Campo_ReferenciaInventario_admin.setEditable(false);
+        Campo_ReferenciaInventario_admin.setBackground(new java.awt.Color(204, 204, 204));
+        Campo_ReferenciaInventario_admin.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("REFERENCIA:");
 
         jLabel12.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("CANTIDAD DISPONIBLE:");
 
-        Campo_CantidadDispoInven.setEditable(false);
-        Campo_CantidadDispoInven.setBackground(new java.awt.Color(204, 204, 204));
-        Campo_CantidadDispoInven.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        Campo_CantidadDispoInven.setForeground(new java.awt.Color(0, 0, 0));
-        Campo_CantidadDispoInven.addActionListener(new java.awt.event.ActionListener() {
+        Campo_CantidadDispoInven_admin.setEditable(false);
+        Campo_CantidadDispoInven_admin.setBackground(new java.awt.Color(204, 204, 204));
+        Campo_CantidadDispoInven_admin.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        Campo_CantidadDispoInven_admin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Campo_CantidadDispoInvenActionPerformed(evt);
+                Campo_CantidadDispoInven_adminActionPerformed(evt);
             }
         });
 
-        BTN_BuscarCodInven.setBackground(new java.awt.Color(0, 0, 204));
-        BTN_BuscarCodInven.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        BTN_BuscarCodInven.setForeground(new java.awt.Color(255, 255, 255));
-        BTN_BuscarCodInven.setText("BUSCAR CODIGO");
-        BTN_BuscarCodInven.addActionListener(new java.awt.event.ActionListener() {
+        BTN_BuscarCodInven_admin.setBackground(new java.awt.Color(0, 0, 204));
+        BTN_BuscarCodInven_admin.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        BTN_BuscarCodInven_admin.setForeground(new java.awt.Color(255, 255, 255));
+        BTN_BuscarCodInven_admin.setText("BUSCAR CODIGO");
+        BTN_BuscarCodInven_admin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTN_BuscarCodInvenActionPerformed(evt);
+                BTN_BuscarCodInven_adminActionPerformed(evt);
             }
         });
 
         jLabel11.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("COSTO:");
 
-        Campo_CostoInventario.setEditable(false);
-        Campo_CostoInventario.setBackground(new java.awt.Color(204, 204, 204));
-        Campo_CostoInventario.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        Campo_CostoInventario.setForeground(new java.awt.Color(0, 0, 0));
+        Campo_CostoInventario_admin.setEditable(false);
+        Campo_CostoInventario_admin.setBackground(new java.awt.Color(204, 204, 204));
+        Campo_CostoInventario_admin.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
 
         jLabel13.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("PRECIO:");
 
-        Campo_PrecioInventario.setEditable(false);
-        Campo_PrecioInventario.setBackground(new java.awt.Color(204, 204, 204));
-        Campo_PrecioInventario.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        Campo_PrecioInventario.setForeground(new java.awt.Color(0, 0, 0));
+        Campo_PrecioInventario_admin.setEditable(false);
+        Campo_PrecioInventario_admin.setBackground(new java.awt.Color(204, 204, 204));
+        Campo_PrecioInventario_admin.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
 
         jLabel14.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setText("FECHA DE INGRESO:");
 
-        Campo_FechaIngresoInven.setEditable(false);
-        Campo_FechaIngresoInven.setBackground(new java.awt.Color(204, 204, 204));
-        Campo_FechaIngresoInven.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        Campo_FechaIngresoInven.setForeground(new java.awt.Color(0, 0, 0));
-        Campo_FechaIngresoInven.addActionListener(new java.awt.event.ActionListener() {
+        Campo_FechaIngresoInven_admin.setEditable(false);
+        Campo_FechaIngresoInven_admin.setBackground(new java.awt.Color(204, 204, 204));
+        Campo_FechaIngresoInven_admin.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        Campo_FechaIngresoInven_admin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Campo_FechaIngresoInvenActionPerformed(evt);
+                Campo_FechaIngresoInven_adminActionPerformed(evt);
             }
         });
 
-        BTN_MostrarInven.setBackground(new java.awt.Color(0, 0, 204));
-        BTN_MostrarInven.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        BTN_MostrarInven.setForeground(new java.awt.Color(255, 255, 255));
-        BTN_MostrarInven.setText("MOSTRAR INVENTARIO");
-        BTN_MostrarInven.addActionListener(new java.awt.event.ActionListener() {
+        BTN_MostrarInven_admin.setBackground(new java.awt.Color(0, 0, 204));
+        BTN_MostrarInven_admin.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        BTN_MostrarInven_admin.setForeground(new java.awt.Color(255, 255, 255));
+        BTN_MostrarInven_admin.setText("MOSTRAR INVENTARIO");
+        BTN_MostrarInven_admin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTN_MostrarInvenActionPerformed(evt);
+                BTN_MostrarInven_adminActionPerformed(evt);
             }
         });
 
-        BTN_LimpiarInven.setBackground(new java.awt.Color(0, 0, 204));
-        BTN_LimpiarInven.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        BTN_LimpiarInven.setForeground(new java.awt.Color(255, 255, 255));
-        BTN_LimpiarInven.setText("LIMPIAR");
-        BTN_LimpiarInven.addActionListener(new java.awt.event.ActionListener() {
+        BTN_LimpiarInven_admin.setBackground(new java.awt.Color(0, 0, 204));
+        BTN_LimpiarInven_admin.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        BTN_LimpiarInven_admin.setForeground(new java.awt.Color(255, 255, 255));
+        BTN_LimpiarInven_admin.setText("LIMPIAR");
+        BTN_LimpiarInven_admin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTN_LimpiarInvenActionPerformed(evt);
+                BTN_LimpiarInven_adminActionPerformed(evt);
             }
         });
 
@@ -242,19 +223,19 @@ public class Inventario extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(BTN_BuscarCodInven, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BTN_BuscarCodInven_admin, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44)
-                        .addComponent(BTN_MostrarInven, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BTN_MostrarInven_admin, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
-                        .addComponent(BTN_LimpiarInven, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BTN_LimpiarInven_admin, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(82, 82, 82)
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Campo_CantidadDispoInven, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(Campo_CantidadDispoInven_admin, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Campo_CodigoInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Campo_CodigoInventario_admin, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -263,24 +244,24 @@ public class Inventario extends javax.swing.JFrame {
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Campo_DescripcionInventario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Campo_DescripcionInventario_admin, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(Campo_FechaIngresoInven)
-                                .addComponent(Campo_ReferenciaInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(Campo_FechaIngresoInven_admin)
+                                .addComponent(Campo_ReferenciaInventario_admin, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Campo_TallaInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(Campo_TallaInventario_admin, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Campo_CostoInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(Campo_CostoInventario_admin, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Campo_PrecioInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(Campo_PrecioInventario_admin, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(77, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -291,42 +272,42 @@ public class Inventario extends javax.swing.JFrame {
                         .addGap(128, 128, 128)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
-                            .addComponent(Campo_PrecioInventario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(Campo_PrecioInventario_admin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel4)
-                                    .addComponent(Campo_DescripcionInventario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(Campo_DescripcionInventario_admin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(32, 32, 32)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel9)
-                                    .addComponent(Campo_ReferenciaInventario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(Campo_ReferenciaInventario_admin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(116, 116, 116)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel14)
-                                    .addComponent(Campo_FechaIngresoInven, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(Campo_FechaIngresoInven_admin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel8)
-                                    .addComponent(Campo_CodigoInventario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Campo_CodigoInventario_admin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel10)
-                                    .addComponent(Campo_TallaInventario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(Campo_TallaInventario_admin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(32, 32, 32)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel11)
-                                    .addComponent(Campo_CostoInventario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(Campo_CostoInventario_admin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(BTN_BuscarCodInven)
-                        .addComponent(BTN_MostrarInven)
-                        .addComponent(BTN_LimpiarInven))
+                        .addComponent(BTN_BuscarCodInven_admin)
+                        .addComponent(BTN_MostrarInven_admin)
+                        .addComponent(BTN_LimpiarInven_admin))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel12)
-                        .addComponent(Campo_CantidadDispoInven, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Campo_CantidadDispoInven_admin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -366,13 +347,13 @@ public class Inventario extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
-        BTN_SalirVenta.setBackground(new java.awt.Color(204, 0, 0));
-        BTN_SalirVenta.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        BTN_SalirVenta.setForeground(new java.awt.Color(255, 255, 255));
-        BTN_SalirVenta.setText("SALIR");
-        BTN_SalirVenta.addActionListener(new java.awt.event.ActionListener() {
+        BTN_SalirVenta_admin.setBackground(new java.awt.Color(204, 0, 0));
+        BTN_SalirVenta_admin.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        BTN_SalirVenta_admin.setForeground(new java.awt.Color(255, 255, 255));
+        BTN_SalirVenta_admin.setText("SALIR");
+        BTN_SalirVenta_admin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTN_SalirVentaActionPerformed(evt);
+                BTN_SalirVenta_adminActionPerformed(evt);
             }
         });
 
@@ -392,7 +373,7 @@ public class Inventario extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(BTN_SalirVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BTN_SalirVenta_admin, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollPane1)
         );
@@ -401,7 +382,7 @@ public class Inventario extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BTN_SalirVenta)
+                .addComponent(BTN_SalirVenta_admin)
                 .addContainerGap())
         );
 
@@ -423,46 +404,46 @@ public class Inventario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BTN_SalirVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SalirVentaActionPerformed
-        Menu mn = new Menu();
+    private void BTN_SalirVenta_adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SalirVenta_adminActionPerformed
+        ADMIN mn = new ADMIN();
         mn.setVisible(true);
         dispose();
-    }//GEN-LAST:event_BTN_SalirVentaActionPerformed
+    }//GEN-LAST:event_BTN_SalirVenta_adminActionPerformed
 
-    private void Campo_CodigoInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Campo_CodigoInventarioActionPerformed
+    private void Campo_CodigoInventario_adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Campo_CodigoInventario_adminActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Campo_CodigoInventarioActionPerformed
+    }//GEN-LAST:event_Campo_CodigoInventario_adminActionPerformed
 
-    private void Campo_DescripcionInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Campo_DescripcionInventarioActionPerformed
+    private void Campo_DescripcionInventario_adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Campo_DescripcionInventario_adminActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Campo_DescripcionInventarioActionPerformed
+    }//GEN-LAST:event_Campo_DescripcionInventario_adminActionPerformed
 
-    private void Campo_CantidadDispoInvenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Campo_CantidadDispoInvenActionPerformed
+    private void Campo_CantidadDispoInven_adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Campo_CantidadDispoInven_adminActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Campo_CantidadDispoInvenActionPerformed
+    }//GEN-LAST:event_Campo_CantidadDispoInven_adminActionPerformed
 
-    private void BTN_BuscarCodInvenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_BuscarCodInvenActionPerformed
-        Metodos_Inventario metodo = new Metodos_Inventario(this);
+    private void BTN_BuscarCodInven_adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_BuscarCodInven_adminActionPerformed
+        Metodos_Inventario_admin metodo = new Metodos_Inventario_admin(this);
         metodo.buscarCodigo();
         metodo.cantidadDisponible();
 //      metodo.calculo();
 
-    }//GEN-LAST:event_BTN_BuscarCodInvenActionPerformed
+    }//GEN-LAST:event_BTN_BuscarCodInven_adminActionPerformed
 
-    private void Campo_FechaIngresoInvenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Campo_FechaIngresoInvenActionPerformed
+    private void Campo_FechaIngresoInven_adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Campo_FechaIngresoInven_adminActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Campo_FechaIngresoInvenActionPerformed
+    }//GEN-LAST:event_Campo_FechaIngresoInven_adminActionPerformed
 
-    private void BTN_MostrarInvenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_MostrarInvenActionPerformed
+    private void BTN_MostrarInven_adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_MostrarInven_adminActionPerformed
         mostrar("Ingresos");
 
-    }//GEN-LAST:event_BTN_MostrarInvenActionPerformed
+    }//GEN-LAST:event_BTN_MostrarInven_adminActionPerformed
 
-    private void BTN_LimpiarInvenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_LimpiarInvenActionPerformed
-        Metodos_Inventario mtd = new Metodos_Inventario(this);
+    private void BTN_LimpiarInven_adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_LimpiarInven_adminActionPerformed
+        Metodos_Inventario_admin mtd = new Metodos_Inventario_admin(this);
         mtd.limpiarCampos();
 
-    }//GEN-LAST:event_BTN_LimpiarInvenActionPerformed
+    }//GEN-LAST:event_BTN_LimpiarInven_adminActionPerformed
 
     /**
      * @param args the command line arguments
@@ -481,37 +462,38 @@ public class Inventario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Inventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Inventario_ADMIN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Inventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Inventario_ADMIN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Inventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Inventario_ADMIN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Inventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Inventario_ADMIN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Inventario().setVisible(true);
+                new Inventario_ADMIN().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton BTN_BuscarCodInven;
-    public javax.swing.JButton BTN_LimpiarInven;
-    public javax.swing.JButton BTN_MostrarInven;
-    private javax.swing.JButton BTN_SalirVenta;
-    public javax.swing.JTextField Campo_CantidadDispoInven;
-    public javax.swing.JTextField Campo_CodigoInventario;
-    public javax.swing.JTextField Campo_CostoInventario;
-    public javax.swing.JTextField Campo_DescripcionInventario;
-    public javax.swing.JTextField Campo_FechaIngresoInven;
-    public javax.swing.JTextField Campo_PrecioInventario;
-    public javax.swing.JTextField Campo_ReferenciaInventario;
-    public javax.swing.JTextField Campo_TallaInventario;
+    public javax.swing.JButton BTN_BuscarCodInven_admin;
+    public javax.swing.JButton BTN_LimpiarInven_admin;
+    public javax.swing.JButton BTN_MostrarInven_admin;
+    private javax.swing.JButton BTN_SalirVenta_admin;
+    public javax.swing.JTextField Campo_CantidadDispoInven_admin;
+    public javax.swing.JTextField Campo_CodigoInventario_admin;
+    public javax.swing.JTextField Campo_CostoInventario_admin;
+    public javax.swing.JTextField Campo_DescripcionInventario_admin;
+    public javax.swing.JTextField Campo_FechaIngresoInven_admin;
+    public javax.swing.JTextField Campo_PrecioInventario_admin;
+    public javax.swing.JTextField Campo_ReferenciaInventario_admin;
+    public javax.swing.JTextField Campo_TallaInventario_admin;
     private javax.swing.JTable TablaInventario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

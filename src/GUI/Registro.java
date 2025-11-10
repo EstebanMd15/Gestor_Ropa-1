@@ -6,13 +6,11 @@ import java.sql.Connection;
 import gestor_ropa.BD_CONECCTION;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.util.Locale;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import GUI_ADMIN.Gestion_Usuarios;
 
 public class Registro extends javax.swing.JFrame {
-    BD_CONECCTION bd = new BD_CONECCTION();
-    Connection con = bd.getconectar();
+    Connection con = BD_CONECCTION.getInstance().getconectar();
             
     
     public Registro() {
@@ -40,7 +38,7 @@ public class Registro extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         Campo_Barrio = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        Combo_Tipo_Rh = new javax.swing.JComboBox<>();
+        Combo_Estado = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         Campo_Correo = new javax.swing.JTextField();
@@ -49,6 +47,8 @@ public class Registro extends javax.swing.JFrame {
         Campo_Telefono = new javax.swing.JTextField();
         BTN_Salir_Registro = new javax.swing.JButton();
         BTN_Confirmar_Registro = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        Combo_Tipo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,12 +56,14 @@ public class Registro extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(30, 30, 30));
         jLabel1.setText("No :");
 
         Campo_Identidad.setBackground(new java.awt.Color(204, 204, 204));
         Campo_Identidad.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(30, 30, 30));
         jLabel2.setText("CORREO ELECTRONICO:");
 
         Campo_Nombre.setBackground(new java.awt.Color(204, 204, 204));
@@ -73,6 +75,7 @@ public class Registro extends javax.swing.JFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(30, 30, 30));
         jLabel3.setText("APELLIDOS:");
 
         Campo_Apellido.setBackground(new java.awt.Color(204, 204, 204));
@@ -84,6 +87,7 @@ public class Registro extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(30, 30, 30));
         jLabel4.setText("FECHA DE EXPEDICION:");
 
         Combo_Tipo_Identidad.setBackground(new java.awt.Color(0, 102, 0));
@@ -92,12 +96,14 @@ public class Registro extends javax.swing.JFrame {
         Combo_Tipo_Identidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "C.C", "T.I", "C.E" }));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(30, 30, 30));
         jLabel5.setText("DIRECCION DE RESIDENCIA:");
 
         Campo_Direccion.setBackground(new java.awt.Color(204, 204, 204));
         Campo_Direccion.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(30, 30, 30));
         jLabel6.setText("TIPO DE IDENTIDAD:");
 
         Campo_Fecha_Expedicion.setBackground(new java.awt.Color(204, 204, 204));
@@ -109,34 +115,39 @@ public class Registro extends javax.swing.JFrame {
         });
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(30, 30, 30));
         jLabel7.setText("BARRIO:");
 
         Campo_Barrio.setBackground(new java.awt.Color(204, 204, 204));
         Campo_Barrio.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(30, 30, 30));
         jLabel8.setText("NOMBRES:");
 
-        Combo_Tipo_Rh.setBackground(new java.awt.Color(0, 102, 0));
-        Combo_Tipo_Rh.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        Combo_Tipo_Rh.setForeground(new java.awt.Color(255, 255, 255));
-        Combo_Tipo_Rh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" }));
-        Combo_Tipo_Rh.addActionListener(new java.awt.event.ActionListener() {
+        Combo_Estado.setBackground(new java.awt.Color(0, 102, 0));
+        Combo_Estado.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        Combo_Estado.setForeground(new java.awt.Color(255, 255, 255));
+        Combo_Estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ACTIVO", "INACTIVO" }));
+        Combo_Estado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Combo_Tipo_RhActionPerformed(evt);
+                Combo_EstadoActionPerformed(evt);
             }
         });
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel9.setText("RH:");
+        jLabel9.setForeground(new java.awt.Color(30, 30, 30));
+        jLabel9.setText("ESTADO:");
 
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(30, 30, 30));
         jLabel10.setText("CONTRASEÑA:");
 
         Campo_Correo.setBackground(new java.awt.Color(204, 204, 204));
         Campo_Correo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
 
         jLabel11.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(30, 30, 30));
         jLabel11.setText("TELEFONO:");
 
         Campo_Contraseña.setBackground(new java.awt.Color(204, 204, 204));
@@ -165,6 +176,20 @@ public class Registro extends javax.swing.JFrame {
             }
         });
 
+        jLabel12.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(30, 30, 30));
+        jLabel12.setText("ROL:");
+
+        Combo_Tipo.setBackground(new java.awt.Color(0, 102, 0));
+        Combo_Tipo.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        Combo_Tipo.setForeground(new java.awt.Color(255, 255, 255));
+        Combo_Tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ADMIN", "EMPLEADO" }));
+        Combo_Tipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Combo_TipoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -173,106 +198,109 @@ public class Registro extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Campo_Barrio, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(Combo_Tipo_Identidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(Campo_Identidad))
+                        .addComponent(Campo_Apellido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel4)
+                    .addComponent(Campo_Fecha_Expedicion, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Campo_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel7)
+                    .addComponent(BTN_Salir_Registro, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(61, 61, 61)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(Campo_Correo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel10)
+                        .addComponent(jLabel11)
+                        .addComponent(Campo_Telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Campo_Contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(BTN_Confirmar_Registro)
+                    .addComponent(Campo_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(Combo_Tipo_Identidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(Campo_Identidad))
-                                .addComponent(Campo_Apellido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel4)
-                            .addComponent(Campo_Fecha_Expedicion, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Campo_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel7)
-                            .addComponent(BTN_Salir_Registro, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(230, 230, 230)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Campo_Correo, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel2)
-                                    .addComponent(Campo_Telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Campo_Contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel9)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(Combo_Tipo_Rh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(Campo_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addComponent(BTN_Confirmar_Registro))))
-                .addContainerGap(74, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addGap(55, 55, 55)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Combo_Tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(Combo_Estado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(2, 2, 2)))))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel8))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Campo_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Campo_Correo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(24, 24, 24)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel11))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Campo_Apellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Campo_Telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Combo_Tipo_Identidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
-                            .addComponent(Campo_Identidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Campo_Contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Campo_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Campo_Correo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel11))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Campo_Apellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Campo_Telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Combo_Tipo_Identidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(Campo_Identidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Campo_Contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Campo_Fecha_Expedicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Campo_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel9)
+                    .addComponent(Combo_Estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Campo_Fecha_Expedicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel9)
-                        .addComponent(Combo_Tipo_Rh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Campo_Barrio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Campo_Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(41, 41, 41)
+                        .addComponent(jLabel12)
+                        .addComponent(Combo_Tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Campo_Barrio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTN_Confirmar_Registro)
                     .addComponent(BTN_Salir_Registro))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,9 +311,9 @@ public class Registro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BTN_Salir_RegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_Salir_RegistroActionPerformed
-            Inicio in = new Inicio();
-            in.setVisible(true);
-            dispose();
+        Gestion_Usuarios gu =  new Gestion_Usuarios();
+        gu.setVisible(true);
+        dispose();
     }//GEN-LAST:event_BTN_Salir_RegistroActionPerformed
 
     private void BTN_Confirmar_RegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_Confirmar_RegistroActionPerformed
@@ -307,9 +335,8 @@ public class Registro extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "ESTE CORREO YA SE ENCUENTRA REGISTRADO");
                 return;
             }
-            //CONTINUAR CON EL REGISTRO SI TODO ESTÁ BIEN
-            PreparedStatement guardar = con.prepareStatement("INSERT INTO Registro (NOMBRES, APELLIDOS, TIPO_IDENTIDAD, NO_IDENTIDAD, FECHA_EXPEDICION, BARRIO, DIRECCION_RESIDENCIA, RH, CORREO_ELECTRONICO, TELEFONO, CONTRASEÑA)"
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+            PreparedStatement guardar = con.prepareStatement("INSERT INTO Registro (NOMBRES, APELLIDOS, TIPO_IDENTIDAD, NO_IDENTIDAD, FECHA_EXPEDICION, BARRIO, DIRECCION_RESIDENCIA, TIPO, CORREO_ELECTRONICO, TELEFONO, CONTRASEÑA, ESTADO)"
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
             guardar.setString(1, Campo_Nombre.getText());
             guardar.setString(2, Campo_Apellido.getText());
             guardar.setString(3, Combo_Tipo_Identidad.getSelectedItem().toString());
@@ -317,10 +344,11 @@ public class Registro extends javax.swing.JFrame {
             guardar.setString(5, Campo_Fecha_Expedicion.getText());
             guardar.setString(6, Campo_Barrio.getText());
             guardar.setString(7, Campo_Direccion.getText());
-            guardar.setString(8, Combo_Tipo_Rh.getSelectedItem().toString());
+            guardar.setString(8, Combo_Tipo.getSelectedItem().toString());
             guardar.setString(9, correo);
             guardar.setString(10, Campo_Telefono.getText());
             guardar.setString(11, Campo_Contraseña.getText());
+            guardar.setString(12, Combo_Estado.getSelectedItem().toString());
            
             int resultado = guardar.executeUpdate();
             
@@ -363,9 +391,13 @@ public class Registro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Campo_NombreActionPerformed
 
-    private void Combo_Tipo_RhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo_Tipo_RhActionPerformed
+    private void Combo_EstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo_EstadoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Combo_Tipo_RhActionPerformed
+    }//GEN-LAST:event_Combo_EstadoActionPerformed
+
+    private void Combo_TipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo_TipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Combo_TipoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -405,20 +437,22 @@ public class Registro extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTN_Confirmar_Registro;
     private javax.swing.JButton BTN_Salir_Registro;
-    private javax.swing.JTextField Campo_Apellido;
+    public javax.swing.JTextField Campo_Apellido;
     private javax.swing.JTextField Campo_Barrio;
     private javax.swing.JPasswordField Campo_Contraseña;
-    private javax.swing.JTextField Campo_Correo;
+    public javax.swing.JTextField Campo_Correo;
     private javax.swing.JTextField Campo_Direccion;
     public javax.swing.JTextField Campo_Fecha_Expedicion;
     private javax.swing.JTextField Campo_Identidad;
-    private javax.swing.JTextField Campo_Nombre;
-    private javax.swing.JTextField Campo_Telefono;
+    public javax.swing.JTextField Campo_Nombre;
+    public javax.swing.JTextField Campo_Telefono;
+    public javax.swing.JComboBox<String> Combo_Estado;
+    public javax.swing.JComboBox<String> Combo_Tipo;
     private javax.swing.JComboBox<String> Combo_Tipo_Identidad;
-    private javax.swing.JComboBox<String> Combo_Tipo_Rh;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

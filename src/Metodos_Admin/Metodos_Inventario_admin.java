@@ -1,7 +1,9 @@
-package Metodos;
+package Metodos_Admin;
 
+import Metodos.*;
 import GUI.Inventario;
 import GUI.INGRESO;
+import GUI_ADMIN.Inventario_ADMIN;
 import java.sql.*;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
@@ -13,19 +15,19 @@ import java.sql.ResultSet;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
-public class Metodos_Inventario implements ActionListener {
+public class Metodos_Inventario_admin implements ActionListener {
 
     Connection con = BD_CONECCTION.getInstance().getconectar();
 
-    private Inventario inventarioIu;
+    private Inventario_ADMIN inventarioIu;
     private JButton btnBuscar;
     private JButton btnLimpiar;
     INGRESO ig = new INGRESO();
 
-    public Metodos_Inventario(Inventario inventarioIu) {
+    public Metodos_Inventario_admin(Inventario_ADMIN inventarioIu) {
         this.inventarioIu = inventarioIu;
-        this.btnBuscar = this.inventarioIu.BTN_BuscarCodInven;
-        this.btnLimpiar = this.inventarioIu.BTN_LimpiarInven;
+        this.btnBuscar = this.inventarioIu.BTN_BuscarCodInven_admin;
+        this.btnLimpiar = this.inventarioIu.BTN_LimpiarInven_admin;
         
     }
 
@@ -34,15 +36,15 @@ public class Metodos_Inventario implements ActionListener {
 
         try {
             PreparedStatement buscar = BD_CONECCTION.getInstance().getconectar().prepareStatement("SELECT * FROM INGRESOS WHERE CODIGO_I = ?");
-            buscar.setString(1, inventarioIu.Campo_CodigoInventario.getText());
+            buscar.setString(1, inventarioIu.Campo_CodigoInventario_admin.getText());
             ResultSet rs = buscar.executeQuery();
             if (rs.next()) {
-                inventarioIu.Campo_CostoInventario.setText(rs.getString("COSTO"));
-                inventarioIu.Campo_DescripcionInventario.setText(rs.getString("DESCRIPCION"));
-                inventarioIu.Campo_FechaIngresoInven.setText(rs.getString("FECHA_INGRESO"));
-                inventarioIu.Campo_ReferenciaInventario.setText(rs.getString("REFERENCIA"));
-                inventarioIu.Campo_TallaInventario.setText(rs.getString("TALLA"));
-                inventarioIu.Campo_PrecioInventario.setText(rs.getString("PRECIO"));
+                inventarioIu.Campo_CostoInventario_admin.setText(rs.getString("COSTO"));
+                inventarioIu.Campo_DescripcionInventario_admin.setText(rs.getString("DESCRIPCION"));
+                inventarioIu.Campo_FechaIngresoInven_admin.setText(rs.getString("FECHA_INGRESO"));
+                inventarioIu.Campo_ReferenciaInventario_admin.setText(rs.getString("REFERENCIA"));
+                inventarioIu.Campo_TallaInventario_admin.setText(rs.getString("TALLA"));
+                inventarioIu.Campo_PrecioInventario_admin.setText(rs.getString("PRECIO"));
 
                 // Campo_CantidadDispoInven.setText(String.valueOf(disponible));//PERMITE CAMBIAR TIPO DE DATOS A CADENA DE TEXTO
             } else {
@@ -57,10 +59,10 @@ public class Metodos_Inventario implements ActionListener {
     public void cantidadDisponible() {
         try {
             PreparedStatement cant = BD_CONECCTION.getInstance().getconectar().prepareStatement("SELECT * FROM INGRESOS WHERE CODIGO_I = ?");
-            cant.setString(1, inventarioIu.Campo_CodigoInventario.getText());
+            cant.setString(1, inventarioIu.Campo_CodigoInventario_admin.getText());
             ResultSet rs = cant.executeQuery();
             if (rs.next()) {
-                inventarioIu.Campo_CantidadDispoInven.setText(rs.getString("CANTIDAD"));
+                inventarioIu.Campo_CantidadDispoInven_admin.setText(rs.getString("CANTIDAD"));
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "[ERROR]: " + e.getMessage());
@@ -69,14 +71,14 @@ public class Metodos_Inventario implements ActionListener {
 
     public void limpiarCampos() {
 
-        inventarioIu.Campo_CantidadDispoInven.setText("");
-        inventarioIu.Campo_CodigoInventario.setText("");
-        inventarioIu.Campo_CostoInventario.setText("");
-        inventarioIu.Campo_DescripcionInventario.setText("");
-        inventarioIu.Campo_FechaIngresoInven.setText("");
-        inventarioIu.Campo_PrecioInventario.setText("");
-        inventarioIu.Campo_ReferenciaInventario.setText("");
-        inventarioIu.Campo_TallaInventario.setText("");
+        inventarioIu.Campo_CantidadDispoInven_admin.setText("");
+        inventarioIu.Campo_CodigoInventario_admin.setText("");
+        inventarioIu.Campo_CostoInventario_admin.setText("");
+        inventarioIu.Campo_DescripcionInventario_admin.setText("");
+        inventarioIu.Campo_FechaIngresoInven_admin.setText("");
+        inventarioIu.Campo_PrecioInventario_admin.setText("");
+        inventarioIu.Campo_ReferenciaInventario_admin.setText("");
+        inventarioIu.Campo_TallaInventario_admin.setText("");
     }
 
 

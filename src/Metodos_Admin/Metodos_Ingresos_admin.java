@@ -1,10 +1,12 @@
-package Metodos;
+package Metodos_Admin;
 
+import Metodos.*;
 import gestor_ropa.BD_CONECCTION;
 import java.sql.*;
 import java.sql.PreparedStatement;
 import GUI.INGRESO;
 import GUI.Ventas;
+import GUI_ADMIN.INGRESO_ADMIN;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
@@ -16,24 +18,24 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author esteb
  */
-public class Metodos_Ingresos  implements ActionListener {
+public class Metodos_Ingresos_admin  implements ActionListener {
     BD_CONECCTION bd;
     Connection con = BD_CONECCTION.getInstance().getconectar();
-    private INGRESO ig;
+    private INGRESO_ADMIN iga;
     private Ventas vt;
     private JButton btnGuardar;
     private JButton btnBuscar;
     private JButton btnModificar;
     private JButton btnLimpiar;
 
-    public Metodos_Ingresos(INGRESO ig) {
+    public Metodos_Ingresos_admin(INGRESO_ADMIN ig) {
         this.bd = BD_CONECCTION.getInstance();
-        this.ig = ig;
+        this.iga = ig;
         this.vt = vt;
-        this.btnGuardar = this.ig.BTN_Guardar;
-        this.btnBuscar = this.ig.BTN_Buscar;
-        this.btnModificar = this.ig.BTN_Modificar;
-        this.btnLimpiar = this.ig.BTN_Limpiar;
+        this.btnGuardar = this.iga.BTN_Guardar_admin;
+        this.btnBuscar = this.iga.BTN_Buscar_admin;
+        this.btnModificar = this.iga.BTN_Modificar_admin;
+        this.btnLimpiar = this.iga.BTN_Limpiar_admin;
     }
 
     public boolean eliminarRegistros(String[] TablasOrden) {
@@ -58,7 +60,7 @@ public class Metodos_Ingresos  implements ActionListener {
             if (confirmacion == 0) {
                 JOptionPane.showMessageDialog(null, "REGISTROS ELIMINADOS CON EXITO");
             }
-            ig.mostrar("INGRESOS");
+            iga.mostrar("INGRESOS");
                 return true;
             }catch (SQLException e) {
             try {
@@ -91,28 +93,28 @@ JOptionPane.showMessageDialog(null,"[ERROR]: " + e);
     
 
     public void guardar() {
-        int cantIngreso = Integer.parseInt(ig.Campo_Cantidad.getText());
+        int cantIngreso = Integer.parseInt(iga.Campo_Cantidad_admin.getText());
         java.sql.Date fechaActual = new java.sql.Date(System.currentTimeMillis());
         try {
             PreparedStatement guardar = BD_CONECCTION.getInstance().getconectar().prepareStatement("INSERT INTO INGRESOS (CODIGO_I, DESCRIPCION, REFERENCIA, TALLA, CANTIDAD, COSTO, FECHA_INGRESO, OBSERVACION, PRECIO) VALUES (?,?,?,?,?,?,?,?,?)");
-            guardar.setString(1, ig.Campo_Codigo.getText());
-            guardar.setString(2, ig.Campo_Descripcion.getText());
-            guardar.setString(3, ig.Campo_Referencia.getText());
-            guardar.setString(4, ig.Campo_Talla.getText());
+            guardar.setString(1, iga.Campo_Codigo_admin.getText());
+            guardar.setString(2, iga.Campo_Descripcion_admin.getText());
+            guardar.setString(3, iga.Campo_Referencia_admin.getText());
+            guardar.setString(4, iga.Campo_Talla_admin.getText());
             guardar.setInt(5, cantIngreso);
-            guardar.setString(6, ig.Campo_Costo.getText());
+            guardar.setString(6, iga.Campo_Costo_admin.getText());
             guardar.setString(7, fechaActual.toString());
-            guardar.setString(8, ig.Campo_Observacion.getText());
-            guardar.setString(9, ig.Campo_PrecioVenta.getText());
+            guardar.setString(8, iga.Campo_Observacion_admin.getText());
+            guardar.setString(9, iga.Campo_PrecioVenta_admin.getText());
 
-            ig.Campo_Cantidad.setText("");
-            ig.Campo_Codigo.setText("");
-            ig.Campo_Costo.setText("");
-            ig.Campo_Descripcion.setText("");
-            ig.Campo_Observacion.setText("");
-            ig.Campo_Referencia.setText("");
-            ig.Campo_Talla.setText("");
-            ig.Campo_PrecioVenta.setText("");
+            iga.Campo_Cantidad_admin.setText("");
+            iga.Campo_Codigo_admin.setText("");
+            iga.Campo_Costo_admin.setText("");
+            iga.Campo_Descripcion_admin.setText("");
+            iga.Campo_Observacion_admin.setText("");
+            iga.Campo_Referencia_admin.setText("");
+            iga.Campo_Talla_admin.setText("");
+            iga.Campo_PrecioVenta_admin.setText("");
             guardar.executeUpdate();// ejecuta sentencias sql que modifiquen datos como INSERT, DELETE, UPDATE
             JOptionPane.showMessageDialog(null, "REGISTRADO");
 
@@ -124,17 +126,17 @@ JOptionPane.showMessageDialog(null,"[ERROR]: " + e);
     public void buscar() {
         try {
             PreparedStatement guardar = BD_CONECCTION.getInstance().getconectar().prepareStatement("SELECT * FROM INGRESOS WHERE CODIGO_I = ?");
-            guardar.setString(1, ig.Campo_Codigo.getText());
+            guardar.setString(1, iga.Campo_Codigo_admin.getText());
             ResultSet rs = guardar.executeQuery();
             if (rs.next()) {
-                ig.Campo_Cantidad.setText(rs.getString("CANTIDAD"));
-                ig.Campo_Codigo.setText(rs.getString("CODIGO_I"));
-                ig.Campo_Costo.setText(rs.getString("COSTO"));
-                ig.Campo_Descripcion.setText(rs.getString("DESCRIPCION"));
-                ig.Campo_Observacion.setText(rs.getString("OBSERVACION"));
-                ig.Campo_Referencia.setText(rs.getString("REFERENCIA"));
-                ig.Campo_Talla.setText(rs.getString("TALLA"));
-                ig.Campo_PrecioVenta.setText(rs.getString("PRECIO"));
+                iga.Campo_Cantidad_admin.setText(rs.getString("CANTIDAD"));
+                iga.Campo_Codigo_admin.setText(rs.getString("CODIGO_I"));
+                iga.Campo_Costo_admin.setText(rs.getString("COSTO"));
+                iga.Campo_Descripcion_admin.setText(rs.getString("DESCRIPCION"));
+                iga.Campo_Observacion_admin.setText(rs.getString("OBSERVACION"));
+                iga.Campo_Referencia_admin.setText(rs.getString("REFERENCIA"));
+                iga.Campo_Talla_admin.setText(rs.getString("TALLA"));
+                iga.Campo_PrecioVenta_admin.setText(rs.getString("PRECIO"));
             } else {
                 JOptionPane.showMessageDialog(null, "NO SE ENCONTRO NINGUN REGISTRO CON ESE CODIGO");
             }
@@ -144,31 +146,31 @@ JOptionPane.showMessageDialog(null,"[ERROR]: " + e);
     }
 
     public void modificar() {
-        String precio = ig.Campo_PrecioVenta.getText();
+        String precio = iga.Campo_PrecioVenta_admin.getText();
         BigDecimal precioF = new BigDecimal(precio);
         try {
             PreparedStatement modificar = BD_CONECCTION.getInstance().getconectar().prepareStatement("UPDATE INGRESOS SET DESCRIPCION =?, REFERENCIA =?, TALLA =?, CANTIDAD =?, COSTO =?, OBSERVACION =?, PRECIO =? WHERE CODIGO_I = ?");
-            modificar.setString(1, ig.Campo_Descripcion.getText());
-            modificar.setString(2, ig.Campo_Referencia.getText());
-            modificar.setString(3, ig.Campo_Talla.getText());
-            modificar.setString(4, ig.Campo_Cantidad.getText());
-            modificar.setString(5, ig.Campo_Costo.getText());
-            modificar.setString(6, ig.Campo_Observacion.getText());
+            modificar.setString(1, iga.Campo_Descripcion_admin.getText());
+            modificar.setString(2, iga.Campo_Referencia_admin.getText());
+            modificar.setString(3, iga.Campo_Talla_admin.getText());
+            modificar.setString(4, iga.Campo_Cantidad_admin.getText());
+            modificar.setString(5, iga.Campo_Costo_admin.getText());
+            modificar.setString(6, iga.Campo_Observacion_admin.getText());
             modificar.setBigDecimal(7, precioF);
-            modificar.setString(8, ig.Campo_Codigo.getText());
+            modificar.setString(8, iga.Campo_Codigo_admin.getText());
             int modificar2 = JOptionPane.showConfirmDialog(null, "DESEA MODIFICAR EL INGRESO ?");
             if (modificar2 == 0) {
                 int filas = modificar.executeUpdate();
                 if (filas != 0) {
                     modificar.executeUpdate();
-                    ig.Campo_Cantidad.setText("");
-                    ig.Campo_Codigo.setText("");
-                    ig.Campo_Costo.setText("");
-                    ig.Campo_Descripcion.setText("");
-                    ig.Campo_Observacion.setText("");
-                    ig.Campo_Referencia.setText("");
-                    ig.Campo_Talla.setText("");
-                    ig.Campo_PrecioVenta.setText("");
+                    iga.Campo_Cantidad_admin.setText("");
+                    iga.Campo_Codigo_admin.setText("");
+                    iga.Campo_Costo_admin.setText("");
+                    iga.Campo_Descripcion_admin.setText("");
+                    iga.Campo_Observacion_admin.setText("");
+                    iga.Campo_Referencia_admin.setText("");
+                    iga.Campo_Talla_admin.setText("");
+                    iga.Campo_PrecioVenta_admin.setText("");
                 }
                 JOptionPane.showMessageDialog(null, "REGISTRO ACTUALIZADO CON EXITO");
             }
@@ -179,18 +181,18 @@ JOptionPane.showMessageDialog(null,"[ERROR]: " + e);
     }
 
     public void limpiar() {
-        ig.Campo_Cantidad.setText("");
-        ig.Campo_Codigo.setText("");
-        ig.Campo_Costo.setText("");
-        ig.Campo_Descripcion.setText("");
-        ig.Campo_Observacion.setText("");
-        ig.Campo_Referencia.setText("");
-        ig.Campo_Talla.setText("");
-        ig.Campo_PrecioVenta.setText("");
+        iga.Campo_Cantidad_admin.setText("");
+        iga.Campo_Codigo_admin.setText("");
+        iga.Campo_Costo_admin.setText("");
+        iga.Campo_Descripcion_admin.setText("");
+        iga.Campo_Observacion_admin.setText("");
+        iga.Campo_Referencia_admin.setText("");
+        iga.Campo_Talla_admin.setText("");
+        iga.Campo_PrecioVenta_admin.setText("");
     }
 
     public void calcularPrecioVenta() {
-        DefaultTableModel model = (DefaultTableModel) ig.Tabla_Ingresos.getModel();
+        DefaultTableModel model = (DefaultTableModel) iga.Tabla_Ingresos.getModel();
         double totalVenta = 0.0;
 
         for (int i = 0; i < model.getRowCount(); i++) {

@@ -1,6 +1,8 @@
-package GUI;
+package GUI_ADMIN;
 
+import GUI.*;
 import Metodos.Metodos_Ventas;
+import Metodos_Admin.Metodos_Ventas_admin;
 import gestor_ropa.BD_CONECCTION;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
@@ -8,14 +10,14 @@ import java.sql.Connection;
 import javax.swing.JOptionPane;
 
 
-public class Ventas extends javax.swing.JFrame {
+public class Ventas_ADMIN extends javax.swing.JFrame {
 
    
     Connection con = BD_CONECCTION.getInstance().getconectar();
     INGRESO in = new INGRESO();
     
 
-    public Ventas() {
+    public Ventas_ADMIN() {
         initComponents();
     }
 
@@ -30,7 +32,7 @@ public class Ventas extends javax.swing.JFrame {
         model.addColumn("PRECIO");
         model.addColumn("CANTIDAD");
         model.addColumn("VALOR_TOTAL");
-        Tabla_Ventas.setModel(model);
+        Tabla_Ventas_Admin.setModel(model);
 
         String[] datos = new String[7];
         try {
@@ -76,10 +78,10 @@ public class Ventas extends javax.swing.JFrame {
             double total2 = costo * cantidad;
 
             //OBTENER EL MODELO DE LA TABLA
-            DefaultTableModel model = (DefaultTableModel) Tabla_Ventas.getModel();
+            DefaultTableModel model = (DefaultTableModel) Tabla_Ventas_Admin.getModel();
 
             //OBTENER FILA SELECCIONADA
-            int filaSelec = Tabla_Ventas.getSelectedRow();
+            int filaSelec = Tabla_Ventas_Admin.getSelectedRow();
 
             if (filaSelec >= 0) {
                 //ACTUALIZAR EL VALOR TOTAL EN LA TABLA
@@ -122,7 +124,7 @@ public class Ventas extends javax.swing.JFrame {
         Campo_ReferenciaVenta = new javax.swing.JTextField();
         BTN_CancelarVenta = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Tabla_Ventas = new javax.swing.JTable();
+        Tabla_Ventas_Admin = new javax.swing.JTable();
         BTN_AgregarVenta = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         Campo_CantidadVenta = new javax.swing.JTextField();
@@ -146,15 +148,12 @@ public class Ventas extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("PUNTO DE VENTA NORTE");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("TIENDA DE ROPA");
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("TEL:9999-9999");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -191,7 +190,6 @@ public class Ventas extends javax.swing.JFrame {
         jPanel2.setBorder(new javax.swing.border.MatteBorder(null));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("DESCRIPCION:");
 
         Campo_DescripcionVenta.setEditable(false);
@@ -212,14 +210,12 @@ public class Ventas extends javax.swing.JFrame {
 
         jLabel7.setBackground(new java.awt.Color(0, 0, 0));
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
 
         Campo_TallaVenta.setEditable(false);
         Campo_TallaVenta.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
 
         jLabel8.setBackground(new java.awt.Color(0, 0, 0));
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("CANTIDAD DISP:");
 
         BTN_BuscarVenta.setBackground(new java.awt.Color(0, 0, 204));
@@ -263,15 +259,12 @@ public class Ventas extends javax.swing.JFrame {
         });
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("REFERENCIA:");
 
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("TALLA:");
 
         jLabel11.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("COSTO:");
 
         Campo_ReferenciaVenta.setEditable(false);
@@ -287,8 +280,8 @@ public class Ventas extends javax.swing.JFrame {
             }
         });
 
-        Tabla_Ventas.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        Tabla_Ventas.setModel(new javax.swing.table.DefaultTableModel(
+        Tabla_Ventas_Admin.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        Tabla_Ventas_Admin.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -296,7 +289,7 @@ public class Ventas extends javax.swing.JFrame {
                 "CODIGO", "DESCRIPCION", "TALLA", "REFERENCIA", "PRECIO", "CANTIDAD", "VALOR TOTAL"
             }
         ));
-        jScrollPane1.setViewportView(Tabla_Ventas);
+        jScrollPane1.setViewportView(Tabla_Ventas_Admin);
 
         BTN_AgregarVenta.setBackground(new java.awt.Color(0, 0, 204));
         BTN_AgregarVenta.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
@@ -309,7 +302,6 @@ public class Ventas extends javax.swing.JFrame {
         });
 
         jLabel12.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("CANTIDAD:");
 
         Campo_CantidadVenta.setBackground(new java.awt.Color(204, 204, 204));
@@ -329,7 +321,6 @@ public class Ventas extends javax.swing.JFrame {
         });
 
         jLabel13.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("CODIGO:");
 
         Campo_CantDispo.setEditable(false);
@@ -341,7 +332,6 @@ public class Ventas extends javax.swing.JFrame {
         });
 
         jLabel14.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setText("PRECIO:");
 
         Campo_PrecioVenta1.setEditable(false);
@@ -354,7 +344,6 @@ public class Ventas extends javax.swing.JFrame {
 
         jLabel15.setBackground(new java.awt.Color(0, 0, 0));
         jLabel15.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
         jLabel15.setText("TOTAL:");
 
         Campo_TotalVenta.setEditable(false);
@@ -522,31 +511,31 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_Campo_CodigoVentaActionPerformed
 
     private void BTN_VenderVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_VenderVentaActionPerformed
-        Metodos_Ventas mt = new Metodos_Ventas(this);
+        Metodos_Ventas_admin mt = new Metodos_Ventas_admin(this);
         //mtf.obtenerTotal();
         mt.venderVentas();
     }//GEN-LAST:event_BTN_VenderVentaActionPerformed
 
     private void BTN_CancelarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_CancelarVentaActionPerformed
-        Metodos_Ventas mt = new Metodos_Ventas(this);
+        Metodos_Ventas_admin mt = new Metodos_Ventas_admin(this);
         mt.cancelar();
         mostrar("Ventas");
         mt.limpiar();
     }//GEN-LAST:event_BTN_CancelarVentaActionPerformed
 
     private void BTN_SalirVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_SalirVentaActionPerformed
-        Menu mn = new Menu();
+        ADMIN mn = new ADMIN();
         mn.setVisible(true);
         dispose();
     }//GEN-LAST:event_BTN_SalirVentaActionPerformed
 
     private void BTN_LimpiarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_LimpiarVentaActionPerformed
-        Metodos_Ventas mt = new Metodos_Ventas(this);
+        Metodos_Ventas_admin mt = new Metodos_Ventas_admin(this);
         mt.limpiar();
     }//GEN-LAST:event_BTN_LimpiarVentaActionPerformed
 
     private void BTN_AgregarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_AgregarVentaActionPerformed
-        Metodos_Ventas mt = new Metodos_Ventas(this);
+        Metodos_Ventas_admin mt = new Metodos_Ventas_admin(this);
         mt.agregarVenta();
         mostrar("Ventas");
         costoTotal();
@@ -555,7 +544,7 @@ public class Ventas extends javax.swing.JFrame {
     }//GEN-LAST:event_BTN_AgregarVentaActionPerformed
 
     private void BTN_BuscarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTN_BuscarVentaActionPerformed
-        Metodos_Ventas mt = new Metodos_Ventas(this);
+        Metodos_Ventas_admin mt = new Metodos_Ventas_admin(this);
         mt.buscar();
         mt.cantidadDispo();
        // mt.calculoPorcentaje();
@@ -598,20 +587,21 @@ public class Ventas extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Ventas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Ventas_ADMIN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Ventas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Ventas_ADMIN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Ventas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Ventas_ADMIN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Ventas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Ventas_ADMIN.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Ventas().setVisible(true);
+                new Ventas_ADMIN().setVisible(true);
             }
         });
     }
@@ -632,7 +622,7 @@ public class Ventas extends javax.swing.JFrame {
     public javax.swing.JTextField Campo_ReferenciaVenta;
     public javax.swing.JTextField Campo_TallaVenta;
     public javax.swing.JTextField Campo_TotalVenta;
-    public javax.swing.JTable Tabla_Ventas;
+    public javax.swing.JTable Tabla_Ventas_Admin;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
